@@ -146,7 +146,7 @@ filterBar.addEventListener('click', e => {
 function renderBarkcloths() {
   if (selectedShapes.length === 0) {
     barkclothList.innerHTML = `
-      <div style="grid-column: 1 / -1; text-align: center; color: var(--muted, #888); font-size: 1.2rem; margin-top: 2rem;">
+      <div style="grid-column: 1 / -1; text-align: center; color: var(--muted, #888); font-size: 1rem; margin-top: 2rem;">
         Please select a shape filter above.
       </div>
     `;
@@ -158,7 +158,8 @@ function renderBarkcloths() {
   barkclothList.innerHTML = filtered.length
     ? filtered.map(bc => `
       <div class="barkcloth-card">
-        <div><strong>${bc.id}</strong> ${bc.origin}</div>
+        <div><strong>${bc.id}</strong></div>
+        <div>${bc.origin}</div>
         <div>Shapes: ${bc.shapes.length ? bc.shapes.join(', ') : 'None'}</div>
         <a href="${bc.link}" target="_blank">View Item</a>
       </div>
