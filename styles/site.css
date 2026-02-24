@@ -189,6 +189,7 @@
     border: 1px solid var(--border, #e5e5e5);
     max-width: 680px;
     margin: 0 auto;
+    animation: rise 0.8s ease 0.4s both;
 }
 
 .filter-btn {
