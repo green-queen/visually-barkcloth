@@ -106,6 +106,7 @@
     width: 56px;
     height: 56px;
     animation: rise 0.8s ease 0.4s both;
+    margin-bottom:15px;
 }
 
 .choice-label {
@@ -162,16 +163,6 @@
     color: var(--muted);
 }
 
-@media (max-width: 600px) {
-    .choices {
-        grid-template-columns: 1fr;
-    }
-
-    .stat-strip {
-        gap: 2rem;
-    }
-}
-
 /* Filters */
 .filter-bar {
     display: flex;
@@ -208,74 +199,114 @@
     border-color: var(--warm, #c8a058);
 }
 
-/* Displays */
-.barkcloth-list {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 1.5rem;
-    margin-top: 2rem;
-    margin-bottom:2rem;
-    max-width: 1080px;
-    margin-left: auto;
-    margin-right: auto;
-    animation: rise 0.8s ease 0.4s both;
+/* ── Animated cards ── */
+:root {
+    --card-w: 180px;
+    --x-speed: 13s;
+    --y-speed: 7s;
 }
 
-.barkcloth-card {
-    background: var(--surface, #fff);
-    border: 1px solid var(--warm, #c8a058);
-    padding: 2rem 1.5rem;
-    border-radius: 12px;
-    text-align: left;
-    color: var(--text, #222);
+#floating-layer {
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 9999;
+    overflow: hidden;
+}
+
+.card-x {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: var(--card-w);
+}
+
+.card-x.go-right {
+    animation: x var(--x-speed) linear infinite alternate;
+    animation-delay: var(--x-delay);
+}
+
+.card-x.go-left {
+    animation: x2 var(--x-speed) linear infinite alternate;
+    animation-delay: var(--x-delay);
+}
+
+.card-y {
+    animation: y var(--y-speed) linear infinite alternate;
+    animation-delay: var(--y-delay);
+}
+
+.floating-card {
+    width: var(--card-w);
+    background: rgba(255, 255, 255, 0.93);
+    border: 1px solid #c8a058;
+    border-radius: 10px;
+    padding: 0.75rem;
+    pointer-events: auto;
+    cursor: pointer;
+    backdrop-filter: blur(4px);
+    transform: rotate(var(--rotate));
+    transition: box-shadow 0.2s, transform 0.2s;
+}
+
+.floating-card:hover {
+    transform: rotate(0deg) scale(1.05);
+    z-index: 10001;
+    position: relative;
+}
+
+.floating-card img {
+    width: 100%;
+    border-radius: 6px;
+    margin-bottom: 0.5rem;
+    object-fit: cover;
+    height: 120px;
+    display: block;
+}
+
+.floating-card .card-id {
+    font-weight: 700;
+    font-size: 0.72rem;
+    letter-spacing: 0.04em;
+}
+
+.floating-card .card-origin {
+    font-size: 0.68rem;
+    margin-top: 2px;
+}
+
+.floating-card .card-shapes {
+    font-size: 0.62rem;
+    margin-top: 4px;
+    line-height: 1.4;
+}
+
+@keyframes x {
+    100% {
+        transform: translateX(var(--x-end, calc(100vw - var(--card-w))));
+    }
+}
+
+@keyframes x2 {
+    100% {
+        transform: translateX(var(--x-end, calc(-100vw + var(--card-w))));
+    }
+}
+
+@keyframes y {
+    100% {
+        transform: translateY(var(--y-end, calc(100vh - var(--card-w))));
+    }
+}
+
+#no-match {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 10001;
+    color: #888;
     font-size: 1rem;
-    font-family: 'Playfair Display', serif;
-    transition: border-color 0.2s;
-    display: flex;
-    flex-direction: column;
-    gap: 0.5rem;
-}
-
-.barkcloth-card a {
-    color: var(--warm, #c8a058);
-    text-decoration: underline;
-    font-size: 0.95rem;
-    font-family: inherit;
-    margin-top: 0.5rem;
-}
-
-.filter-prompt,
-.no-results {
-    grid-column: 1 / -1;
-    text-align: center;
-    color: var(--muted, #888);
-    font-size: 1rem;
-    margin-top: 2rem;
-    font-family: 'Playfair Display', serif;
-    background: var(--surface, #fff);
-    border-radius: 12px;
-    border: 1px solid var(--border, #e5e5e5);
-    max-width: 680px;
-    margin: 0 auto;
-}
-
-@media (max-width: 900px) {
-    .barkcloth-list {
-        grid-template-columns: repeat(2, 1fr);
-    }
-}
-
-@media (max-width: 600px) {
-    .barkcloth-list {
-        grid-template-columns: 1fr;
-    }
-
-    .filter-bar {
-        max-width: 100%;
-    }
-
-    .filter-prompt,
-    .no-results {
-        max-width: 100%;
-    }
+    pointer-events: none;
 }

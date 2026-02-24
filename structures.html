@@ -19,7 +19,7 @@
     </nav>
 
     <main class="hero">
-        <div class="choice-icon" style="margin-bottom: 15px;">
+        <div class="choice-icon">
             <svg viewBox="0 0 56 56" fill="none" stroke="#c8a058" stroke-width="1.5">
                 <rect x="8" y="8" width="40" height="40" />
                 <rect x="16" y="16" width="24" height="24" stroke-dasharray="2,2" />
@@ -45,156 +45,163 @@
             <button class="filter-btn" data-structure="four-dir-sym">Four Direction Symmetry</button>
             <button class="filter-btn" data-structure="concentric-circle-sym">Concentric Circle Symmetry</button>
         </div>
+
         <section class="barkcloth-list" id="barkcloth-list">
         </section>
     </main>
 
-    <script>
-        const csvData = `id,origin,square,rhombus,rectangle,right,equilateral,isoceles,circle,line,curve,cross,sun,moon,star,flower,leaf,square-structure,square-cross-structure,square-concentric-circle-structure,rectangle-structure,rhombus-structure,equilateral-structure,circle-structure,diag-sym,gen-sym,matrix-sym,two-dir-sym,four-dir-sym,concentric-circle-sym,tassels,link
-RV-4706-120,Fiji,1 ,0 ,0 ,1 ,0 ,0 ,1 ,1 ,0 ,1 ,0 ,0 ,0 ,1 ,0 ,1 ,1 ,0 ,1 ,0 ,0 ,1 ,1 ,0 ,0 ,0 ,0 ,0 ,0 ,https://hdl.handle.net/20.500.11840/795173
-RV-265-1b,Futuna,1 ,0 ,0 ,0 ,0 ,0 ,0 ,1 ,0 ,1 ,1 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,1 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,1 ,1 ,1 ,https://hdl.handle.net/20.500.11840/598299
-RV-09-220,Tonga,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,2 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,1 ,1 ,0 ,0 ,1 ,0 ,0 ,0 ,0 ,0 ,https://hdl.handle.net/20.500.11840/838810
-RV-489-87,Tonga,0 ,0 ,0 ,0 ,1 ,0 ,1 ,1 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,1 ,0 ,0 ,0 ,0 ,0 ,https://hdl.handle.net/20.500.11840/660559
-RV-4241-1,Tonga,0 ,0 ,0 ,0 ,1 ,0 ,1 ,0 ,0 ,0 ,1 ,2 ,1 ,1 ,1 ,0 ,0 ,0 ,0 ,0 ,1 ,0 ,0 ,0 ,1 ,0 ,0 ,0 ,0 ,https://hdl.handle.net/20.500.11840/787757
-RV-4518-17,Tonga,0 ,0 ,0 ,1 ,0 ,0 ,1 ,1 ,0 ,0 ,0 ,1 ,1 ,0 ,0 ,0 ,0 ,0 ,1 ,0 ,0 ,0 ,0 ,0 ,1 ,0 ,0 ,0 ,0 ,https://hdl.handle.net/20.500.11840/791809
-RV-4518-18,Tonga,0 ,0 ,0 ,0 ,1 ,0 ,1 ,0 ,0 ,0 ,0 ,2 ,0 ,0 ,1 ,0 ,0 ,0 ,0 ,1 ,1 ,0 ,0 ,0 ,1 ,0 ,0 ,0 ,0 ,https://hdl.handle.net/20.500.11840/791810
-RV-4518-19,Tonga,0 ,0 ,0 ,0 ,1 ,1 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,1 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,1 ,0 ,0 ,0 ,0 ,https://hdl.handle.net/20.500.11840/791811
-RV-4518-22,Tonga,0 ,0 ,0 ,1 ,1 ,0 ,1 ,0 ,0 ,1 ,0 ,0 ,0 ,1 ,1 ,1 ,0 ,0 ,0 ,1 ,1 ,0 ,0 ,0 ,1 ,0 ,0 ,0 ,0 ,https://hdl.handle.net/20.500.11840/791814
-RV-4518-25,Tonga,0 ,0 ,0 ,1 ,0 ,0 ,0 ,0 ,0 ,1 ,0 ,0 ,0 ,0 ,1 ,1 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,1 ,1 ,0 ,0 ,0 ,https://hdl.handle.net/20.500.11840/791817
-RV-4518-26,Tonga,0 ,0 ,0 ,1 ,0 ,0 ,1 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,1 ,1 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,1 ,0 ,0 ,0 ,0 ,https://hdl.handle.net/20.500.11840/791818
-RV-4518-27,Tonga,0 ,0 ,0 ,1 ,1 ,0 ,0 ,0 ,0 ,1 ,0 ,0 ,0 ,0 ,1 ,1 ,1 ,1 ,1 ,0 ,1 ,1 ,0 ,0 ,1 ,0 ,0 ,0 ,0 ,https://hdl.handle.net/20.500.11840/791819
-RV-4518-30,Tonga,0 ,0 ,0 ,0 ,1 ,0 ,0 ,1 ,0 ,0 ,0 ,1 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,1 ,0 ,0 ,0 ,1 ,0 ,0 ,0 ,0 ,0 ,https://hdl.handle.net/20.500.11840/791822
-RV-4518-32,Tonga,1 ,0 ,0 ,0 ,0 ,0 ,0 ,1 ,1 ,0 ,0 ,0 ,0 ,0 ,0 ,1 ,1 ,1 ,0 ,0 ,0 ,0 ,0 ,1 ,0 ,0 ,0 ,1 ,0 ,https://hdl.handle.net/20.500.11840/791824
-RV-265-7,Samoa,0 ,0 ,0 ,0 ,1 ,0 ,1 ,0 ,1 ,1 ,1 ,2 ,0 ,0 ,0 ,1 ,1 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,1 ,0 ,0 ,0 ,1 ,https://hdl.handle.net/20.500.11840/598304
-RV-489-83,Samoa,0 ,0 ,0 ,0 ,0 ,1 ,0 ,1 ,1 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,1 ,0 ,0 ,0 ,0 ,0 ,1 ,0 ,0 ,0 ,0 ,https://hdl.handle.net/20.500.11840/660555
-RV-489-84,Samoa,0 ,0 ,0 ,0 ,0 ,0 ,0 ,1 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,1 ,0 ,1 ,0 ,0 ,0 ,1 ,0 ,0 ,0 ,0 ,https://hdl.handle.net/20.500.11840/660556
-RV-489-85,Samoa,0 ,0 ,0 ,0 ,0 ,0 ,0 ,1 ,0 ,1 ,0 ,2 ,0 ,1 ,0 ,1 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,1 ,0 ,0 ,0 ,0 ,https://hdl.handle.net/20.500.11840/660557
-RV-489-88,Samoa,0 ,0 ,0 ,1 ,1 ,1 ,0 ,1 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,1 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,1 ,0 ,0 ,0 ,0 ,https://hdl.handle.net/20.500.11840/660560
-RV-552-5,Samoa,1 ,0 ,0 ,0 ,1 ,0 ,0 ,1 ,1 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,1 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,1 ,0 ,0 ,0 ,0 ,https://hdl.handle.net/20.500.11840/662722
-RV-828-122,Samoa,0 ,0 ,0 ,0 ,0 ,0 ,0 ,1 ,1 ,0 ,0 ,0 ,0 ,0 ,0 ,1 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,1 ,0 ,0 ,0 ,0 ,https://hdl.handle.net/20.500.11840/673330
-RV-1141-133,Samoa,0 ,0 ,0 ,0 ,1 ,0 ,0 ,1 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,1 ,1 ,0 ,0 ,0 ,0 ,0 ,0 ,1 ,0 ,0 ,0 ,0 ,https://hdl.handle.net/20.500.11840/686065
-RV-912-4,East Polynesian (Polynesia / Hawaii),0 ,0 ,0 ,0 ,0 ,0 ,1 ,1 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,1 ,0 ,0 ,0 ,0 ,0 ,0 ,1 ,0 ,0 ,0 ,
-RV-3600-7499,"West Papua (Nafri, Sentani)",0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,https://hdl.handle.net/20.500.11840/777783
-RV-121-65,West Papua (Karon),1 ,1 ,0 ,0 ,0 ,0 ,1 ,1 ,1 ,1 ,1 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,1 ,0 ,0 ,0 ,0 ,1 ,0 ,1 ,0 ,0 ,0 ,https://hdl.handle.net/20.500.11840/595932
-RV-2972-2,West Papua (Karon),1 ,1 ,0 ,1 ,1 ,1 ,1 ,1 ,1 ,1 ,0 ,0 ,0 ,0 ,0 ,1 ,1 ,0 ,1 ,1 ,1 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,https://hdl.handle.net/20.500.11840/757315
-RV-2953-2,"West Papua (Wandamen, probably Karon)",1 ,1 ,1 ,1 ,1 ,0 ,1 ,1 ,1 ,1 ,0 ,0 ,0 ,0 ,0 ,1 ,1 ,0 ,1 ,1 ,1 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,https://hdl.handle.net/20.500.11840/754845
-RV-1759-31,Pebato,1 ,1 ,0 ,1 ,1 ,0 ,1 ,1 ,1 ,0 ,1 ,2 ,0 ,0 ,0 ,0 ,1 ,1 ,0 ,0 ,0 ,0 ,1 ,0 ,0 ,0 ,0 ,0 ,0 ,https://hdl.handle.net/20.500.11840/718435
-RV-03-277,Toraja,0 ,1 ,0 ,0 ,0 ,0 ,0 ,1 ,1 ,0 ,0 ,2 ,0 ,0 ,0 ,1 ,1 ,0 ,0 ,0 ,0 ,0 ,1 ,0 ,0 ,0 ,0 ,1 ,0 ,https://hdl.handle.net/20.500.11840/828350
-RV-03-2400,Toraja,0 ,1 ,0 ,0 ,1 ,0 ,0 ,1 ,1 ,1 ,0 ,0 ,1 ,0 ,1 ,1 ,0 ,0 ,0 ,0 ,0 ,0 ,1 ,0 ,0 ,0 ,0 ,1 ,0 ,https://hdl.handle.net/20.500.11840/849873
-RV-776-45,Toraja,0 ,0 ,0 ,0 ,0 ,0 ,1 ,0 ,1 ,1 ,1 ,0 ,0 ,0 ,0 ,1 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,1 ,0 ,https://hdl.handle.net/20.500.11840/671205
-RV-776-45a,Toraja,0 ,0 ,0 ,1 ,1 ,0 ,1 ,0 ,0 ,1 ,0 ,0 ,1 ,1 ,0 ,1 ,0 ,0 ,1 ,0 ,0 ,0 ,1 ,0 ,0 ,1 ,0 ,1 ,0 ,https://hdl.handle.net/20.500.11840/671206
-RV-1232-93,Toraja,0 ,0 ,0 ,0 ,0 ,0 ,1 ,0 ,0 ,0 ,0 ,0 ,1 ,1 ,0 ,1 ,0 ,0 ,1 ,0 ,0 ,0 ,1 ,0 ,0 ,1 ,0 ,1 ,0 ,https://hdl.handle.net/20.500.11840/690654
-RV-1372-2,Toraja (Poso Toraja),1 ,1 ,0 ,0 ,1 ,0 ,1 ,0 ,1 ,0 ,0 ,0 ,0 ,1 ,1 ,1 ,1 ,0 ,0 ,0 ,0 ,0 ,1 ,0 ,0 ,0 ,0 ,0 ,0 ,https://hdl.handle.net/20.500.11840/701086
-RV-1232-87,Toraja,0 ,0 ,0 ,0 ,1 ,1 ,1 ,1 ,1 ,1 ,0 ,0 ,1 ,1 ,1 ,1 ,1 ,0 ,0 ,0 ,0 ,0 ,1 ,0 ,0 ,0 ,0 ,1 ,0 ,https://hdl.handle.net/20.500.11840/690648
-RV-1232-92,Toraja,0 ,1 ,0 ,0 ,0 ,0 ,0 ,1 ,1 ,0 ,0 ,0 ,0 ,0 ,0 ,1 ,1 ,0 ,0 ,0 ,0 ,0 ,1 ,0 ,0 ,0 ,0 ,1 ,0 ,https://hdl.handle.net/20.500.11840/690653
-RV-1759-27,Pebato,0 ,0 ,0 ,0 ,1 ,0 ,1 ,1 ,0 ,0 ,1 ,0 ,1 ,0 ,0 ,0 ,1 ,0 ,0 ,1 ,0 ,0 ,1 ,0 ,0 ,0 ,0 ,1 ,0 ,https://hdl.handle.net/20.500.11840/718431
-RV-1232-90,Toraja,1 ,0 ,1 ,0 ,1 ,0 ,0 ,1 ,1 ,0 ,0 ,0 ,0 ,0 ,1 ,1 ,1 ,1 ,0 ,0 ,0 ,0 ,1 ,0 ,0 ,0 ,0 ,0 ,0 ,https://hdl.handle.net/20.500.11840/690651
-RV-1926-205,Toraja (Poso Toraja),0 ,1 ,0 ,0 ,0 ,0 ,1 ,1 ,1 ,0 ,0 ,2 ,0 ,0 ,1 ,1 ,1 ,0 ,0 ,0 ,0 ,0 ,1 ,0 ,0 ,0 ,0 ,1 ,0 ,https://hdl.handle.net/20.500.11840/724867
-RV-1759-36,Toraja (Lage),0 ,1 ,0 ,1 ,1 ,0 ,0 ,1 ,1 ,0 ,0 ,2 ,0 ,0 ,0 ,1 ,1 ,0 ,0 ,0 ,0 ,0 ,1 ,0 ,0 ,0 ,0 ,1 ,0 ,https://hdl.handle.net/20.500.11840/718440
-RV-1759-38,Toraja (Lage),1 ,0 ,0 ,0 ,1 ,0 ,0 ,1 ,0 ,1 ,0 ,0 ,1 ,0 ,0 ,1 ,1 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,1 ,0 ,https://hdl.handle.net/20.500.11840/718442
-RV-1926-211,Toraja (Poso Toraja),1 ,1 ,0 ,1 ,1 ,0 ,1 ,1 ,1 ,1 ,0 ,0 ,0 ,0 ,1 ,1 ,1 ,0 ,0 ,1 ,0 ,0 ,0 ,0 ,1 ,0 ,0 ,0 ,0 ,https://hdl.handle.net/20.500.11840/724873
-RV-03-276,Toraja,0 ,0 ,0 ,0 ,0 ,0 ,1 ,0 ,0 ,0 ,0 ,0 ,0 ,1 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,1 ,0 ,0 ,0 ,0 ,1 ,0 ,0 ,https://hdl.handle.net/20.500.11840/828349
-RV-03-2349,Toraja,0 ,0 ,0 ,1 ,0 ,0 ,1 ,0 ,0 ,0 ,0 ,0 ,0 ,1 ,0 ,1 ,0 ,0 ,0 ,0 ,0 ,1 ,0 ,0 ,0 ,0 ,1 ,0 ,0 ,https://hdl.handle.net/20.500.11840/849473
-RV-1232-94,Toraja,0 ,1 ,0 ,0 ,0 ,0 ,0 ,1 ,1 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,1 ,0 ,0 ,0 ,0 ,0 ,1 ,0 ,0 ,0 ,0 ,https://hdl.handle.net/20.500.11840/690655
-RV-03-2391,Toraja (Poso Toraja),1 ,1 ,0 ,0 ,1 ,1 ,0 ,1 ,1 ,0 ,0 ,0 ,0 ,0 ,0 ,1 ,0 ,1 ,0 ,1 ,1 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,https://hdl.handle.net/20.500.11840/849514`;
+    <div id="floating-layer"></div>
+    <div id="no-match">No barkcloths match the selected filters.</div>
 
-        const structureKeys = [
-            "square-structure",
-            "square-cross-structure",
-            "square-concentric-circle-structure",
-            "rectangle-structure",
-            "rhombus-structure",
-            "equilateral-structure",
-            "circle-structure",
-            "diag-sym",
-            "gen-sym",
-            "matrix-sym",
-            "two-dir-sym",
-            "four-dir-sym",
-            "concentric-circle-sym"
+    <script>
+        const barkcloths = [
+            { id: "RV-4706-120", origin: "Fiji", structures: ["square-structure", "square-cross-structure", "equilateral-structure", "circle-structure"], link: "https://hdl.handle.net/20.500.11840/795173" },
+            { id: "RV-265-1b", origin: "Futuna", structures: ["rectangle-structure", "two-dir-sym", "four-dir-sym", "concentric-circle-sym"], link: "https://hdl.handle.net/20.500.11840/598299" },
+            { id: "RV-09-220", origin: "Tonga", structures: ["rectangle-structure", "rhombus-structure", "diag-sym"], link: "https://hdl.handle.net/20.500.11840/838810" },
+            { id: "RV-489-87", origin: "Tonga", structures: ["diag-sym"], link: "https://hdl.handle.net/20.500.11840/660559" },
+            { id: "RV-4241-1", origin: "Tonga", structures: ["rhombus-structure", "gen-sym"], link: "https://hdl.handle.net/20.500.11840/787757" },
+            { id: "RV-4518-17", origin: "Tonga", structures: ["square-concentric-circle-structure", "gen-sym"], link: "https://hdl.handle.net/20.500.11840/791809" },
+            { id: "RV-4518-18", origin: "Tonga", structures: ["rectangle-structure", "rhombus-structure", "gen-sym"], link: "https://hdl.handle.net/20.500.11840/791810" },
+            { id: "RV-4518-19", origin: "Tonga", structures: ["gen-sym"], link: "https://hdl.handle.net/20.500.11840/791811" },
+            { id: "RV-4518-22", origin: "Tonga", structures: ["square-structure", "rectangle-structure", "rhombus-structure", "gen-sym"], link: "https://hdl.handle.net/20.500.11840/791814" },
+            { id: "RV-4518-25", origin: "Tonga", structures: ["square-structure", "gen-sym", "matrix-sym"], link: "https://hdl.handle.net/20.500.11840/791817" },
+            { id: "RV-4518-26", origin: "Tonga", structures: ["square-structure", "gen-sym"], link: "https://hdl.handle.net/20.500.11840/791818" },
+            { id: "RV-4518-27", origin: "Tonga", structures: ["square-structure", "square-cross-structure", "square-concentric-circle-structure", "rhombus-structure", "equilateral-structure", "gen-sym"], link: "https://hdl.handle.net/20.500.11840/791819" },
+            { id: "RV-4518-30", origin: "Tonga", structures: ["rectangle-structure", "diag-sym"], link: "https://hdl.handle.net/20.500.11840/791822" },
+            { id: "RV-4518-32", origin: "Tonga", structures: ["square-structure", "square-cross-structure", "square-concentric-circle-structure", "diag-sym", "four-dir-sym"], link: "https://hdl.handle.net/20.500.11840/791824" },
+            { id: "RV-265-7", origin: "Samoa", structures: ["square-structure", "square-cross-structure", "gen-sym", "concentric-circle-sym"], link: "https://hdl.handle.net/20.500.11840/598304" },
+            { id: "RV-489-83", origin: "Samoa", structures: ["rectangle-structure", "gen-sym"], link: "https://hdl.handle.net/20.500.11840/660555" },
+            { id: "RV-489-84", origin: "Samoa", structures: ["rectangle-structure", "rhombus-structure", "gen-sym"], link: "https://hdl.handle.net/20.500.11840/660556" },
+            { id: "RV-489-85", origin: "Samoa", structures: ["square-structure", "gen-sym"], link: "https://hdl.handle.net/20.500.11840/660557" },
+            { id: "RV-489-88", origin: "Samoa", structures: ["square-structure", "gen-sym"], link: "https://hdl.handle.net/20.500.11840/660560" },
+            { id: "RV-552-5", origin: "Samoa", structures: ["square-cross-structure", "gen-sym"], link: "https://hdl.handle.net/20.500.11840/662722" },
+            { id: "RV-828-122", origin: "Samoa", structures: ["square-structure", "gen-sym"], link: "https://hdl.handle.net/20.500.11840/673330" },
+            { id: "RV-1141-133", origin: "Samoa", structures: ["square-cross-structure", "square-concentric-circle-structure", "gen-sym"], link: "https://hdl.handle.net/20.500.11840/686065" },
+            { id: "RV-912-4", origin: "East Polynesian (Polynesia / Hawaii)", structures: ["rectangle-structure", "matrix-sym"], link: "" },
+            { id: "RV-3600-7499", origin: "West Papua (Nafri, Sentani)", structures: [], link: "https://hdl.handle.net/20.500.11840/777783" },
+            { id: "RV-121-65", origin: "West Papua (Karon)", structures: ["rectangle-structure", "diag-sym", "matrix-sym"], link: "https://hdl.handle.net/20.500.11840/595932" },
+            { id: "RV-2972-2", origin: "West Papua (Karon)", structures: ["square-structure", "square-cross-structure", "rectangle-structure", "rhombus-structure"], link: "https://hdl.handle.net/20.500.11840/757315" },
+            { id: "RV-2953-2", origin: "West Papua (Wandamen, probably Karon)", structures: ["square-structure", "square-cross-structure", "rectangle-structure", "rhombus-structure"], link: "https://hdl.handle.net/20.500.11840/754845" },
+            { id: "RV-1759-31", origin: "Pebato", structures: ["square-cross-structure", "square-concentric-circle-structure", "circle-structure"], link: "https://hdl.handle.net/20.500.11840/718435" },
+            { id: "RV-03-277", origin: "Toraja", structures: ["square-structure", "square-cross-structure", "circle-structure", "four-dir-sym"], link: "https://hdl.handle.net/20.500.11840/828350" },
+            { id: "RV-03-2400", origin: "Toraja", structures: ["square-structure", "circle-structure", "four-dir-sym"], link: "https://hdl.handle.net/20.500.11840/849873" },
+            { id: "RV-776-45", origin: "Toraja", structures: ["square-structure", "four-dir-sym"], link: "https://hdl.handle.net/20.500.11840/671205" },
+            { id: "RV-776-45a", origin: "Toraja", structures: ["square-structure", "rectangle-structure", "circle-structure", "matrix-sym", "four-dir-sym"], link: "https://hdl.handle.net/20.500.11840/671206" },
+            { id: "RV-1232-93", origin: "Toraja", structures: ["square-structure", "rectangle-structure", "circle-structure", "matrix-sym", "four-dir-sym"], link: "https://hdl.handle.net/20.500.11840/690654" },
+            { id: "RV-1372-2", origin: "Toraja (Poso Toraja)", structures: ["square-structure", "square-cross-structure", "circle-structure"], link: "https://hdl.handle.net/20.500.11840/701086" },
+            { id: "RV-1232-87", origin: "Toraja", structures: ["square-structure", "square-cross-structure", "circle-structure", "four-dir-sym"], link: "https://hdl.handle.net/20.500.11840/690648" },
+            { id: "RV-1232-92", origin: "Toraja", structures: ["square-structure", "square-cross-structure", "circle-structure", "four-dir-sym"], link: "https://hdl.handle.net/20.500.11840/690653" },
+            { id: "RV-1759-27", origin: "Pebato", structures: ["square-cross-structure", "rectangle-structure", "circle-structure", "four-dir-sym"], link: "https://hdl.handle.net/20.500.11840/718431" },
+            { id: "RV-1232-90", origin: "Toraja", structures: ["square-structure", "square-cross-structure", "square-concentric-circle-structure", "square-concentric-circle-structure", "circle-structure"], link: "https://hdl.handle.net/20.500.11840/690651" },
+            { id: "RV-1926-205", origin: "Toraja (Poso Toraja)", structures: ["square-structure", "square-cross-structure", "circle-structure", "four-dir-sym"], link: "https://hdl.handle.net/20.500.11840/724867" },
+            { id: "RV-1759-36", origin: "Toraja (Lage)", structures: ["square-structure", "square-cross-structure", "circle-structure", "four-dir-sym"], link: "https://hdl.handle.net/20.500.11840/718440" },
+            { id: "RV-1759-38", origin: "Toraja (Lage)", structures: ["square-structure", "square-cross-structure", "four-dir-sym"], link: "https://hdl.handle.net/20.500.11840/718442" },
+            { id: "RV-1926-211", origin: "Toraja (Poso Toraja)", structures: ["square-structure", "square-cross-structure", "rectangle-structure", "gen-sym"], link: "https://hdl.handle.net/20.500.11840/724873" },
+            { id: "RV-03-276", origin: "Toraja", structures: ["equilateral-structure", "two-dir-sym"], link: "https://hdl.handle.net/20.500.11840/828349" },
+            { id: "RV-03-2349", origin: "Toraja", structures: ["square-structure", "equilateral-structure", "two-dir-sym"], link: "https://hdl.handle.net/20.500.11840/849473" },
+            { id: "RV-1232-94", origin: "Toraja", structures: ["rectangle-structure", "gen-sym"], link: "https://hdl.handle.net/20.500.11840/690655" },
+            { id: "RV-03-2391", origin: "Toraja (Poso Toraja)", structures: ["square-structure", "square-cross-structure", "rectangle-structure", "rhombus-structure"], link: "https://hdl.handle.net/20.500.11840/849514" },
         ];
 
-        function parseCSV(csv) {
-            const lines = csv.trim().split('\n');
-            const header = lines[0].split(',').map(h => h.trim());
-            return lines.slice(1).map(line => {
-                let fields = [];
-                let current = '';
-                let inQuotes = false;
-                for (let i = 0; i < line.length; i++) {
-                    const char = line[i];
-                    if (char === '"') {
-                        inQuotes = !inQuotes;
-                    } else if (char === ',' && !inQuotes) {
-                        fields.push(current.trim());
-                        current = '';
-                    } else {
-                        current += char;
-                    }
+        let selectedStructures = [];
+
+        // filter button clicks
+        let buttons = document.querySelectorAll('.filter-btn');
+        for (let i = 0; i < buttons.length; i++) {
+            buttons[i].addEventListener('click', function () {
+                let structure = this.dataset.structure;
+                this.classList.toggle('selected');
+
+                if (selectedStructures.includes(structure)) {
+                    // remove
+                    let index = selectedStructures.indexOf(structure);
+                    selectedStructures.splice(index, 1);
+                } else {
+                    // add
+                    selectedStructures.push(structure);
                 }
-                fields.push(current.trim());
-                const structureValues = {};
-                structureKeys.forEach((key) => {
-                    const colIdx = header.indexOf(key);
-                    structureValues[key] = fields[colIdx] && fields[colIdx].replace(/\s/g, '') === '1';
-                });
-                return {
-                    id: fields[0],
-                    origin: fields[1],
-                    structures: structureKeys.filter(key => structureValues[key]),
-                    link: fields[fields.length - 1]
-                };
+
+                renderBarkcloths();
             });
         }
 
-        const barkcloths = parseCSV(csvData);
-
-        const filterBar = document.getElementById('filter-bar');
-        const barkclothList = document.getElementById('barkcloth-list');
-        let selectedStructures = [];
-
-        filterBar.addEventListener('click', e => {
-            if (e.target.classList.contains('filter-btn')) {
-                const structure = e.target.dataset.structure;
-                e.target.classList.toggle('selected');
-                if (selectedStructures.includes(structure)) {
-                    selectedStructures = selectedStructures.filter(s => s !== structure);
-                } else {
-                    selectedStructures.push(structure);
-                }
-                renderBarkcloths();
-            }
-        });
-
         function renderBarkcloths() {
-            if (selectedStructures.length === 0) {
-                barkclothList.innerHTML = `
-      <div style="grid-column: 1 / -1; text-align: center; color: var(--muted, #888); font-size: 1rem; margin-top: 2rem;">
-        Please select a structure filter above.
-      </div>
-    `;
+            let floatingLayer = document.getElementById('floating-layer');
+            let noMatch = document.getElementById('no-match');
+
+            floatingLayer.innerHTML = '';
+            noMatch.style.display = 'none';
+
+            if (selectedStructures.length === 0) return;
+
+            // find barkcloths w all selected structures
+            let filtered = [];
+            for (let i = 0; i < barkcloths.length; i++) {
+                let bc = barkcloths[i];
+                let hasAllStructures = true;
+                for (let j = 0; j < selectedStructures.length; j++) {
+                    if (!bc.structures.includes(selectedStructures[j])) {
+                        hasAllStructures = false;
+                        break;
+                    }
+                }
+                if (hasAllStructures) {
+                    filtered.push(bc);
+                }
+            }
+
+            if (filtered.length === 0) {
+                noMatch.style.display = 'block';
                 return;
             }
-            let filtered = barkcloths.filter(bc =>
-                selectedStructures.every(structure => bc.structures.includes(structure))
-            );
-            barkclothList.innerHTML = filtered.length
-                ? filtered.map(bc => `
-      <div class="barkcloth-card">
-        <img src="img/${bc.id}.png" alt="${bc.id}" style="width:100%;border-radius:8px;margin-bottom:1rem;object-fit:cover;">
-        <div><strong>${bc.id}</strong></div>
-        <div>${bc.origin}</div>
-        <div>Structures: ${bc.structures.length ? bc.structures.join(', ') : 'None'}</div>
-      </div>
-    `).join('')
-                : `<div class="no-results">
-        No barkcloths match the selected filters.
-      </div>`;
+
+            for (let i = 0; i < filtered.length; i++) {
+                let bc = filtered[i];
+
+                // random speeds and positions for animations
+                let xSpeed = Math.random() * 9 + 9;   // 9 to 18
+                let ySpeed = Math.random() * 5 + 5;   // 5 to 10
+                let xDelay = Math.random() * -xSpeed;
+                let yDelay = Math.random() * -ySpeed;
+                let xEnd = 'calc(' + (Math.random() * 40 + 60) + 'vw - 180px)';
+                let yEnd = 'calc(' + (Math.random() * 40 + 60) + 'vh - 180px)';
+                let rotate = Math.random() * 12 - 6;  // -6 to 6
+                let goRight = i % 2 === 0;
+
+                let xWrap = document.createElement('div');
+                xWrap.className = 'card-x ' + (goRight ? 'go-right' : 'go-left');
+                xWrap.style.cssText =
+                    '--x-speed: ' + xSpeed + 's;' +
+                    '--x-delay: ' + xDelay + 's;' +
+                    '--x-end: ' + xEnd + ';' +
+                    'top: 0; left: 0;';
+
+                let yWrap = document.createElement('div');
+                yWrap.className = 'card-y';
+                yWrap.style.cssText =
+                    '--y-speed: ' + ySpeed + 's;' +
+                    '--y-delay: ' + yDelay + 's;' +
+                    '--y-end: ' + yEnd + ';';
+
+                let card = document.createElement('div');
+                card.className = 'floating-card';
+                card.style.setProperty('--rotate', rotate + 'deg');
+
+                let structureList = bc.structures.length > 0 ? bc.structures.join(', ') : 'No structures';
+                card.innerHTML =
+                    '<img src="img/' + bc.id + '.png" alt="' + bc.id + '" onerror="this.style.display=\'none\'">' +
+                    '<div class="card-id">' + bc.id + '</div>' +
+                    '<div class="card-origin">' + bc.origin + '</div>' +
+                    '<div class="card-shapes">' + structureList + '</div>';
+
+                yWrap.appendChild(card);
+                xWrap.appendChild(yWrap);
+                floatingLayer.appendChild(xWrap);
+            }
         }
 
         renderBarkcloths();
     </script>
-
 </body>
 
 </html>
