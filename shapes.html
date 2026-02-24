@@ -1,48 +1,57 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" type="text/css" href="styles/site.css">
-  <title>Visually Barkcloth</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="styles/site.css">
+    <title>Visually Barkcloth</title>
 </head>
+
 <body>
-<nav class="nav">
-  <ul>
-    <li><a href="index.html">Home</a></li>
-    <li><a href="symbols.html">Symbols</a></li>
-    <li><a href="about.html">About</a></li>
-    <li><a href="contact.html">Contact</a></li>
-  </ul>
-</nav>
+    <nav class="nav">
+        <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="symbols.html">Symbols</a></li>
+            <li><a href="about.html">About</a></li>
+            <li><a href="contact.html">Contact</a></li>
+        </ul>
+    </nav>
 
-<main class="hero">
-  <h1 class="hero-title">Filter Barkcloths by Shape</h1>
+    <main class="hero">
+        <div class="choice-icon" style="margin-bottom: 15px;">
+            <svg viewBox="0 0 56 56" fill="none" stroke="#c8a058" stroke-width="1.5">
+                <rect x="8" y="8" width="16" height="16" />
+                <circle cx="42" cy="16" r="8" />
+                <polygon points="8,48 24,32 8,32" />
+                <path d="M32 40 L48 40 L40 32 Z" />
+            </svg>
+        </div>
 
-  <div class="filter-bar" id="filter-bar">
-    <button class="filter-btn" data-shape="square">Square</button>
-    <button class="filter-btn" data-shape="rhombus">Rhombus</button>
-    <button class="filter-btn" data-shape="rectangle">Rectangle</button>
-    <button class="filter-btn" data-shape="right">Right Triangle</button>
-    <button class="filter-btn" data-shape="equilateral">Equilateral Triangle</button>
-    <button class="filter-btn" data-shape="isoceles">Isoceles Triangle</button>
-    <button class="filter-btn" data-shape="circle">Circle</button>
-    <button class="filter-btn" data-shape="line">Line</button>
-    <button class="filter-btn" data-shape="curve">Curve</button>
-    <button class="filter-btn" data-shape="cross">Cross</button>
-    <button class="filter-btn" data-shape="sun">Sun</button>
-    <button class="filter-btn" data-shape="moon">Moon</button>
-    <button class="filter-btn" data-shape="star">Star</button>
-    <button class="filter-btn" data-shape="flower">Flower</button>
-    <button class="filter-btn" data-shape="leaf">Leaf</button>
-  </div>
+        <div class="filter-bar" id="filter-bar">
+            <button class="filter-btn" data-shape="square">Square</button>
+            <button class="filter-btn" data-shape="rhombus">Rhombus</button>
+            <button class="filter-btn" data-shape="rectangle">Rectangle</button>
+            <button class="filter-btn" data-shape="right">Right Triangle</button>
+            <button class="filter-btn" data-shape="equilateral">Equilateral Triangle</button>
+            <button class="filter-btn" data-shape="isoceles">Isoceles Triangle</button>
+            <button class="filter-btn" data-shape="circle">Circle</button>
+            <button class="filter-btn" data-shape="line">Line</button>
+            <button class="filter-btn" data-shape="curve">Curve</button>
+            <button class="filter-btn" data-shape="cross">Cross</button>
+            <button class="filter-btn" data-shape="sun">Sun</button>
+            <button class="filter-btn" data-shape="moon">Moon</button>
+            <button class="filter-btn" data-shape="star">Star</button>
+            <button class="filter-btn" data-shape="flower">Flower</button>
+            <button class="filter-btn" data-shape="leaf">Leaf</button>
+        </div>
 
-  <section class="barkcloth-list" id="barkcloth-list">
-  </section>
-</main>
+        <section class="barkcloth-list" id="barkcloth-list">
+        </section>
+    </main>
 
-<script>
-const csvData = `id,origin,square,rhombus,rectangle,right,equilateral,isoceles,circle,line,curve,cross,sun,moon,star,flower,leaf,square-structure,square-cross-structure,square-concentric-circle-structure,rectangle-structure,rhombus-structure,equilateral-structure,circle-structure,diag-sym,gen-sym,matrix-sym,two-dir-sym,four-dir-sym,concentric-circle-sym,tassels,link
+    <script>
+        const csvData = `id,origin,square,rhombus,rectangle,right,equilateral,isoceles,circle,line,curve,cross,sun,moon,star,flower,leaf,square-structure,square-cross-structure,square-concentric-circle-structure,rectangle-structure,rhombus-structure,equilateral-structure,circle-structure,diag-sym,gen-sym,matrix-sym,two-dir-sym,four-dir-sym,concentric-circle-sym,tassels,link
 RV-4706-120,Fiji,1 ,0 ,0 ,1 ,0 ,0 ,1 ,1 ,0 ,1 ,0 ,0 ,0 ,1 ,0 ,1 ,1 ,0 ,1 ,0 ,0 ,1 ,1 ,0 ,0 ,0 ,0 ,0 ,0 ,https://hdl.handle.net/20.500.11840/795173
 RV-265-1b,Futuna,1 ,0 ,0 ,0 ,0 ,0 ,0 ,1 ,0 ,1 ,1 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,1 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,1 ,1 ,1 ,https://hdl.handle.net/20.500.11840/598299
 RV-09-220,Tonga,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,2 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,1 ,1 ,0 ,0 ,1 ,0 ,0 ,0 ,0 ,0 ,https://hdl.handle.net/20.500.11840/838810
@@ -90,86 +99,87 @@ RV-03-2349,Toraja,0 ,0 ,0 ,1 ,0 ,0 ,1 ,0 ,0 ,0 ,0 ,0 ,0 ,1 ,0 ,1 ,0 ,0 ,0 ,0 ,0 
 RV-1232-94,Toraja,0 ,1 ,0 ,0 ,0 ,0 ,0 ,1 ,1 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,1 ,0 ,0 ,0 ,0 ,0 ,1 ,0 ,0 ,0 ,0 ,https://hdl.handle.net/20.500.11840/690655
 RV-03-2391,Toraja (Poso Toraja),1 ,1 ,0 ,0 ,1 ,1 ,0 ,1 ,1 ,0 ,0 ,0 ,0 ,0 ,0 ,1 ,0 ,1 ,0 ,1 ,1 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,https://hdl.handle.net/20.500.11840/849514`;
 
-const shapeKeys = ["square","rhombus","rectangle","right","equilateral","isoceles","circle","line","curve","cross","sun","moon","star","flower","leaf"];
+        const shapeKeys = ["square", "rhombus", "rectangle", "right", "equilateral", "isoceles", "circle", "line", "curve", "cross", "sun", "moon", "star", "flower", "leaf"];
 
-function parseCSV(csv) {
-  const lines = csv.trim().split('\n');
-  const header = lines[0].split(',').map(h => h.trim());
-  return lines.slice(1).map(line => {
-    let fields = [];
-    let current = '';
-    let inQuotes = false;
-    for (let i = 0, j = 0; i < line.length; i++) {
-      const char = line[i];
-      if (char === '"') {
-        inQuotes = !inQuotes;
-      } else if (char === ',' && !inQuotes) {
-        fields.push(current.trim());
-        current = '';
-      } else {
-        current += char;
-      }
-    }
-    fields.push(current.trim());
-    const shapeValues = {};
-    shapeKeys.forEach((key, idx) => {
-      shapeValues[key] = fields[2 + idx].replace(/\s/g, '') === '1';
-    });
-    return {
-      id: fields[0],
-      origin: fields[1],
-      shapes: shapeKeys.filter(key => shapeValues[key]),
-      link: fields[fields.length - 1]
-    };
-  });
-}
+        function parseCSV(csv) {
+            const lines = csv.trim().split('\n');
+            const header = lines[0].split(',').map(h => h.trim());
+            return lines.slice(1).map(line => {
+                let fields = [];
+                let current = '';
+                let inQuotes = false;
+                for (let i = 0, j = 0; i < line.length; i++) {
+                    const char = line[i];
+                    if (char === '"') {
+                        inQuotes = !inQuotes;
+                    } else if (char === ',' && !inQuotes) {
+                        fields.push(current.trim());
+                        current = '';
+                    } else {
+                        current += char;
+                    }
+                }
+                fields.push(current.trim());
+                const shapeValues = {};
+                shapeKeys.forEach((key, idx) => {
+                    shapeValues[key] = fields[2 + idx].replace(/\s/g, '') === '1';
+                });
+                return {
+                    id: fields[0],
+                    origin: fields[1],
+                    shapes: shapeKeys.filter(key => shapeValues[key]),
+                    link: fields[fields.length - 1]
+                };
+            });
+        }
 
-const barkcloths = parseCSV(csvData);
+        const barkcloths = parseCSV(csvData);
 
-const filterBar = document.getElementById('filter-bar');
-const barkclothList = document.getElementById('barkcloth-list');
-let selectedShapes = [];
+        const filterBar = document.getElementById('filter-bar');
+        const barkclothList = document.getElementById('barkcloth-list');
+        let selectedShapes = [];
 
-filterBar.addEventListener('click', e => {
-  if (e.target.classList.contains('filter-btn')) {
-    const shape = e.target.dataset.shape;
-    e.target.classList.toggle('selected');
-    if (selectedShapes.includes(shape)) {
-      selectedShapes = selectedShapes.filter(s => s !== shape);
-    } else {
-      selectedShapes.push(shape);
-    }
-    renderBarkcloths();
-  }
-});
+        filterBar.addEventListener('click', e => {
+            if (e.target.classList.contains('filter-btn')) {
+                const shape = e.target.dataset.shape;
+                e.target.classList.toggle('selected');
+                if (selectedShapes.includes(shape)) {
+                    selectedShapes = selectedShapes.filter(s => s !== shape);
+                } else {
+                    selectedShapes.push(shape);
+                }
+                renderBarkcloths();
+            }
+        });
 
-function renderBarkcloths() {
-  if (selectedShapes.length === 0) {
-    barkclothList.innerHTML = `
+        function renderBarkcloths() {
+            if (selectedShapes.length === 0) {
+                barkclothList.innerHTML = `
       <div style="grid-column: 1 / -1; text-align: center; color: var(--muted, #888); font-size: 1rem; margin-top: 2rem;">
         Please select a shape filter above.
       </div>
     `;
-    return;
-  }
-  let filtered = barkcloths.filter(bc =>
-    selectedShapes.every(shape => bc.shapes.includes(shape))
-  );
-  barkclothList.innerHTML = filtered.length
-    ? filtered.map(bc => `
+                return;
+            }
+            let filtered = barkcloths.filter(bc =>
+                selectedShapes.every(shape => bc.shapes.includes(shape))
+            );
+            barkclothList.innerHTML = filtered.length
+                ? filtered.map(bc => `
       <div class="barkcloth-card">
+        <img src="img/${bc.id}.png" alt="${bc.id}" style="width:100%;border-radius:8px;margin-bottom:1rem;object-fit:cover;">
         <div><strong>${bc.id}</strong></div>
         <div>${bc.origin}</div>
         <div>Shapes: ${bc.shapes.length ? bc.shapes.join(', ') : 'None'}</div>
-        <a href="${bc.link}" target="_blank">View Item</a>
       </div>
     `).join('')
-    : `<div style="grid-column: 1 / -1; text-align: center; color: var(--muted, #888); font-size: 1.2rem; margin-top: 2rem;">
+                : `<div style="grid-column: 1 / -1; text-align: center; color: var(--muted, #888); font-size: 1.2rem; margin-top: 2rem;">
         No barkcloths match the selected filters.
       </div>`;
-}
+        }
 
-renderBarkcloths();
-</script>
+        renderBarkcloths();
+    </script>
 </body>
+
 </html>

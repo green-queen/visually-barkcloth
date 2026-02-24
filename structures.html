@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,17 +9,192 @@
 </head>
 
 <body>
-<nav class="nav">
-    <ul>
-    <li><a href="index.html" class="active">Home</a></li>
-    <li><a href="symbols.html">Symbols</a></li>
-    <li><a href="about.html">About</a></li>
-    <li><a href="contact.html">Contact</a></li>
-  </ul>
-</nav>
+    <nav class="nav">
+        <ul>
+            <li><a href="index.html" class="active">Home</a></li>
+            <li><a href="symbols.html">Symbols</a></li>
+            <li><a href="about.html">About</a></li>
+            <li><a href="contact.html">Contact</a></li>
+        </ul>
+    </nav>
 
+    <main class="hero">
+        <div class="choice-icon" style="margin-bottom: 15px;">
+            <svg viewBox="0 0 56 56" fill="none" stroke="#c8a058" stroke-width="1.5">
+                <rect x="8" y="8" width="40" height="40" />
+                <rect x="16" y="16" width="24" height="24" stroke-dasharray="2,2" />
+                <rect x="24" y="24" width="8" height="8" />
+                <line x1="28" y1="8" x2="28" y2="48" />
+                <line x1="8" y1="28" x2="48" y2="28" />
+            </svg>
+        </div>
 
+        <div class="filter-bar" id="filter-bar">
+            <button class="filter-btn" data-structure="square-structure">Square Structure</button>
+            <button class="filter-btn" data-structure="square-cross-structure">Square Cross Structure</button>
+            <button class="filter-btn" data-structure="square-concentric-circle-structure">Square Concentric Circle
+                Structure</button>
+            <button class="filter-btn" data-structure="rectangle-structure">Rectangle Structure</button>
+            <button class="filter-btn" data-structure="rhombus-structure">Rhombus Structure</button>
+            <button class="filter-btn" data-structure="equilateral-structure">Equilateral Structure</button>
+            <button class="filter-btn" data-structure="circle-structure">Circle Structure</button>
+            <button class="filter-btn" data-structure="diag-sym">Diagonal Symmetry</button>
+            <button class="filter-btn" data-structure="gen-sym">General Symmetry</button>
+            <button class="filter-btn" data-structure="matrix-sym">Matrix Symmetry</button>
+            <button class="filter-btn" data-structure="two-dir-sym">Two Direction Symmetry</button>
+            <button class="filter-btn" data-structure="four-dir-sym">Four Direction Symmetry</button>
+            <button class="filter-btn" data-structure="concentric-circle-sym">Concentric Circle Symmetry</button>
+        </div>
+        <section class="barkcloth-list" id="barkcloth-list">
+        </section>
+    </main>
 
+    <script>
+        const csvData = `id,origin,square,rhombus,rectangle,right,equilateral,isoceles,circle,line,curve,cross,sun,moon,star,flower,leaf,square-structure,square-cross-structure,square-concentric-circle-structure,rectangle-structure,rhombus-structure,equilateral-structure,circle-structure,diag-sym,gen-sym,matrix-sym,two-dir-sym,four-dir-sym,concentric-circle-sym,tassels,link
+RV-4706-120,Fiji,1 ,0 ,0 ,1 ,0 ,0 ,1 ,1 ,0 ,1 ,0 ,0 ,0 ,1 ,0 ,1 ,1 ,0 ,1 ,0 ,0 ,1 ,1 ,0 ,0 ,0 ,0 ,0 ,0 ,https://hdl.handle.net/20.500.11840/795173
+RV-265-1b,Futuna,1 ,0 ,0 ,0 ,0 ,0 ,0 ,1 ,0 ,1 ,1 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,1 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,1 ,1 ,1 ,https://hdl.handle.net/20.500.11840/598299
+RV-09-220,Tonga,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,2 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,1 ,1 ,0 ,0 ,1 ,0 ,0 ,0 ,0 ,0 ,https://hdl.handle.net/20.500.11840/838810
+RV-489-87,Tonga,0 ,0 ,0 ,0 ,1 ,0 ,1 ,1 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,1 ,0 ,0 ,0 ,0 ,0 ,https://hdl.handle.net/20.500.11840/660559
+RV-4241-1,Tonga,0 ,0 ,0 ,0 ,1 ,0 ,1 ,0 ,0 ,0 ,1 ,2 ,1 ,1 ,1 ,0 ,0 ,0 ,0 ,0 ,1 ,0 ,0 ,0 ,1 ,0 ,0 ,0 ,0 ,https://hdl.handle.net/20.500.11840/787757
+RV-4518-17,Tonga,0 ,0 ,0 ,1 ,0 ,0 ,1 ,1 ,0 ,0 ,0 ,1 ,1 ,0 ,0 ,0 ,0 ,0 ,1 ,0 ,0 ,0 ,0 ,0 ,1 ,0 ,0 ,0 ,0 ,https://hdl.handle.net/20.500.11840/791809
+RV-4518-18,Tonga,0 ,0 ,0 ,0 ,1 ,0 ,1 ,0 ,0 ,0 ,0 ,2 ,0 ,0 ,1 ,0 ,0 ,0 ,0 ,1 ,1 ,0 ,0 ,0 ,1 ,0 ,0 ,0 ,0 ,https://hdl.handle.net/20.500.11840/791810
+RV-4518-19,Tonga,0 ,0 ,0 ,0 ,1 ,1 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,1 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,1 ,0 ,0 ,0 ,0 ,https://hdl.handle.net/20.500.11840/791811
+RV-4518-22,Tonga,0 ,0 ,0 ,1 ,1 ,0 ,1 ,0 ,0 ,1 ,0 ,0 ,0 ,1 ,1 ,1 ,0 ,0 ,0 ,1 ,1 ,0 ,0 ,0 ,1 ,0 ,0 ,0 ,0 ,https://hdl.handle.net/20.500.11840/791814
+RV-4518-25,Tonga,0 ,0 ,0 ,1 ,0 ,0 ,0 ,0 ,0 ,1 ,0 ,0 ,0 ,0 ,1 ,1 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,1 ,1 ,0 ,0 ,0 ,https://hdl.handle.net/20.500.11840/791817
+RV-4518-26,Tonga,0 ,0 ,0 ,1 ,0 ,0 ,1 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,1 ,1 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,1 ,0 ,0 ,0 ,0 ,https://hdl.handle.net/20.500.11840/791818
+RV-4518-27,Tonga,0 ,0 ,0 ,1 ,1 ,0 ,0 ,0 ,0 ,1 ,0 ,0 ,0 ,0 ,1 ,1 ,1 ,1 ,1 ,0 ,1 ,1 ,0 ,0 ,1 ,0 ,0 ,0 ,0 ,https://hdl.handle.net/20.500.11840/791819
+RV-4518-30,Tonga,0 ,0 ,0 ,0 ,1 ,0 ,0 ,1 ,0 ,0 ,0 ,1 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,1 ,0 ,0 ,0 ,1 ,0 ,0 ,0 ,0 ,0 ,https://hdl.handle.net/20.500.11840/791822
+RV-4518-32,Tonga,1 ,0 ,0 ,0 ,0 ,0 ,0 ,1 ,1 ,0 ,0 ,0 ,0 ,0 ,0 ,1 ,1 ,1 ,0 ,0 ,0 ,0 ,0 ,1 ,0 ,0 ,0 ,1 ,0 ,https://hdl.handle.net/20.500.11840/791824
+RV-265-7,Samoa,0 ,0 ,0 ,0 ,1 ,0 ,1 ,0 ,1 ,1 ,1 ,2 ,0 ,0 ,0 ,1 ,1 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,1 ,0 ,0 ,0 ,1 ,https://hdl.handle.net/20.500.11840/598304
+RV-489-83,Samoa,0 ,0 ,0 ,0 ,0 ,1 ,0 ,1 ,1 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,1 ,0 ,0 ,0 ,0 ,0 ,1 ,0 ,0 ,0 ,0 ,https://hdl.handle.net/20.500.11840/660555
+RV-489-84,Samoa,0 ,0 ,0 ,0 ,0 ,0 ,0 ,1 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,1 ,0 ,1 ,0 ,0 ,0 ,1 ,0 ,0 ,0 ,0 ,https://hdl.handle.net/20.500.11840/660556
+RV-489-85,Samoa,0 ,0 ,0 ,0 ,0 ,0 ,0 ,1 ,0 ,1 ,0 ,2 ,0 ,1 ,0 ,1 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,1 ,0 ,0 ,0 ,0 ,https://hdl.handle.net/20.500.11840/660557
+RV-489-88,Samoa,0 ,0 ,0 ,1 ,1 ,1 ,0 ,1 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,1 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,1 ,0 ,0 ,0 ,0 ,https://hdl.handle.net/20.500.11840/660560
+RV-552-5,Samoa,1 ,0 ,0 ,0 ,1 ,0 ,0 ,1 ,1 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,1 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,1 ,0 ,0 ,0 ,0 ,https://hdl.handle.net/20.500.11840/662722
+RV-828-122,Samoa,0 ,0 ,0 ,0 ,0 ,0 ,0 ,1 ,1 ,0 ,0 ,0 ,0 ,0 ,0 ,1 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,1 ,0 ,0 ,0 ,0 ,https://hdl.handle.net/20.500.11840/673330
+RV-1141-133,Samoa,0 ,0 ,0 ,0 ,1 ,0 ,0 ,1 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,1 ,1 ,0 ,0 ,0 ,0 ,0 ,0 ,1 ,0 ,0 ,0 ,0 ,https://hdl.handle.net/20.500.11840/686065
+RV-912-4,East Polynesian (Polynesia / Hawaii),0 ,0 ,0 ,0 ,0 ,0 ,1 ,1 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,1 ,0 ,0 ,0 ,0 ,0 ,0 ,1 ,0 ,0 ,0 ,
+RV-3600-7499,"West Papua (Nafri, Sentani)",0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,https://hdl.handle.net/20.500.11840/777783
+RV-121-65,West Papua (Karon),1 ,1 ,0 ,0 ,0 ,0 ,1 ,1 ,1 ,1 ,1 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,1 ,0 ,0 ,0 ,0 ,1 ,0 ,1 ,0 ,0 ,0 ,https://hdl.handle.net/20.500.11840/595932
+RV-2972-2,West Papua (Karon),1 ,1 ,0 ,1 ,1 ,1 ,1 ,1 ,1 ,1 ,0 ,0 ,0 ,0 ,0 ,1 ,1 ,0 ,1 ,1 ,1 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,https://hdl.handle.net/20.500.11840/757315
+RV-2953-2,"West Papua (Wandamen, probably Karon)",1 ,1 ,1 ,1 ,1 ,0 ,1 ,1 ,1 ,1 ,0 ,0 ,0 ,0 ,0 ,1 ,1 ,0 ,1 ,1 ,1 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,https://hdl.handle.net/20.500.11840/754845
+RV-1759-31,Pebato,1 ,1 ,0 ,1 ,1 ,0 ,1 ,1 ,1 ,0 ,1 ,2 ,0 ,0 ,0 ,0 ,1 ,1 ,0 ,0 ,0 ,0 ,1 ,0 ,0 ,0 ,0 ,0 ,0 ,https://hdl.handle.net/20.500.11840/718435
+RV-03-277,Toraja,0 ,1 ,0 ,0 ,0 ,0 ,0 ,1 ,1 ,0 ,0 ,2 ,0 ,0 ,0 ,1 ,1 ,0 ,0 ,0 ,0 ,0 ,1 ,0 ,0 ,0 ,0 ,1 ,0 ,https://hdl.handle.net/20.500.11840/828350
+RV-03-2400,Toraja,0 ,1 ,0 ,0 ,1 ,0 ,0 ,1 ,1 ,1 ,0 ,0 ,1 ,0 ,1 ,1 ,0 ,0 ,0 ,0 ,0 ,0 ,1 ,0 ,0 ,0 ,0 ,1 ,0 ,https://hdl.handle.net/20.500.11840/849873
+RV-776-45,Toraja,0 ,0 ,0 ,0 ,0 ,0 ,1 ,0 ,1 ,1 ,1 ,0 ,0 ,0 ,0 ,1 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,1 ,0 ,https://hdl.handle.net/20.500.11840/671205
+RV-776-45a,Toraja,0 ,0 ,0 ,1 ,1 ,0 ,1 ,0 ,0 ,1 ,0 ,0 ,1 ,1 ,0 ,1 ,0 ,0 ,1 ,0 ,0 ,0 ,1 ,0 ,0 ,1 ,0 ,1 ,0 ,https://hdl.handle.net/20.500.11840/671206
+RV-1232-93,Toraja,0 ,0 ,0 ,0 ,0 ,0 ,1 ,0 ,0 ,0 ,0 ,0 ,1 ,1 ,0 ,1 ,0 ,0 ,1 ,0 ,0 ,0 ,1 ,0 ,0 ,1 ,0 ,1 ,0 ,https://hdl.handle.net/20.500.11840/690654
+RV-1372-2,Toraja (Poso Toraja),1 ,1 ,0 ,0 ,1 ,0 ,1 ,0 ,1 ,0 ,0 ,0 ,0 ,1 ,1 ,1 ,1 ,0 ,0 ,0 ,0 ,0 ,1 ,0 ,0 ,0 ,0 ,0 ,0 ,https://hdl.handle.net/20.500.11840/701086
+RV-1232-87,Toraja,0 ,0 ,0 ,0 ,1 ,1 ,1 ,1 ,1 ,1 ,0 ,0 ,1 ,1 ,1 ,1 ,1 ,0 ,0 ,0 ,0 ,0 ,1 ,0 ,0 ,0 ,0 ,1 ,0 ,https://hdl.handle.net/20.500.11840/690648
+RV-1232-92,Toraja,0 ,1 ,0 ,0 ,0 ,0 ,0 ,1 ,1 ,0 ,0 ,0 ,0 ,0 ,0 ,1 ,1 ,0 ,0 ,0 ,0 ,0 ,1 ,0 ,0 ,0 ,0 ,1 ,0 ,https://hdl.handle.net/20.500.11840/690653
+RV-1759-27,Pebato,0 ,0 ,0 ,0 ,1 ,0 ,1 ,1 ,0 ,0 ,1 ,0 ,1 ,0 ,0 ,0 ,1 ,0 ,0 ,1 ,0 ,0 ,1 ,0 ,0 ,0 ,0 ,1 ,0 ,https://hdl.handle.net/20.500.11840/718431
+RV-1232-90,Toraja,1 ,0 ,1 ,0 ,1 ,0 ,0 ,1 ,1 ,0 ,0 ,0 ,0 ,0 ,1 ,1 ,1 ,1 ,0 ,0 ,0 ,0 ,1 ,0 ,0 ,0 ,0 ,0 ,0 ,https://hdl.handle.net/20.500.11840/690651
+RV-1926-205,Toraja (Poso Toraja),0 ,1 ,0 ,0 ,0 ,0 ,1 ,1 ,1 ,0 ,0 ,2 ,0 ,0 ,1 ,1 ,1 ,0 ,0 ,0 ,0 ,0 ,1 ,0 ,0 ,0 ,0 ,1 ,0 ,https://hdl.handle.net/20.500.11840/724867
+RV-1759-36,Toraja (Lage),0 ,1 ,0 ,1 ,1 ,0 ,0 ,1 ,1 ,0 ,0 ,2 ,0 ,0 ,0 ,1 ,1 ,0 ,0 ,0 ,0 ,0 ,1 ,0 ,0 ,0 ,0 ,1 ,0 ,https://hdl.handle.net/20.500.11840/718440
+RV-1759-38,Toraja (Lage),1 ,0 ,0 ,0 ,1 ,0 ,0 ,1 ,0 ,1 ,0 ,0 ,1 ,0 ,0 ,1 ,1 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,1 ,0 ,https://hdl.handle.net/20.500.11840/718442
+RV-1926-211,Toraja (Poso Toraja),1 ,1 ,0 ,1 ,1 ,0 ,1 ,1 ,1 ,1 ,0 ,0 ,0 ,0 ,1 ,1 ,1 ,0 ,0 ,1 ,0 ,0 ,0 ,0 ,1 ,0 ,0 ,0 ,0 ,https://hdl.handle.net/20.500.11840/724873
+RV-03-276,Toraja,0 ,0 ,0 ,0 ,0 ,0 ,1 ,0 ,0 ,0 ,0 ,0 ,0 ,1 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,1 ,0 ,0 ,0 ,0 ,1 ,0 ,0 ,https://hdl.handle.net/20.500.11840/828349
+RV-03-2349,Toraja,0 ,0 ,0 ,1 ,0 ,0 ,1 ,0 ,0 ,0 ,0 ,0 ,0 ,1 ,0 ,1 ,0 ,0 ,0 ,0 ,0 ,1 ,0 ,0 ,0 ,0 ,1 ,0 ,0 ,https://hdl.handle.net/20.500.11840/849473
+RV-1232-94,Toraja,0 ,1 ,0 ,0 ,0 ,0 ,0 ,1 ,1 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,1 ,0 ,0 ,0 ,0 ,0 ,1 ,0 ,0 ,0 ,0 ,https://hdl.handle.net/20.500.11840/690655
+RV-03-2391,Toraja (Poso Toraja),1 ,1 ,0 ,0 ,1 ,1 ,0 ,1 ,1 ,0 ,0 ,0 ,0 ,0 ,0 ,1 ,0 ,1 ,0 ,1 ,1 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,https://hdl.handle.net/20.500.11840/849514`;
+
+        const structureKeys = [
+            "square-structure",
+            "square-cross-structure",
+            "square-concentric-circle-structure",
+            "rectangle-structure",
+            "rhombus-structure",
+            "equilateral-structure",
+            "circle-structure",
+            "diag-sym",
+            "gen-sym",
+            "matrix-sym",
+            "two-dir-sym",
+            "four-dir-sym",
+            "concentric-circle-sym"
+        ];
+
+        function parseCSV(csv) {
+            const lines = csv.trim().split('\n');
+            const header = lines[0].split(',').map(h => h.trim());
+            return lines.slice(1).map(line => {
+                let fields = [];
+                let current = '';
+                let inQuotes = false;
+                for (let i = 0; i < line.length; i++) {
+                    const char = line[i];
+                    if (char === '"') {
+                        inQuotes = !inQuotes;
+                    } else if (char === ',' && !inQuotes) {
+                        fields.push(current.trim());
+                        current = '';
+                    } else {
+                        current += char;
+                    }
+                }
+                fields.push(current.trim());
+                const structureValues = {};
+                structureKeys.forEach((key) => {
+                    const colIdx = header.indexOf(key);
+                    structureValues[key] = fields[colIdx] && fields[colIdx].replace(/\s/g, '') === '1';
+                });
+                return {
+                    id: fields[0],
+                    origin: fields[1],
+                    structures: structureKeys.filter(key => structureValues[key]),
+                    link: fields[fields.length - 1]
+                };
+            });
+        }
+
+        const barkcloths = parseCSV(csvData);
+
+        const filterBar = document.getElementById('filter-bar');
+        const barkclothList = document.getElementById('barkcloth-list');
+        let selectedStructures = [];
+
+        filterBar.addEventListener('click', e => {
+            if (e.target.classList.contains('filter-btn')) {
+                const structure = e.target.dataset.structure;
+                e.target.classList.toggle('selected');
+                if (selectedStructures.includes(structure)) {
+                    selectedStructures = selectedStructures.filter(s => s !== structure);
+                } else {
+                    selectedStructures.push(structure);
+                }
+                renderBarkcloths();
+            }
+        });
+
+        function renderBarkcloths() {
+            if (selectedStructures.length === 0) {
+                barkclothList.innerHTML = `
+      <div style="grid-column: 1 / -1; text-align: center; color: var(--muted, #888); font-size: 1rem; margin-top: 2rem;">
+        Please select a structure filter above.
+      </div>
+    `;
+                return;
+            }
+            let filtered = barkcloths.filter(bc =>
+                selectedStructures.every(structure => bc.structures.includes(structure))
+            );
+            barkclothList.innerHTML = filtered.length
+                ? filtered.map(bc => `
+      <div class="barkcloth-card">
+        <img src="img/${bc.id}.png" alt="${bc.id}" style="width:100%;border-radius:8px;margin-bottom:1rem;object-fit:cover;">
+        <div><strong>${bc.id}</strong></div>
+        <div>${bc.origin}</div>
+        <div>Structures: ${bc.structures.length ? bc.structures.join(', ') : 'None'}</div>
+      </div>
+    `).join('')
+                : `<div class="no-results">
+        No barkcloths match the selected filters.
+      </div>`;
+        }
+
+        renderBarkcloths();
+    </script>
 
 </body>
+
 </html>
