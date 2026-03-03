@@ -1,0 +1,107 @@
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" type="text/css" href="styles/site.css">
+  <title>Visually Barkcloth</title>
+</head>
+
+<body>
+  <nav class="nav">
+    <ul>
+      <li><a href="index.html" class="active">Home</a></li>
+      <li><a href="quiz.html">Quiz</a></li>
+      <li><a href="about.html">About</a></li>
+      <li><a href="contact.html">Contact</a></li>
+    </ul>
+  </nav>
+
+  <main class="hero">
+  <div class="hero-bg"></div>
+  <div id="quiz-container"></div>
+  </main>
+
+  <script>
+    const QUESTIONS = [
+      {
+        type: 'multiple',
+        text: 'What building blocks do you see?',
+        options: ['Squares', 'Circles', 'Lines', 'Flowers', 'Leaves', 'Other']
+      },
+      {
+        type: 'text',
+        text: 'What pattern rhythm do you find?'
+      },
+      {
+        type: 'text',
+        text: 'What is the first thing you think of when you see this textile?'
+      }
+    ];
+
+    function parseCSV(text) {
+      const [headerLine, ...rows] = text.trim().split('\n');
+      const headers = headerLine.split(',').map(h => h.trim());
+
+      return rows.map(row => {
+        const values = row.split(',');
+        return Object.fromEntries(
+          headers.map((h, i) => [h, values[i]?.trim() ?? ''])
+        );
+      });
+    }
+
+    function pickRandom(arr) {
+      return arr[Math.floor(Math.random() * arr.length)];
+    }
+
+    function getImageLink(barkcloth) {
+      return `img/${barkcloth.id}.png`;
+    }
+
+    function buildAnswerHTML(question) {
+      if (question.type === 'multiple') {
+        return question.options.map(opt => `
+        <label class="quiz-option">
+          <input type="radio" name="answer" value="${opt}"> ${opt}
+        </label>
+      `).join('');
+      }
+
+      return `
+      <textarea class="quiz-textarea"
+        name="answer"
+        rows="4"
+        placeholder="Your answer..."></textarea>
+    `;
+    }
+
+    function showQuiz(data) {
+      const container = document.getElementById('quiz-container');
+      const barkcloth = pickRandom(data);
+      const question = pickRandom(QUESTIONS);
+
+      container.innerHTML = `
+      <img class="quiz-img"
+           src="${getImageLink(barkcloth)}"
+           alt="${barkcloth.id}"
+           onerror="this.style.display='none'">
+
+      <form id="quiz-form">
+        <div class="quiz-question">${question.text}</div>
+        ${buildAnswerHTML(question)}
+        <button class="quiz-submit" type="submit">Submit</button>
+      </form>
+    `;
+
+      document.getElementById('quiz-form')
+        .addEventListener('submit', (e) => {
+          e.preventDefault();
+          showQuiz(data);
+        });
+    }
+
+    fetch('data/data.csv')
+      .then(res => res.text())
+      .then(csvText => showQuiz(parseCSV(csvText)))
+      .catch(err => console.error("CSV failed to load:", err));
+  </script>
+</body>

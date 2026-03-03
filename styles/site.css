@@ -106,7 +106,7 @@
     width: 56px;
     height: 56px;
     animation: rise 0.8s ease 0.4s both;
-    margin-bottom:15px;
+    margin-bottom: 15px;
 }
 
 .choice-label {
@@ -168,7 +168,6 @@
     display: flex;
     flex-wrap: wrap;
     gap: 1rem;
-    margin-bottom: 2.5rem;
     justify-content: center;
     padding: 1rem 2rem;
     background: var(--surface, #fff);
@@ -199,7 +198,7 @@
     border-color: var(--warm, #c8a058);
 }
 
-/* ── Animated cards ── */
+/* Animated cards */
 :root {
     --card-w: 180px;
     --x-speed: 13s;
@@ -309,4 +308,79 @@
     color: #888;
     font-size: 1rem;
     pointer-events: none;
+}
+
+/* Quiz */
+#quiz-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+#quiz-form {
+    padding: 20px 10px;
+    width: 100%;
+    max-width: 520px;
+    border-radius: 18px;
+    transition: 0.3s ease;
+}
+
+.quiz-question {
+    margin-bottom: 10px;
+}
+
+.quiz-img {
+    max-width: 350px;
+    margin-top:25px;
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+}
+
+.quiz-option {
+    display: block;
+    text-align: left;
+    padding: 10px 10px;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: background 0.2s ease;
+    font-size: medium;
+}
+
+.quiz-option:hover {
+    background: #f0e7da;
+}
+
+.quiz-option input {
+    margin-right: 10px;
+    accent-color: #c8a058;
+}
+
+.quiz-textarea {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ddd;
+}
+
+.quiz-textarea:focus {
+    outline: none;
+    border-color: #c8a058;
+}
+
+.quiz-submit {
+    margin-top: 20px;
+    padding: 12px 26px;
+    background: #c8a058;
+    color: white;
+    border: none;
+    border-radius: 30px;
+    cursor: pointer;
+    transition: all 0.25s ease;
+    font-family: 'Playfair Display', serif;
+}
+
+.quiz-submit:hover {
+    background: #b28d44;
 }
