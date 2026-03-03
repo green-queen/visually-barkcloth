@@ -1,8 +1,12 @@
+<!DOCTYPE html>
+<html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" type="text/css" href="styles/site.css">
   <title>Visually Barkcloth</title>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
 
 <body>
@@ -16,8 +20,8 @@
   </nav>
 
   <main class="hero">
-  <div class="hero-bg"></div>
-  <div id="quiz-container"></div>
+    <div class="hero-bg"></div>
+    <div id="quiz-container"></div>
   </main>
 
   <script>
@@ -25,15 +29,19 @@
       {
         type: 'multiple',
         text: 'What building blocks do you see?',
-        options: ['Squares', 'Circles', 'Lines', 'Flowers', 'Leaves', 'Other']
+        options: ['Cross']
       },
       {
         type: 'text',
-        text: 'What pattern rhythm do you find?'
+        text: 'What pattern rhythm do you see?'
       },
       {
         type: 'text',
         text: 'What is the first thing you think of when you see this textile?'
+      },
+      {
+        type: 'text',
+        text: 'What pattern do you see?'
       }
     ];
 
@@ -59,19 +67,101 @@
 
     function buildAnswerHTML(question) {
       if (question.type === 'multiple') {
-        return question.options.map(opt => `
+        const dropdownHTML = `
+          <div class="dropdown" data-control="checkbox-dropdown" id="square-dropdown">
+            <label class="dropdown-label">Square</label>
+            <div class="dropdown-list">
+              <a href="#" data-toggle="check-all" class="dropdown-option">Check All</a>
+              <label class="dropdown-option">
+              <label class="dropdown-option">
+                <input type="checkbox" name="dropdown-group" value="square" /> Square
+              </label>
+                <input type="checkbox" name="dropdown-group" value="rectangle" /> Rectangle 
+              </label>
+              <label class="dropdown-option">
+                <input type="checkbox" name="dropdown-group" value="rhombus" /> Rhombus 
+              </label>
+            </div>
+          </div>
+
+
+          <div class="dropdown" data-control="checkbox-dropdown" id="circle-dropdown">
+            <label class="dropdown-label">Circle</label>
+            <div class="dropdown-list">
+              <a href="#" data-toggle="check-all" class="dropdown-option">Check All</a>
+              <label class="dropdown-option">
+                <input type="checkbox" name="dropdown-group" value="circle" /> Circle
+              </label>
+              <label class="dropdown-option">
+                <input type="checkbox" name="dropdown-group" value="oval" /> Oval
+              </label>
+              <label class="dropdown-option">
+                <input type="checkbox" name="dropdown-group" value="dot" /> Dot
+              </label>
+            </div>
+          </div>
+
+          <div class="dropdown" data-control="checkbox-dropdown" id="triangle-dropdown">
+            <label class="dropdown-label">Triangle</label>
+            <div class="dropdown-list">
+              <a href="#" data-toggle="check-all" class="dropdown-option">Check All</a>
+              <label class="dropdown-option">
+                <input type="checkbox" name="dropdown-group" value="equilateral" /> Equilateral
+              </label>
+              <label class="dropdown-option">
+                <input type="checkbox" name="dropdown-group" value="right" /> Right
+              </label>
+              <label class="dropdown-option">
+                <input type="checkbox" name="dropdown-group" value="isosceles" /> Isosceles
+              </label>
+              <label class="dropdown-option">
+                <input type="checkbox" name="dropdown-group" value="scalene" /> Scalene
+              </label>
+            </div>
+          </div>
+
+          <div class="dropdown" data-control="checkbox-dropdown" id="lines-dropdown">
+            <label class="dropdown-label">Lines</label>
+            <div class="dropdown-list">
+              <a href="#" data-toggle="check-all" class="dropdown-option">Check All</a>
+              <label class="dropdown-option">
+                <input type="checkbox" name="dropdown-group" value="regular" /> Regular
+              </label>
+              <label class="dropdown-option">
+                <input type="checkbox" name="dropdown-group" value="dotted" /> Dotted
+              </label>
+              <label class="dropdown-option">
+                <input type="checkbox" name="dropdown-group" value="curved" /> Curved
+              </label>
+            </div>
+          </div>
+
         <label class="quiz-option">
-          <input type="radio" name="answer" value="${opt}"> ${opt}
+            <input type="checkbox" name="answer" value="Cross"> Cross
         </label>
-      `).join('');
+
+        <label>
+          <p style ="display: block; margin: 10px 10px;">
+            Other shapes you see:
+          </p>
+        <textarea class="quiz-textarea"
+          name="answer"
+          rows="4"
+          placeholder="Your answer..."></textarea>
+        </label>
+          
+        `;
+        const optionsHTML = question.options.map(opt => `
+        `).join('');
+        return dropdownHTML + optionsHTML;
       }
 
       return `
-      <textarea class="quiz-textarea"
-        name="answer"
-        rows="4"
-        placeholder="Your answer..."></textarea>
-    `;
+        <textarea class="quiz-textarea"
+          name="answer"
+          rows="4"
+          placeholder="Your answer..."></textarea>
+      `;
     }
 
     function showQuiz(data) {
@@ -80,17 +170,92 @@
       const question = pickRandom(QUESTIONS);
 
       container.innerHTML = `
-      <img class="quiz-img"
-           src="${getImageLink(barkcloth)}"
-           alt="${barkcloth.id}"
-           onerror="this.style.display='none'">
+        <img class="quiz-img"
+             src="${getImageLink(barkcloth)}"
+             alt="${barkcloth.id}"
+             onerror="this.style.display='none'">
 
-      <form id="quiz-form">
-        <div class="quiz-question">${question.text}</div>
-        ${buildAnswerHTML(question)}
-        <button class="quiz-submit" type="submit">Submit</button>
-      </form>
-    `;
+        <form id="quiz-form">
+          <div class="quiz-question">${question.text}</div>
+          ${buildAnswerHTML(question)}
+          <button class="quiz-submit" type="submit">Submit</button>
+        </form>
+      `;
+
+      if (document.querySelector('[data-control="checkbox-dropdown"]')) {
+        (function ($) {
+          var CheckboxDropdown = function (el) {
+            var _this = this;
+            this.isOpen = false;
+            this.areAllChecked = false;
+            this.$el = $(el);
+            this.$label = this.$el.find('.dropdown-label');
+            this.$checkAll = this.$el.find('[data-toggle="check-all"]').first();
+            this.$inputs = this.$el.find('[type="checkbox"]');
+            this.onCheckBox();
+            this.$label.on('click', function (e) {
+              e.preventDefault();
+              _this.toggleOpen();
+            });
+            this.$checkAll.on('click', function (e) {
+              e.preventDefault();
+              _this.onCheckAll();
+            });
+            this.$inputs.on('change', function (e) {
+              _this.onCheckBox();
+            });
+          };
+          CheckboxDropdown.prototype.onCheckBox = function () {
+            this.updateStatus();
+          };
+          CheckboxDropdown.prototype.updateStatus = function () {
+            var checked = this.$el.find(':checked');
+            this.areAllChecked = false;
+            this.$checkAll.html('Check All');
+            if (checked.length <= 0) {
+              this.$label.html(this.$label.data('default'));
+            }
+            else if (checked.length === this.$inputs.length) {
+              this.areAllChecked = true;
+              this.$checkAll.html('Uncheck All');
+            }
+          };
+          CheckboxDropdown.prototype.onCheckAll = function (checkAll) {
+            if (!this.areAllChecked || checkAll) {
+              this.areAllChecked = true;
+              this.$checkAll.html('Uncheck All');
+              this.$inputs.prop('checked', true);
+            }
+            else {
+              this.areAllChecked = false;
+              this.$checkAll.html('Check All');
+              this.$inputs.prop('checked', false);
+            }
+            this.updateStatus();
+          };
+          CheckboxDropdown.prototype.toggleOpen = function (forceOpen) {
+            var _this = this;
+            if (!this.isOpen || forceOpen) {
+              this.isOpen = true;
+              this.$el.addClass('on');
+              $(document).on('click', function (e) {
+                if (!$(e.target).closest('[data-control]').length) {
+                  _this.toggleOpen();
+                }
+              });
+            }
+            else {
+              this.isOpen = false;
+              this.$el.removeClass('on');
+              $(document).off('click');
+            }
+          };
+          var checkboxesDropdowns = document.querySelectorAll('[data-control="checkbox-dropdown"]');
+          for (var i = 0, length = checkboxesDropdowns.length; i < length; i++) {
+            new CheckboxDropdown(checkboxesDropdowns[i]);
+          }
+        })(jQuery);
+      }
 
       document.getElementById('quiz-form')
         .addEventListener('submit', (e) => {
@@ -105,3 +270,5 @@
       .catch(err => console.error("CSV failed to load:", err));
   </script>
 </body>
+
+</html>

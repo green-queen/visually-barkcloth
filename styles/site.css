@@ -332,8 +332,8 @@
 }
 
 .quiz-img {
-    max-width: 350px;
-    margin-top:25px;
+    max-width: 300px;
+    margin-top: 25px;
     width: 100%;
     height: auto;
     object-fit: cover;
@@ -383,4 +383,69 @@
 
 .quiz-submit:hover {
     background: #b28d44;
+}
+
+/* Checkbox */
+
+.dropdown {
+    position: relative;
+    margin-bottom: 20px;
+
+    .dropdown-list {
+        padding: 12px;
+        background: #fff;
+        position: absolute;
+        top: 30px;
+        left: 0px;
+        right: 0px;
+        z-index: 10000;
+        transform-origin: 50% 0;
+        transform: scale(1, 0);
+        transition: transform .15s ease-in-out .15s;
+        border: 1px solid #ccc;
+    }
+
+    .dropdown-option {
+        display: block;
+        padding: 8px 8px;
+        opacity: 0;
+        transition: opacity .15s ease-in-out;
+        z-index: 10000;
+    }
+
+    .dropdown-label {
+        display: block;
+        height: 20px;
+        background: #fff;
+        border: 1px solid #ccc;
+        padding: 6px 12px;
+        line-height: 1;
+        cursor: pointer;
+
+        &:before {
+            content: '▼';
+            float: right;
+        }
+    }
+
+    &.on {
+        .dropdown-list {
+            transform: scale(1, 1);
+            transition-delay: 0s;
+
+            .dropdown-option {
+                opacity: 1;
+                transition-delay: .2s;
+            }
+        }
+
+        .dropdown-label:before {
+            content: '▲';
+        }
+    }
+
+    [type="checkbox"] {
+        position: relative;
+        top: -1px;
+    }
 }
