@@ -22,6 +22,11 @@
   <main class="hero">
     <div class="hero-bg"></div>
     <div id="quiz-container"></div>
+    <div id="img-modal"
+      style="display:none; position:fixed; top:0; left:0; width:100vw; height:100vh; background:rgba(0,0,0,0.7); justify-content:center; align-items:center; z-index:9999; cursor:pointer;">
+      <img id="modal-img" src=""
+        style="max-width:90vw; max-height:90vh;">
+    </div>
   </main>
 
   <script>
@@ -67,93 +72,74 @@
 
     function buildAnswerHTML(question) {
       if (question.type === 'multiple') {
-        const dropdownHTML = `
-          <div class="dropdown" data-control="checkbox-dropdown" id="square-dropdown">
-            <label class="dropdown-label">Square</label>
+        const dropdowns = [
+          {
+            id: "square-dropdown",
+            label: "Select Square",
+            options: [
+              { value: "square", text: "Square" },
+              { value: "rectangle", text: "Rectangle" },
+              { value: "rhombus", text: "Rhombus" }
+            ]
+          },
+          {
+            id: "circle-dropdown",
+            label: "Select Circle",
+            options: [
+              { value: "circle", text: "Circle" },
+              { value: "oval", text: "Oval" },
+              { value: "dot", text: "Dot" }
+            ]
+          },
+          {
+            id: "triangle-dropdown",
+            label: "Select Triangle",
+            options: [
+              { value: "equilateral", text: "Equilateral" },
+              { value: "right", text: "Right" },
+              { value: "isosceles", text: "Isosceles" },
+              { value: "scalene", text: "Scalene" }
+            ]
+          },
+          {
+            id: "lines-dropdown",
+            label: "Select Line",
+            options: [
+              { value: "regular", text: "Regular" },
+              { value: "dotted", text: "Dotted" },
+              { value: "curved", text: "Curved" }
+            ]
+          }
+        ];
+
+        const dropdownHTML = dropdowns.map(drop =>
+          `<div class="dropdown" data-control="checkbox-dropdown" id="${drop.id}">
+            <label class="dropdown-label">${drop.label}</label>
             <div class="dropdown-list">
-              <a href="#" data-toggle="check-all" class="dropdown-option">Check All</a>
-              <label class="dropdown-option">
-              <label class="dropdown-option">
-                <input type="checkbox" name="dropdown-group" value="square" /> Square
-              </label>
-                <input type="checkbox" name="dropdown-group" value="rectangle" /> Rectangle 
-              </label>
-              <label class="dropdown-option">
-                <input type="checkbox" name="dropdown-group" value="rhombus" /> Rhombus 
-              </label>
+              ${drop.options.map(opt => `
+                <label class="dropdown-option">
+                  <input type="checkbox" name="dropdown-group" value="${opt.value}" /> ${opt.text}
+                </label>
+              `).join('')}
             </div>
-          </div>
+          </div>`
+        ).join('');
 
-
-          <div class="dropdown" data-control="checkbox-dropdown" id="circle-dropdown">
-            <label class="dropdown-label">Circle</label>
-            <div class="dropdown-list">
-              <a href="#" data-toggle="check-all" class="dropdown-option">Check All</a>
-              <label class="dropdown-option">
-                <input type="checkbox" name="dropdown-group" value="circle" /> Circle
-              </label>
-              <label class="dropdown-option">
-                <input type="checkbox" name="dropdown-group" value="oval" /> Oval
-              </label>
-              <label class="dropdown-option">
-                <input type="checkbox" name="dropdown-group" value="dot" /> Dot
-              </label>
-            </div>
-          </div>
-
-          <div class="dropdown" data-control="checkbox-dropdown" id="triangle-dropdown">
-            <label class="dropdown-label">Triangle</label>
-            <div class="dropdown-list">
-              <a href="#" data-toggle="check-all" class="dropdown-option">Check All</a>
-              <label class="dropdown-option">
-                <input type="checkbox" name="dropdown-group" value="equilateral" /> Equilateral
-              </label>
-              <label class="dropdown-option">
-                <input type="checkbox" name="dropdown-group" value="right" /> Right
-              </label>
-              <label class="dropdown-option">
-                <input type="checkbox" name="dropdown-group" value="isosceles" /> Isosceles
-              </label>
-              <label class="dropdown-option">
-                <input type="checkbox" name="dropdown-group" value="scalene" /> Scalene
-              </label>
-            </div>
-          </div>
-
-          <div class="dropdown" data-control="checkbox-dropdown" id="lines-dropdown">
-            <label class="dropdown-label">Lines</label>
-            <div class="dropdown-list">
-              <a href="#" data-toggle="check-all" class="dropdown-option">Check All</a>
-              <label class="dropdown-option">
-                <input type="checkbox" name="dropdown-group" value="regular" /> Regular
-              </label>
-              <label class="dropdown-option">
-                <input type="checkbox" name="dropdown-group" value="dotted" /> Dotted
-              </label>
-              <label class="dropdown-option">
-                <input type="checkbox" name="dropdown-group" value="curved" /> Curved
-              </label>
-            </div>
-          </div>
-
-        <label class="quiz-option">
-            <input type="checkbox" name="answer" value="Cross"> Cross
-        </label>
-
-        <label>
-          <p style ="display: block; margin: 10px 10px;">
-            Other shapes you see:
-          </p>
-        <textarea class="quiz-textarea"
-          name="answer"
-          rows="4"
-          placeholder="Your answer..."></textarea>
-        </label>
-          
-        `;
         const optionsHTML = question.options.map(opt => `
+          <label class="quiz-option">
+            <input type="checkbox" name="answer" value="${opt}"> ${opt}
+          </label>
         `).join('');
-        return dropdownHTML + optionsHTML;
+
+        return dropdownHTML + optionsHTML + `
+          <label>
+            Other structures you see:
+            <textarea class="quiz-textarea"
+              name="answer"
+              rows="4"
+              placeholder="Your answer..."></textarea>
+          </label>
+        `;
       }
 
       return `
@@ -170,11 +156,10 @@
       const question = pickRandom(QUESTIONS);
 
       container.innerHTML = `
-        <img class="quiz-img"
-             src="${getImageLink(barkcloth)}"
-             alt="${barkcloth.id}"
-             onerror="this.style.display='none'">
-
+        <img class="quiz-img" src="${getImageLink(barkcloth)}" alt="${barkcloth.id}">
+        <div class="quiz-citation">
+          ${barkcloth["reference citation"]}
+        </div>
         <form id="quiz-form">
           <div class="quiz-question">${question.text}</div>
           ${buildAnswerHTML(question)}
@@ -182,56 +167,31 @@
         </form>
       `;
 
+      const quizImg = container.querySelector('.quiz-img');
+      const imgModal = document.getElementById('img-modal');
+      const modalImg = document.getElementById('modal-img');
+
+      quizImg.onclick = function () {
+        modalImg.src = quizImg.src;
+        imgModal.style.display = 'flex';
+      };
+
+      imgModal.onclick = function () {
+        imgModal.style.display = 'none';
+      };
+
       if (document.querySelector('[data-control="checkbox-dropdown"]')) {
         (function ($) {
           var CheckboxDropdown = function (el) {
             var _this = this;
             this.isOpen = false;
-            this.areAllChecked = false;
             this.$el = $(el);
             this.$label = this.$el.find('.dropdown-label');
-            this.$checkAll = this.$el.find('[data-toggle="check-all"]').first();
             this.$inputs = this.$el.find('[type="checkbox"]');
-            this.onCheckBox();
             this.$label.on('click', function (e) {
               e.preventDefault();
               _this.toggleOpen();
             });
-            this.$checkAll.on('click', function (e) {
-              e.preventDefault();
-              _this.onCheckAll();
-            });
-            this.$inputs.on('change', function (e) {
-              _this.onCheckBox();
-            });
-          };
-          CheckboxDropdown.prototype.onCheckBox = function () {
-            this.updateStatus();
-          };
-          CheckboxDropdown.prototype.updateStatus = function () {
-            var checked = this.$el.find(':checked');
-            this.areAllChecked = false;
-            this.$checkAll.html('Check All');
-            if (checked.length <= 0) {
-              this.$label.html(this.$label.data('default'));
-            }
-            else if (checked.length === this.$inputs.length) {
-              this.areAllChecked = true;
-              this.$checkAll.html('Uncheck All');
-            }
-          };
-          CheckboxDropdown.prototype.onCheckAll = function (checkAll) {
-            if (!this.areAllChecked || checkAll) {
-              this.areAllChecked = true;
-              this.$checkAll.html('Uncheck All');
-              this.$inputs.prop('checked', true);
-            }
-            else {
-              this.areAllChecked = false;
-              this.$checkAll.html('Check All');
-              this.$inputs.prop('checked', false);
-            }
-            this.updateStatus();
           };
           CheckboxDropdown.prototype.toggleOpen = function (forceOpen) {
             var _this = this;
@@ -243,8 +203,7 @@
                   _this.toggleOpen();
                 }
               });
-            }
-            else {
+            } else {
               this.isOpen = false;
               this.$el.removeClass('on');
               $(document).off('click');
