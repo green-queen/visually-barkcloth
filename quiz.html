@@ -24,8 +24,7 @@
     <div id="quiz-container"></div>
     <div id="img-modal"
       style="display:none; position:fixed; top:0; left:0; width:100vw; height:100vh; background:rgba(0,0,0,0.7); justify-content:center; align-items:center; z-index:9999; cursor:pointer;">
-      <img id="modal-img" src=""
-        style="max-width:90vw; max-height:90vh;">
+      <img id="modal-img" src="" style="max-width:90vw; max-height:90vh;">
     </div>
   </main>
 
@@ -132,13 +131,13 @@
         `).join('');
 
         return dropdownHTML + optionsHTML + `
-          <label>
-            Other structures you see:
-            <textarea class="quiz-textarea"
-              name="answer"
-              rows="4"
-              placeholder="Your answer..."></textarea>
-          </label>
+        <label class="quiz-struct">
+          Other structures you see:
+          <textarea class="quiz-textarea"
+            name="answer"
+            rows="4"
+            placeholder="Your answer..."></textarea>
+        </label>
         `;
       }
 
