@@ -12,7 +12,7 @@
 <body>
   <nav class="nav">
     <ul>
-      <li><a href="index.html" class="active">Home</a></li>
+      <li><a href="index.html">Home</a></li>
       <li><a href="quiz.html">Quiz</a></li>
       <li><a href="about.html">About</a></li>
       <li><a href="contact.html">Contact</a></li>
@@ -50,15 +50,24 @@
     ];
 
     function parseCSV(text) {
-      const [headerLine, ...rows] = text.trim().split('\n');
-      const headers = headerLine.split(',').map(h => h.trim());
-
-      return rows.map(row => {
-        const values = row.split(',');
-        return Object.fromEntries(
-          headers.map((h, i) => [h, values[i]?.trim() ?? ''])
-        );
+      const lines = text.trim().split('\n');
+      const headers = splitCSVLine(lines[0]);
+      return lines.slice(1).map(line => {
+        const values = splitCSVLine(line);
+        return Object.fromEntries(headers.map((h, i) => [h, values[i]?.trim() ?? '']));
       });
+    }
+
+    function splitCSVLine(line) {
+      const result = [];
+      let cur = '', inQuotes = false;
+      for (const ch of line) {
+        if (ch === '"') { inQuotes = !inQuotes; }
+        else if (ch === ',' && !inQuotes) { result.push(cur); cur = ''; }
+        else { cur += ch; }
+      }
+      result.push(cur);
+      return result;
     }
 
     function pickRandom(arr) {
@@ -149,10 +158,12 @@
       `;
     }
 
+    let barkcloth, question;
+
     function showQuiz(data) {
       const container = document.getElementById('quiz-container');
-      const barkcloth = pickRandom(data);
-      const question = pickRandom(QUESTIONS);
+      barkcloth = pickRandom(data);
+      question = pickRandom(QUESTIONS);
 
       container.innerHTML = `
         <img class="quiz-img" src="${getImageLink(barkcloth)}" alt="${barkcloth.id}">
@@ -216,8 +227,57 @@
       }
 
       document.getElementById('quiz-form')
-        .addEventListener('submit', (e) => {
+        .addEventListener('submit', async (e) => {
           e.preventDefault();
+
+          const form = e.target;
+          const submitBtn = form.querySelector('.quiz-submit');
+
+          function getChecked(dropdownId) {
+            return Array.from(
+              document.querySelectorAll(`#${dropdownId} input[type="checkbox"]:checked`)
+            ).map(cb => cb.value).join(', ');
+          }
+
+          const crossChecked = Array.from(
+            form.querySelectorAll('input[name="answer"][type="checkbox"]:checked')
+          ).map(cb => cb.value).join(', ');
+
+          const textareas = form.querySelectorAll('textarea[name="answer"]');
+          const structuresOther = textareas.length > 1 ? textareas[0].value.trim() : '';
+          const generalTextarea = textareas[textareas.length - 1].value.trim();
+
+          const payload = {
+            barkcloth_id: barkcloth.id,
+            question: question.text,
+            square_shapes: getChecked('square-dropdown'),
+            circle_shapes: getChecked('circle-dropdown'),
+            triangle_shapes: getChecked('triangle-dropdown'),
+            line_shapes: getChecked('lines-dropdown'),
+            cross_shapes: crossChecked,
+            structures_other: structuresOther,
+            textarea: generalTextarea,
+          };
+
+          submitBtn.disabled = true;
+          submitBtn.textContent = 'Saving…';
+
+          try {
+            const res = await fetch('submit_quiz.php', {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify(payload),
+            });
+
+            const json = await res.json();
+
+            if (!res.ok || json.error) {
+              console.error('Submission error:', json.error);
+            }
+          } catch (err) {
+            console.error('Network error:', err);
+          }
+
           showQuiz(data);
         });
     }
