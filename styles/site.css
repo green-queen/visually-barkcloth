@@ -1,10 +1,10 @@
-/* Base olors */
+/* Base colors */
 :root {
     --warm: #b8934a;
     --warm-light: #d4aa6a;
     --warm-dim: rgba(184, 147, 74, 0.12);
     --text: #1a1714;
-    --text-sub: #5a5248;
+    --text-sub: #4f483f;
     --muted: #8c8078;
     --bg: #f5ede0;
     --surface: #fdf9f4;
@@ -85,12 +85,13 @@ body {
 
 .hero-title {
     font-family: 'Playfair Display', serif;
-    font-size: clamp(4rem, 6vw, 5rem);
-    font-weight: 400;
+    font-size: clamp(4rem, 6vw, 6rem);
+    font-weight: 600;
     color: var(--text);
     line-height: 1.08;
     letter-spacing: -0.01em;
     animation: rise 0.8s var(--ease-out) 0.15s both;
+    margin-bottom:20px;
 }
 
 .hero-title em {
@@ -369,7 +370,7 @@ body {
     border-radius: var(--radius-sm);
     margin-bottom: 0.5rem;
     object-fit: cover;
-    height: 110px;
+    height: 200px;
     display: block;
 }
 
@@ -408,7 +409,7 @@ body {
 #no-match {
     display: none;
     position: fixed;
-    top: 50%;
+    top: 65%;
     left: 50%;
     transform: translate(-50%, -50%);
     z-index: 10001;
