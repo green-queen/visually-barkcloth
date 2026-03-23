@@ -1,14 +1,12 @@
-/* Base colors */
+/* base colors */
 :root {
-    --warm: #111111;
-    --warm-light: #333333;
-    --warm-dim: rgba(0, 0, 0, 0.06);
+    --black: #111111;
+    --black-sub: #333333;
     --text: #0a0a0a;
-    --text-sub: #2a2a2a;
-    --muted: #888888;
-    --bg: #ffffff;
-    --surface: #ffffff;
-    --surface-alt: #f2f2f2;
+    --text-sub: #464646;
+    --white: #ffffff;
+    --white-sub: #f2f2f2;
+    --gray: #888888;
     --border: rgba(0, 0, 0, 0.18);
     --border-soft: rgba(0, 0, 0, 0.09);
     --card-w: 180px;
@@ -23,7 +21,7 @@ body {
     background-color: var(--bg);
 }
 
-/* Nav */
+/* nav */
 .nav ul {
     list-style: none;
     display: flex;
@@ -35,7 +33,7 @@ body {
 
 .nav li a {
     text-decoration: none;
-    color: var(--muted);
+    color: var(--text);
     font-size: 11px;
     font-weight: 500;
     letter-spacing: 0.18em;
@@ -53,19 +51,19 @@ body {
     left: 0;
     width: 0;
     height: 1px;
-    background: var(--text);
+    background: var(--text-sub);
     transition: width 0.3s var(--ease-out);
 }
 
 .nav li a:hover {
-    color: var(--warm);
+    color: var(--black-sub);
 }
 
 .nav li a:hover::after {
     width: 100%;
 }
 
-/* Hero */
+/* page */
 .page {
     display: flex;
     flex-direction: column;
@@ -87,7 +85,7 @@ body {
     font-family: 'Playfair Display', serif;
     font-size: clamp(4rem, 6vw, 6rem);
     font-weight: 600;
-    color: var(--text);
+    color: var(--white);
     line-height: 1.08;
     letter-spacing: -0.01em;
     animation: rise 0.8s var(--ease-out) 0.15s both;
@@ -96,7 +94,7 @@ body {
 
 .page-title em {
     font-style: italic;
-    color: var(--warm);
+    color: var(--black-sub);
 }
 
 .hero {
@@ -129,7 +127,7 @@ body {
     }
 }
 
-/* Choice cards */
+/* choice cards */
 .choices {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -141,8 +139,7 @@ body {
 }
 
 .choice-card {
-    background: var(--surface);
-    border: 1px solid var(--border);
+    background: var(--white);
     padding: 1.5rem 1.5rem 2.25rem;
     cursor: pointer;
     text-decoration: none;
@@ -171,7 +168,6 @@ body {
     left: 0;
     width: 100%;
     height: 2px;
-    background: linear-gradient(90deg, var(--warm), var(--warm-light));
     transform: scaleX(0);
     transform-origin: left;
     transition: transform 0.35s var(--ease-out);
@@ -179,7 +175,6 @@ body {
 
 .choice-card:hover {
     transform: translateY(-5px);
-    border-color: var(--warm);
 }
 
 .choice-card:hover::before {
@@ -207,7 +202,7 @@ body {
     font-size: 9px;
     letter-spacing: 0.3em;
     text-transform: uppercase;
-    color: var(--warm);
+    color: var(--text-sub);
     margin-bottom: 0.3rem;
     font-weight: 500;
 }
@@ -225,32 +220,30 @@ body {
     bottom: 1.4rem;
     right: 1.4rem;
     font-size: 1.2rem;
-    color: var(--border);
+    color: var(--text-sub);
     transition: color 0.25s ease, transform 0.25s var(--ease-out);
 }
 
 .choice-card:hover .choice-arrow {
-    color: var(--warm);
+    color: var(--text);
     transform: translateX(5px);
 }
 
-/* Filters */
+/* filters */
 .filter-bar {
     display: flex;
     flex-wrap: wrap;
     gap: 0.6rem;
     justify-content: center;
     padding: 1rem 1.25rem;
-    background: var(--surface);
-    border: 1px solid var(--border-soft);
+    background: var(--white);
     max-width: 680px;
     animation: rise 0.8s var(--ease-out) 0.4s both;
 }
 
 .filter-btn {
     background: transparent;
-    border: 1px solid var(--border-soft);
-    color: var(--text-sub);
+    color: var(--black);
     padding: 0.45rem 1.1rem;
     font-size: 13px;
     font-weight: 500;
@@ -261,18 +254,16 @@ body {
 }
 
 .filter-btn:hover:not(.selected) {
-    border-color: var(--warm);
-    color: var(--warm);
+    color: var(--black-sub);
     transform: translateY(-1px);
 }
 
 .filter-btn.selected {
-    background: var(--warm);
-    color: #fff;
-    border-color: var(--warm);
+    background: var(--black);
+    color: var(--white);
 }
 
-/* Animated floating cards */
+/* animated floating cards */
 #floating-layer {
     position: fixed;
     inset: 0;
@@ -382,7 +373,7 @@ body {
     letter-spacing: 0.05em;
 }
 
-/* Quiz */
+/* quiz */
 #quiz-container {
     display: flex;
     flex-direction: column;
@@ -488,7 +479,7 @@ body {
     transform: translateY(0);
 }
 
-/* Checkbox dropdown */
+/* dropdown */
 .dropdown {
     position: relative;
     margin-bottom: 20px;

@@ -12,9 +12,9 @@
   <nav class="nav">
     <ul>
       <li><a href="index.php">Home</a></li>
-      <li><a href="quiz.html">Quiz</a></li>
-      <li><a href="about.html">About</a></li>
-      <li><a href="contact.html">Contact</a></li>
+      <li><a href="quiz.php">Quiz</a></li>
+      <li><a href="annotations.php">Annotations</a></li>
+      <li><a href="contact.php">Contact</a></li>
     </ul>
   </nav>
 
@@ -22,7 +22,7 @@
     <h1 class="page-title">Explore Barkcloth</h1>
 
     <div class="choices">
-      <a href="shapes.html" class="choice-card">
+      <a href="shapes.php" class="choice-card">
         <div class="choice-icon">
           <svg viewBox="0 0 56 56" fill="none" stroke="var(--warm)" stroke-width="1.5">
             <rect x="8" y="8" width="16" height="16" />
@@ -36,7 +36,7 @@
         <span class="choice-arrow">→</span>
       </a>
 
-      <a href="structures.html" class="choice-card">
+      <a href="structures.php" class="choice-card">
         <div class="choice-icon">
           <svg viewBox="0 0 56 56" fill="none" stroke="var(--warm)" stroke-width="1.5">
             <rect x="8" y="8" width="40" height="40" />
@@ -54,11 +54,13 @@
   </main>
 
   <?php
+  // load hero images
     $files = glob('hero/*.png');
     $images = json_encode(array_values($files));
   ?>
 
   <script>
+    // cycle through hero images every 5 seconds
     document.addEventListener('DOMContentLoaded', () => {
       const heroImages = <?= $images ?>;
       let current = 0;
