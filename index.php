@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" type="text/css" href="styles/site.css">
+  <title>Visually Barkcloth</title>
+</head>
+
+<body>
+  <nav class="nav">
+    <ul>
+      <li><a href="index.php">Home</a></li>
+      <li><a href="quiz.html">Quiz</a></li>
+      <li><a href="about.html">About</a></li>
+      <li><a href="contact.html">Contact</a></li>
+    </ul>
+  </nav>
+
+  <main class="page page-adjust hero">
+    <h1 class="page-title">Explore Barkcloth</h1>
+
+    <div class="choices">
+      <a href="shapes.html" class="choice-card">
+        <div class="choice-icon">
+          <svg viewBox="0 0 56 56" fill="none" stroke="var(--warm)" stroke-width="1.5">
+            <rect x="8" y="8" width="16" height="16" />
+            <circle cx="42" cy="16" r="8" />
+            <polygon points="8,48 24,32 8,32" />
+            <path d="M32 40 L48 40 L40 32 Z" />
+          </svg>
+        </div>
+        <span class="choice-label">Filter by</span>
+        <h2 class="choice-title">Shapes</h2>
+        <span class="choice-arrow">→</span>
+      </a>
+
+      <a href="structures.html" class="choice-card">
+        <div class="choice-icon">
+          <svg viewBox="0 0 56 56" fill="none" stroke="var(--warm)" stroke-width="1.5">
+            <rect x="8" y="8" width="40" height="40" />
+            <rect x="16" y="16" width="24" height="24" stroke-dasharray="2,2" />
+            <rect x="24" y="24" width="8" height="8" />
+            <line x1="28" y1="8" x2="28" y2="48" />
+            <line x1="8" y1="28" x2="48" y2="28" />
+          </svg>
+        </div>
+        <span class="choice-label">Filter by</span>
+        <h2 class="choice-title">Structures</h2>
+        <span class="choice-arrow">→</span>
+      </a>
+    </div>
+  </main>
+
+  <?php
+    $files = glob('hero/*.png');
+    $images = json_encode(array_values($files));
+  ?>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const heroImages = <?= $images ?>;
+      let current = 0;
+      const el = document.querySelector('.hero');
+
+      function cycleHero() {
+        const img = new Image();
+        const next = heroImages[(current + 1) % heroImages.length];
+        img.onload = () => {
+          el.style.backgroundImage = `url('${heroImages[current]}')`;
+          current = (current + 1) % heroImages.length;
+        };
+        img.src = next;
+      }
+
+      cycleHero();
+      setInterval(cycleHero, 5000);
+    });
+  </script>
+
+</body>
+
+</html>
