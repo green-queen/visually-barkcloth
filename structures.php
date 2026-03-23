@@ -19,9 +19,9 @@
     </ul>
   </nav>
 
-    <main class="page-adjust">
+    <main class="page">
         <div class="choice-icon">
-            <svg viewBox="0 0 56 56" fill="none" stroke="var(--warm)" stroke-width="1.5">
+            <svg viewBox="0 0 56 56" fill="none" stroke="var(--black)" stroke-width="1.5">
                 <rect x="8" y="8" width="40" height="40" />
                 <rect x="16" y="16" width="24" height="24" stroke-dasharray="2,2" />
                 <rect x="24" y="24" width="8" height="8" />

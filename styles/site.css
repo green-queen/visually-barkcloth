@@ -70,39 +70,22 @@ body {
     align-items: center;
     justify-content: center;
     text-align: center;
-}
-
-.page-adjust {
     min-height: 80vh;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
     gap: 0;
 }
 
 .page-title {
-    font-family: 'Playfair Display', serif;
-    font-size: clamp(4rem, 6vw, 6rem);
+    margin-top:70px;
+    font-size: clamp(7rem, 6vw, 6rem);
     font-weight: 600;
     color: var(--white);
-    line-height: 1.08;
-    letter-spacing: -0.01em;
     animation: rise 0.8s var(--ease-out) 0.15s both;
-    margin-bottom: 20px;
-}
-
-.page-title em {
-    font-style: italic;
-    color: var(--black-sub);
 }
 
 .hero {
-    min-height: 100vh;
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
-    transition: opacity 0.8s ease;
 }
 
 @keyframes rise {
@@ -135,7 +118,6 @@ body {
     max-width: 680px;
     width: 100%;
     animation: rise 0.8s var(--ease-out) 0.4s both;
-    margin-top: 20px;
 }
 
 .choice-card {
@@ -199,7 +181,7 @@ body {
 }
 
 .choice-label {
-    font-size: 9px;
+    font-size: 11px;
     letter-spacing: 0.3em;
     text-transform: uppercase;
     color: var(--text-sub);
@@ -209,7 +191,7 @@ body {
 
 .choice-title {
     font-family: 'Playfair Display', serif;
-    font-size: 1.55rem;
+    font-size: 1.6rem;
     font-weight: 400;
     line-height: 1.2;
     color: var(--text);
@@ -246,9 +228,9 @@ body {
     color: var(--black);
     padding: 0.45rem 1.1rem;
     font-size: 13px;
-    font-weight: 500;
     cursor: pointer;
     transition: background 0.2s ease, border-color 0.2s ease, color 0.2s ease, transform 0.15s ease;
+    border: 1.5px solid var(--black);
     font-family: 'Playfair Display', serif;
     letter-spacing: 0.04em;
 }
@@ -296,7 +278,6 @@ body {
 
 .floating-card {
     width: var(--card-w);
-    background: var(--surface);
     padding: 0.75rem;
     pointer-events: auto;
     cursor: pointer;
@@ -307,7 +288,7 @@ body {
 }
 
 .floating-card:hover {
-    transform: rotate(0deg) scale(1.07);
+    transform: rotate(0deg) scale(1.03);
     z-index: 10001;
     position: relative;
 }
@@ -330,7 +311,7 @@ body {
 .floating-card .card-origin {
     font-size: 0.66rem;
     margin-top: 2px;
-    color: var(--muted);
+    color: var(--text-sub);
 }
 
 .floating-card .card-shapes {
@@ -365,7 +346,7 @@ body {
     left: 50%;
     transform: translate(-50%, -50%);
     z-index: 10001;
-    color: var(--muted);
+    color: var(--text-sub);
     font-size: 1rem;
     pointer-events: none;
     font-family: 'Playfair Display', serif;
@@ -385,7 +366,7 @@ body {
 #quiz-form {
     padding: 24px 16px;
     width: 100%;
-    max-width: 540px;
+    max-width: 400px;
     transition: opacity 0.3s ease;
 }
 
@@ -397,8 +378,8 @@ body {
 }
 
 .quiz-img {
-    max-width: 500px;
-    margin-top: 22px;
+    max-width: 400px;
+    margin-top: 70px;
     width: 100%;
     height: auto;
     object-fit: cover;
@@ -412,10 +393,9 @@ body {
 
 .quiz-citation {
     font-size: 0.6rem;
-    color: var(--muted);
+    color: var(--text-sub);
     margin-top: 10px;
     max-width: 400px;
-
 }
 
 .quiz-option {
@@ -431,13 +411,13 @@ body {
 }
 
 .quiz-option:hover {
-    background: var(--warm-dim);
-    border-color: var(--border);
+    background: var(--text-sub);
+    border-color: var(--black);
 }
 
 .quiz-option input {
     margin-right: 10px;
-    accent-color: var(--warm);
+    accent-color: var(--text);
     flex-shrink: 0;
 }
 
@@ -445,9 +425,9 @@ body {
     width: 100%;
     min-width: 480px;
     padding: 12px 14px;
-    border: 1px solid var(--border-soft);
+    border: 1px solid var(--black-sub);
     font-size: 0.9rem;
-    background: var(--surface);
+    background: var(--white);
     color: var(--text);
     resize: vertical;
     font-family: inherit;
@@ -455,14 +435,14 @@ body {
 
 .quiz-textarea:focus {
     outline: none;
-    border-color: var(--warm);
+    border-color: var(--black);
 }
 
 .quiz-submit {
     margin-top: 22px;
     padding: 13px 30px;
-    background: var(--warm);
-    color: #fff;
+    background: var(--black);
+    color: var(--white);
     border: none;
     cursor: pointer;
     transition: background 0.25s ease, transform 0.2s ease;
@@ -472,7 +452,7 @@ body {
 }
 
 .quiz-submit:hover {
-    background: var(--warm-light);
+    background: var(--black-sub);
 }
 
 .quiz-submit:active {

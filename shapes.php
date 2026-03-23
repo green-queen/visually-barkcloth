@@ -19,9 +19,9 @@
     </ul>
   </nav>
 
-    <main class="page-adjust">
+    <main class="page">
         <div class="choice-icon">
-            <svg viewBox="0 0 56 56" fill="none" stroke="var(--warm)" stroke-width="1.5">
+            <svg viewBox="0 0 56 56" fill="none" stroke="var(--black)" stroke-width="1.5">
                 <rect x="8" y="8" width="16" height="16" />
                 <circle cx="42" cy="16" r="8" />
                 <polygon points="8,48 24,32 8,32" />

@@ -8,7 +8,7 @@
   <title>Visually Barkcloth</title>
 </head>
 
-<body>
+<body class="hero">
   <nav class="nav">
     <ul>
       <li><a href="index.php">Home</a></li>
@@ -18,13 +18,15 @@
     </ul>
   </nav>
 
-  <main class="page page-adjust hero">
-    <h1 class="page-title">Explore Barkcloth</h1>
+  <main class="page">
+    <h1 class="page-title">
+      Explore<br>Barkcloth
+    </h1>
 
     <div class="choices">
       <a href="shapes.php" class="choice-card">
         <div class="choice-icon">
-          <svg viewBox="0 0 56 56" fill="none" stroke="var(--warm)" stroke-width="1.5">
+          <svg viewBox="0 0 56 56" fill="none" stroke="var(--black)" stroke-width="1.5">
             <rect x="8" y="8" width="16" height="16" />
             <circle cx="42" cy="16" r="8" />
             <polygon points="8,48 24,32 8,32" />
@@ -38,7 +40,7 @@
 
       <a href="structures.php" class="choice-card">
         <div class="choice-icon">
-          <svg viewBox="0 0 56 56" fill="none" stroke="var(--warm)" stroke-width="1.5">
+          <svg viewBox="0 0 56 56" fill="none" stroke="var(--black)" stroke-width="1.5">
             <rect x="8" y="8" width="40" height="40" />
             <rect x="16" y="16" width="24" height="24" stroke-dasharray="2,2" />
             <rect x="24" y="24" width="8" height="8" />
@@ -60,7 +62,7 @@
   ?>
 
   <script>
-    // cycle through hero images every 5 seconds
+    // cycle through hero images every 8 seconds
     document.addEventListener('DOMContentLoaded', () => {
       const heroImages = <?= $images ?>;
       let current = 0;
@@ -77,7 +79,7 @@
       }
 
       cycleHero();
-      setInterval(cycleHero, 5000);
+      setInterval(cycleHero, 8000);
     });
   </script>
 
