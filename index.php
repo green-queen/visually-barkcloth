@@ -11,10 +11,10 @@
 <body class="hero">
   <nav class="nav">
     <ul>
-      <li><a href="index.php">Home</a></li>
-      <li><a href="quiz.php">Quiz</a></li>
-      <li><a href="annotations.php">Annotations</a></li>
-      <li><a href="contact.php">Contact</a></li>
+      <li><a class = "white-nav" href="index.php">Home</a></li>
+      <li><a class = "white-nav" href="quiz.php">Quiz</a></li>
+      <li><a class = "white-nav" href="annotations.php">Annotations</a></li>
+      <li><a class = "white-nav" href="contact.php">Contact</a></li>
     </ul>
   </nav>
 
@@ -68,13 +68,17 @@
       let current = 0;
       const el = document.querySelector('.hero');
 
+      // add dark overlay to make text more readable
       function cycleHero() {
         const img = new Image();
         const next = heroImages[(current + 1) % heroImages.length];
         img.onload = () => {
-          el.style.backgroundImage = `url('${heroImages[current]}')`;
-          current = (current + 1) % heroImages.length;
+          el.style.backgroundImage = `
+            linear-gradient(rgba(0,0,0,0.15), rgba(0,0,0,0.15)),
+            url('${heroImages[current]}')
+          `;
         };
+        current = (current + 1) % heroImages.length;
         img.src = next;
       }
 
