@@ -15,7 +15,7 @@
       <li><a href="index.php">Home</a></li>
       <li><a href="quiz.php">Quiz</a></li>
       <li><a href="annotations.php">Annotations</a></li>
-      <li><a href="contact.php">Contact</a></li>
+      <li><a href="about.php">About</a></li>
     </ul>
   </nav>
 

@@ -5,8 +5,21 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <link rel="stylesheet" type="text/css" href="styles/site.css">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Audiowide&family=Barriecito&family=Rubik+Dirt&display=swap" rel="stylesheet">
   <title>Visually Barkcloth</title>
 </head>
+
+<style>
+.page-title {
+  font-family: "Barriecito", system-ui;
+  font-weight: 400;
+  font-style: normal;
+}
+
+
+</style>
 
 <body class="hero">
   <nav class="nav">
@@ -14,7 +27,7 @@
       <li><a class = "white-nav" href="index.php">Home</a></li>
       <li><a class = "white-nav" href="quiz.php">Quiz</a></li>
       <li><a class = "white-nav" href="annotations.php">Annotations</a></li>
-      <li><a class = "white-nav" href="contact.php">Contact</a></li>
+      <li><a class = "white-nav" href="about.php">About</a></li>
     </ul>
   </nav>
 
