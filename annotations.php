@@ -10,14 +10,24 @@
 </head>
 
 <body>
-  <nav class="nav">
-    <ul>
-      <li><a href="index.php">Home</a></li>
-      <li><a href="quiz.php">Quiz</a></li>
-      <li><a href="annotations.php">Annotations</a></li>
-      <li><a href="about.php">About</a></li>
-    </ul>
-  </nav>
+<?php $currentPage = basename($_SERVER['PHP_SELF']); ?>
+
+<nav class="nav">
+  <ul>
+    <li>
+      <a class="<?= ($currentPage == 'index.php') ? 'active' : '' ?>" href="index.php">Home</a>
+    </li>
+    <li>
+      <a class="<?= ($currentPage == 'quiz.php') ? 'active' : '' ?>" href="quiz.php">Quiz</a>
+    </li>
+    <li>
+      <a class="<?= ($currentPage == 'annotations.php') ? 'active' : '' ?>" href="annotations.php">Annotations</a>
+    </li>
+    <li>
+      <a class="<?= ($currentPage == 'about.php') ? 'active' : '' ?>" href="about.php">About</a>
+    </li>
+  </ul>
+</nav>
 
   <main class="page">
     <div id="annotation-container"></div>

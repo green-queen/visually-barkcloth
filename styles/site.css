@@ -37,19 +37,20 @@ body {
     color: var(--text);
     font-size: 13px;
     font-weight: 575;
-    letter-spacing: 0.18em;
+    letter-spacing: 0.10em;
     text-transform: uppercase;
     transition: color 0.25s var(--ease-out);
     animation: rise 0.7s var(--ease-out) 0.1s both;
     position: relative;
+    display: inline-block;  
+    text-align: center;
+    padding: 1px 2px;
     padding-bottom: 2px;
 }
 
 .nav li a.white-nav {
     color: var(--white);
     background-color: var(--black);
-    padding: 1px 4px;
-    padding-bottom: 2px;
 }
 
 .nav li a::after {
@@ -86,6 +87,14 @@ body {
     width: 100%;
 }
 
+.nav li a.active::after {
+    width: 100%;
+}
+
+.nav li a.white-nav::after {
+    background: var(--white-sub);
+}
+
 /* page */
 .page {
     display: flex;
@@ -100,11 +109,14 @@ body {
 .page-title {
     margin-top: 65px;
     font-size: clamp(7rem, 6vw, 6rem);
-    font-weight: 600;
     color: var(--white);
     text-shadow: var(--black-sub) 1px 1px 200px;
     animation: rise 0.8s var(--ease-out) 0.15s both;
     letter-spacing: 0.05em;
+    font-family: "Fraunces", serif;
+    font-optical-sizing: auto;
+    font-weight: 600;
+    font-style: italic
 }
 
 .hero {
@@ -207,7 +219,7 @@ body {
 
 .choice-label {
     font-size: 11px;
-    letter-spacing: 0.3em;
+    letter-spacing: 0.2em;
     color: var(--text-sub);
     margin-bottom: 0.3rem;
     font-weight: 500;

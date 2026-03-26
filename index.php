@@ -5,29 +5,28 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <link rel="stylesheet" type="text/css" href="styles/site.css">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Audiowide&family=Barriecito&family=Rubik+Dirt&display=swap" rel="stylesheet">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Audiowide&family=Barriecito&family=Rubik+Dirt&display=swap" rel="stylesheet">
   <title>Visually Barkcloth</title>
 </head>
 
-<style>
-.page-title {
-  font-family: "Barriecito", system-ui;
-  font-weight: 400;
-  font-style: normal;
-}
-
-
-</style>
-
 <body class="hero">
+    <?php $currentPage = basename($_SERVER['PHP_SELF']); ?>
   <nav class="nav">
     <ul>
-      <li><a class = "white-nav" href="index.php">Home</a></li>
-      <li><a class = "white-nav" href="quiz.php">Quiz</a></li>
-      <li><a class = "white-nav" href="annotations.php">Annotations</a></li>
-      <li><a class = "white-nav" href="about.php">About</a></li>
+      <li>
+        <a class="white-nav <?= ($currentPage == 'index.php') ? 'active' : '' ?>" href="index.php">Home</a>
+      </li>
+      <li>
+        <a class="white-nav <?= ($currentPage == 'quiz.php') ? 'active' : '' ?>" href="quiz.php">Quiz</a>
+      </li>
+      <li>
+        <a class="white-nav <?= ($currentPage == 'annotations.php') ? 'active' : '' ?>" href="annotations.php">Annotations</a>
+      </li>
+      <li>
+        <a class="white-nav <?= ($currentPage == 'about.php') ? 'active' : '' ?>" href="about.php">About</a>
+      </li>
     </ul>
   </nav>
 
