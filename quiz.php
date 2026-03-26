@@ -32,7 +32,7 @@
   <main class="page">
     <div id="quiz-container"></div>
     <div id="img-modal"
-      style="display:none; position:fixed; top:0; left:0; width:100vw; height:100vh; background:rgba(0,0,0,0.7); justify-content:center; align-items:center; z-index:9999; cursor:pointer;">
+      style="display:none; position:fixed; top:0; left:0; width:100vw; height:100vh; background:rgba(0,0,0,0.6); justify-content:center; align-items:center; z-index:9999; cursor:pointer;">
       <img id="modal-img" src="" alt="Enlarged barkcloth image" style="max-width:90vw; max-height:90vh;">
     </div>
   </main>
@@ -213,14 +213,17 @@
       const safeQuestionTx = escapeHTML(question.text);
 
       container.innerHTML = `
+      <div class="quiz-left">
         <img class="quiz-img" src="${safeImgSrc}" alt="${safeImgAlt}">
         <div class="quiz-citation">${safeCitation}</div>
-        <form id="quiz-form">
-          <div class="quiz-question">${safeQuestionTx}</div>
-          ${buildAnswerHTML(question)}
-          <button class="quiz-submit" type="submit">Submit</button>
-        </form>
-      `;
+      </div>
+      <form id="quiz-form">
+        <div class="quiz-question">${safeQuestionTx}</div>
+        ${buildAnswerHTML(question)}
+        <button class="quiz-submit" type="submit">Submit</button>
+        <button class="quiz-skip" type="button" id="quiz-skip">Skip</button>
+      </form>
+    `;
 
       // img modal
       const quizImg  = container.querySelector('.quiz-img');
@@ -273,7 +276,11 @@
         })(jQuery);
       }
 
-      // form submission
+      // form skip
+      document.getElementById('quiz-skip')
+      .addEventListener('click', () => showQuiz(data));
+
+       // form submission
       document.getElementById('quiz-form')
         .addEventListener('submit', async (e) => {
           e.preventDefault();

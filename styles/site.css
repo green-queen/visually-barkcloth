@@ -30,6 +30,8 @@ body {
     justify-content: center;
     padding: 0;
     margin: 25px 0px 0px 0px;
+    position: relative; 
+    z-index: 10000;  
 }
 
 .nav li a {
@@ -211,6 +213,7 @@ body {
     animation: rise 0.8s var(--ease-out) 0.4s both;
     opacity: 0.85;
     transition: opacity 0.2s;
+    z-index: 100000;
 }
 
 .choice-card:hover .choice-icon {
@@ -253,9 +256,10 @@ body {
     gap: 0.6rem;
     justify-content: center;
     padding: 1rem 1.25rem;
-    background: var(--white);
     max-width: 680px;
     animation: rise 0.8s var(--ease-out) 0.4s both;
+    position: relative; 
+    z-index: 10000;    
 }
 
 .filter-btn {
@@ -268,6 +272,7 @@ body {
     transition: background 0.2s ease, border-color 0.2s ease, color 0.2s ease, transform 0.15s ease;
     border: 1.5px solid var(--black);
     letter-spacing: 0.04em;
+    background-color: var(--white);
 }
 
 .filter-btn:hover:not(.selected) {
@@ -285,7 +290,7 @@ body {
     position: fixed;
     inset: 0;
     pointer-events: none;
-    z-index: 9999;
+    z-index: 9990; /* below nav and quiz */
     overflow: hidden;
 }
 
@@ -322,6 +327,9 @@ body {
     border: 1px solid var(--black);
     transform: rotate(var(--rotate));
     transition: transform 0.2s ease;
+    display: block;       
+    text-decoration: none;
+    color: inherit; 
 }
 
 .floating-card:hover {
@@ -391,39 +399,53 @@ body {
 }
 
 #quiz-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: start;
+    gap: 48px;
+    width: 100%;
+    max-width: 1100px;
+    padding: 60px 40px;
+    box-sizing: border-box;
+}
+
+.quiz-left {
+    position: sticky;
+    top: 40px;
     display: flex;
     flex-direction: column;
     align-items: center;
-    text-align: center;
-    gap: 16px;
-    padding-bottom: 40px;
+    gap: 12px;
 }
 
 #quiz-form {
-    padding: 24px 18px;
     width: 100%;
-    max-width: 420px;
-    background: var(--surface, #fff);
-    border: 1px solid var(--border-soft, #e5e5e5);
+    background: var(--white);
+    border: 1px solid var(--border-soft);
+    padding: 32px;
+    box-sizing: border-box;
     transition: opacity 0.3s ease;
 }
 
 .quiz-question {
-    margin-bottom: 16px;
+    margin-bottom: 20px;
     color: var(--text);
-    font-size: 14px;
-    font-weight: 600;
+    font-size: 15px;
     letter-spacing: 0.05em;
+    text-transform: uppercase;
+    border-bottom: 1px solid var(--border-soft);
+    padding-bottom: 16px;
+    font-weight:bold;
 }
 
 .quiz-img {
-    max-width: 500px;
-    margin-top: 60px;
     width: 100%;
     height: auto;
-    object-fit: cover;
+    max-height: 520px;
+    object-fit: contain;
     cursor: pointer;
-    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    transition: transform 0.2s ease;
+    display: block;
 }
 
 .quiz-img:hover {
@@ -433,8 +455,20 @@ body {
 .quiz-citation {
     font-size: 0.65rem;
     color: var(--gray);
-    max-width: 360px;
+    max-width: 100%;
     line-height: 1.4;
+    text-align: center;
+}
+
+@media (max-width: 768px) {
+    #quiz-container {
+        grid-template-columns: 1fr;
+        padding: 30px 20px;
+        gap: 30px;
+    }
+    .quiz-left {
+        position: static;
+    }
 }
 
 .quiz-option {
@@ -446,18 +480,12 @@ body {
     font-size: 0.92rem;
     color: var(--text);
     border: 1px solid transparent;
-    border-radius: 6px;
     transition: background 0.2s ease, border 0.2s ease;
-}
-
-.quiz-option:hover {
-    background: var(--text-sub);
-    border-color: var(--black-sub);
+    margin-bottom:10px;
 }
 
 .quiz-option input {
     margin-right: 10px;
-    accent-color: var(--text);
 }
 
 .quiz-textarea {
@@ -466,17 +494,16 @@ body {
     max-width: 100%;
     box-sizing: border-box;
     padding: 12px 14px;
-    border: 1px solid var(--black-sub);
+    border: 1px solid var(--border);
     font-size: 0.9rem;
-    background: var(--white);
+    font-family: 'Courier New', Courier, monospace;
     color: var(--text);
     resize: vertical;
-    transition: border 0.2s ease, box-shadow 0.2s ease;
-    margin-top: 20px;
+    transition: border 0.2s ease, background 0.2s ease;
+    margin-top: 12px;
 }
 
 .quiz-struct {
-    margin-top: 12px;
     font-size: 0.85rem;
     color: var(--text-sub);
 }
@@ -487,15 +514,18 @@ body {
 }
 
 .quiz-submit {
-    margin-top: 20px;
+    margin-top: 24px;
     padding: 12px 26px;
+    width: 100%;
     background: var(--black);
     color: var(--white);
     border: none;
     cursor: pointer;
-    transition: background 0.25s ease, transform 0.15s ease, box-shadow 0.15s ease;
-    font-size: 0.95rem;
-    letter-spacing: 0.06em;
+    transition: background 0.25s ease, transform 0.15s ease;
+    font-size: 0.85rem;
+    font-family: 'Courier New', Courier, monospace;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
 }
 
 .quiz-submit:hover {
@@ -504,6 +534,26 @@ body {
 
 .quiz-submit:active {
     transform: translateY(1px);
+}
+
+.quiz-skip {
+    margin-top: 10px;
+    padding: 12px 26px;
+    width: 100%;
+    background: transparent;
+    color: var(--text-sub);
+    border: 1px solid var(--border);
+    cursor: pointer;
+    font-size: 0.85rem;
+    font-family: 'Courier New', Courier, monospace;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    transition: color 0.2s ease, border-color 0.2s ease;
+}
+
+.quiz-skip:hover {
+    color: var(--text);
+    border-color: var(--black-sub);
 }
 
 .dropdown {
@@ -520,7 +570,6 @@ body {
     cursor: pointer;
     font-size: 13px;
     color: var(--text-sub);
-    border-radius: 6px;
     transition: border-color 0.2s ease, background 0.2s ease;
 }
 
@@ -544,8 +593,7 @@ body {
     opacity: 0;
     transition: transform 0.18s ease, opacity 0.15s ease;
     border: 1px solid var(--border-soft);
-    border-radius: 6px;
-    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.08);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
 }
 
 .dropdown .dropdown-option {
@@ -589,10 +637,11 @@ body {
 
 .annotation-dot {
     position: absolute;
-    width: 30px;
-    height: 30px;
+    width: 15px;
+    height: 15px;
     background: #e53e3e;
-    border: 1px solid var(--black);
+    border: #0a0a0a 2px solid;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
     border-radius: 50%;
     transform: translate(-50%, -50%);
     cursor: pointer;
@@ -654,4 +703,129 @@ body {
 
 .annotation-citation a:hover {
     color: #555;
+}
+
+/* about page */
+.about-page {
+    max-width: 680px;
+    margin: 0 auto;
+    padding: 60px 40px 120px;
+    animation: rise 0.8s var(--ease-out) 0.1s both;
+}
+ 
+.about-intro {
+    margin-bottom: 50px;
+    border-bottom: 1px solid var(--border-soft);
+    padding-bottom: 50px;
+}
+ 
+.about-intro-label {
+    font-size: 11px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--gray);
+    margin-bottom: 20px;
+}
+ 
+.about-intro-hook {
+    font-size: clamp(1.4rem, 2vw, 1.25rem);
+    line-height: 1.55;
+    color: var(--text);
+    font-weight: 400;
+    margin: 0;
+}
+ 
+.about-intro-hook em {
+    font-style: italic;
+    color: var(--text-sub);
+}
+ 
+.about-section {
+    margin-bottom: 56px;
+}
+ 
+.about-section-header {
+    display: flex;
+    align-items: baseline;
+    gap: 14px;
+    margin-bottom: 20px;
+}
+ 
+.about-section-num {
+    font-size: 10px;
+    letter-spacing: 0.18em;
+    color: var(--gray);
+    text-transform: uppercase;
+    flex-shrink: 0;
+}
+ 
+.about-section-title {
+    font-size: 11px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--text);
+    font-weight: 600;
+    border-bottom: 1px solid var(--text);
+    padding-bottom: 2px;
+}
+ 
+.about-body {
+    font-size: 0.92rem;
+    line-height: 1.85;
+    color: var(--text-sub);
+    margin: 0 0 16px;
+}
+ 
+.about-body:last-child {
+    margin-bottom: 0;
+}
+ 
+.about-pull {
+    border-left: 2px solid var(--border);
+    padding: 4px 0 4px 20px;
+    margin: 24px 0;
+    font-style: italic;
+    font-size: 0.9rem;
+    line-height: 1.7;
+    color: var(--text-sub);
+}
+ 
+.about-note {
+    margin-top: 64px;
+    padding-top: 40px;
+    border-top: 1px solid var(--border-soft);
+}
+ 
+.about-note-label {
+    font-size: 10px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--gray);
+    margin-bottom: 14px;
+}
+ 
+.about-note p {
+    font-size: 0.82rem;
+    line-height: 1.8;
+    color: var(--gray);
+    margin: 0 0 10px;
+}
+ 
+.about-note p:last-child {
+    margin-bottom: 0;
+}
+ 
+.about-deco {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 40px 0;
+    transition: opacity 0.3s ease;
+}
+ 
+.about-deco img {
+    height: 52px;
+    width: auto;
+    object-fit: contain;
+    mix-blend-mode: multiply;
 }

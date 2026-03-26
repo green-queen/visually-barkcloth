@@ -194,18 +194,20 @@
                     '--y-delay: ' + yDelay + 's;' +
                     '--y-end: ' + yEnd + ';';
 
-                let card = document.createElement('div');
-                card.className = 'floating-card';
-                card.style.setProperty('--rotate', rotate + 'deg');
+                let cardLink = document.createElement('a');
+                cardLink.href = bc.link || '#'; 
+                cardLink.target = '_blank';     
+                cardLink.className = 'floating-card';
+                cardLink.style.setProperty('--rotate', rotate + 'deg');
 
                 let shapeList = bc.shapes.length > 0 ? bc.shapes.join(', ') : 'No shapes';
-                card.innerHTML =
+                cardLink.innerHTML =
                     '<img src="img/' + bc.id + '.png" alt="' + bc.id + '" onerror="this.style.display=\'none\'">' +
                     '<div class="card-id">' + bc.id + '</div>' +
                     '<div class="card-origin">' + bc.origin + '</div>' +
                     '<div class="card-shapes">' + shapeList + '</div>';
 
-                yWrap.appendChild(card);
+                yWrap.appendChild(cardLink);
                 xWrap.appendChild(yWrap);
                 floatingLayer.appendChild(xWrap);
             }
