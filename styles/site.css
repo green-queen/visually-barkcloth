@@ -42,7 +42,6 @@ body {
     letter-spacing: 0.10em;
     text-transform: uppercase;
     transition: color 0.25s var(--ease-out);
-    animation: rise 0.7s var(--ease-out) 0.1s both;
     position: relative;
     display: inline-block;  
     text-align: center;
@@ -52,7 +51,7 @@ body {
 
 .nav li a.white-nav {
     color: var(--white);
-    background-color: var(--black);
+    /* background-color: var(--black); */
 }
 
 .nav li a::after {
@@ -113,7 +112,6 @@ body {
     font-size: clamp(7rem, 6vw, 6rem);
     color: var(--white);
     text-shadow: var(--black-sub) 1px 1px 200px;
-    animation: rise 0.8s var(--ease-out) 0.15s both;
     letter-spacing: 0.05em;
     font-family: "Fraunces", serif;
     font-optical-sizing: auto;
@@ -127,7 +125,7 @@ body {
     background-repeat: no-repeat;
 }
 
-@keyframes rise {
+/* @keyframes rise {
     from {
         opacity: 0;
         transform: translateY(20px);
@@ -137,7 +135,7 @@ body {
         opacity: 1;
         transform: translateY(0);
     }
-}
+} */
 
 @keyframes fade-in {
     from {
@@ -156,7 +154,6 @@ body {
     gap: 2rem;
     max-width: 680px;
     width: 100%;
-    animation: rise 0.8s var(--ease-out) 0.4s both;
 }
 
 .choice-card {
@@ -210,7 +207,6 @@ body {
     width: 48px;
     height: 48px;
     margin-bottom: 1.1rem;
-    animation: rise 0.8s var(--ease-out) 0.4s both;
     opacity: 0.85;
     transition: opacity 0.2s;
     z-index: 100000;
@@ -257,7 +253,6 @@ body {
     justify-content: center;
     padding: 1rem 1.25rem;
     max-width: 680px;
-    animation: rise 0.8s var(--ease-out) 0.4s both;
     position: relative; 
     z-index: 10000;    
 }
@@ -710,7 +705,6 @@ body {
     max-width: 680px;
     margin: 0 auto;
     padding: 60px 40px 120px;
-    animation: rise 0.8s var(--ease-out) 0.1s both;
 }
  
 .about-intro {
