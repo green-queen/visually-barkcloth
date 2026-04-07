@@ -29,6 +29,15 @@
   </ul>
 </nav>
 
+        <div class="view-toggle">
+            <button class="view-btn active" id="btn-float" title="Float view">
+                Float
+            </button>
+            <button class="view-btn" id="btn-grid" title="Grid view">
+                Grid
+            </button>
+        </div>
+
     <main class="page">
         <div class="choice-icon">
             <svg viewBox="0 0 56 56" fill="none" stroke="var(--black)" stroke-width="1.5">
@@ -40,31 +49,34 @@
         </div>
         </div>
 
-        <div class="view-toggle">
-            <button class="view-btn active" id="btn-float" title="Float view">
-                Float
-            </button>
-            <button class="view-btn" id="btn-grid" title="Grid view">
-                Grid
-            </button>
-        </div>
-
         <div class="filter-bar" id="filter-bar">
-            <button id="clear-filters" class="clear-btn">Clear All</button>
             <button class="filter-btn" data-shape="square">Square</button>
             <button class="filter-btn" data-shape="rhombus">Rhombus</button>
             <button class="filter-btn" data-shape="rectangle">Rectangle</button>
+        </div>
+
+        <div class="filter-bar" id="filter-bar">
             <button class="filter-btn" data-shape="right">Right Triangle</button>
             <button class="filter-btn" data-shape="equilateral">Equilateral Triangle</button>
             <button class="filter-btn" data-shape="isoceles">Isoceles Triangle</button>
+        </div>
+
+        <div class="filter-bar" id="filter-bar">
             <button class="filter-btn" data-shape="circle">Circle</button>
             <button class="filter-btn" data-shape="line">Line</button>
             <button class="filter-btn" data-shape="curve">Curve</button>
             <button class="filter-btn" data-shape="cross">Cross</button>
+        </div>
+
+        <div class="filter-bar" id="filter-bar">
             <button class="filter-btn" data-shape="sun">Sun</button>
             <button class="filter-btn" data-shape="moon">Moon</button>
             <button class="filter-btn" data-shape="star">Star</button>
             <button class="filter-btn" data-shape="flower">Flower</button>
+        </div>
+
+        <div class="filter-bar" id="filter-bar">
+            <button id="clear-filters" class="clear-btn">Clear All</button>
         </div>
 
         <section class="barkcloth-list" id="barkcloth-list">

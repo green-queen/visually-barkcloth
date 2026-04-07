@@ -29,17 +29,6 @@
   </ul>
 </nav>
 
-    <main class="page">
-        <div class="choice-icon">
-            <svg viewBox="0 0 56 56" fill="none" stroke="var(--black)" stroke-width="1.5">
-                <rect x="8" y="8" width="40" height="40" />
-                <rect x="16" y="16" width="24" height="24" stroke-dasharray="2,2" />
-                <rect x="24" y="24" width="8" height="8" />
-                <line x1="28" y1="8" x2="28" y2="48" />
-                <line x1="8" y1="28" x2="48" y2="28" />
-            </svg>
-        </div>
-
         <div class="view-toggle">
             <button class="view-btn active" id="btn-float" title="Float view">
                 Float
@@ -49,12 +38,24 @@
             </button>
         </div>
 
+    <main class="page">
+        <div class="choice-icon">
+            <svg viewBox="0 0 56 56" fill="none" stroke="var(--black)" stroke-width="1.5">
+                <rect x="8" y="8" width="40" height="40" />
+                <rect x="16" y="16" width="24" height="24" stroke-dasharray="2,2" />
+                <rect x="24" y="24" width="8" height="8" />
+                <line x1="28" y1="8" x2="28" y2="48" />
+                <line x1="8" y1="28" x2="48" y2="28" />
+            </svg>
+                    
+        </div>
+
         <div class="filter-bar" id="filter-bar">
-            <button id="clear-filters" class="clear-btn">Clear All</button>
+            <button id="clear-filters" class="clear-btn"> Clear All</button>
             <button class="filter-btn" data-structure="square-structure">Square Structure</button>
             <button class="filter-btn" data-structure="square-cross-structure">Square Cross Structure</button>
-            <button class="filter-btn" data-structure="square-concentric-circle-structure">Square Concentric Circle
-                Structure</button>
+            <!-- <button class="filter-btn" data-structure="square-concentric-circle-structure">Square Concentric Circle
+                Structure</button> -->
             <button class="filter-btn" data-structure="rectangle-structure">Rectangle Structure</button>
             <button class="filter-btn" data-structure="rhombus-structure">Rhombus Structure</button>
             <button class="filter-btn" data-structure="equilateral-structure">Equilateral Structure</button>
@@ -180,7 +181,7 @@
             document.getElementById('grid-inner').innerHTML = '';
             document.getElementById('no-match').style.display = 'none';
         });
-        
+
         function renderBarkcloths() {
             let floatingLayer = document.getElementById('floating-layer');
             let gridInner = document.getElementById('grid-inner');

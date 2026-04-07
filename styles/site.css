@@ -30,8 +30,8 @@ body {
     justify-content: center;
     padding: 0;
     margin: 25px 0px 0px 0px;
-    position: relative; 
-    z-index: 9999;  
+    position: relative;
+    z-index: 9999;
 }
 
 .nav li a {
@@ -43,7 +43,7 @@ body {
     text-transform: uppercase;
     transition: color 0.25s var(--ease-out);
     position: relative;
-    display: inline-block;  
+    display: inline-block;
     text-align: center;
     padding: 1px 2px;
     padding-bottom: 2px;
@@ -251,10 +251,10 @@ body {
     flex-wrap: wrap;
     gap: 0.6rem;
     justify-content: center;
-    padding: 1rem 1.25rem;
+    padding: 0.25rem 0.25rem;
     max-width: 680px;
-    position: relative; 
-    z-index: 10000;    
+    position: relative;
+    z-index: 10000;
 }
 
 .filter-btn {
@@ -303,7 +303,8 @@ body {
     position: fixed;
     inset: 0;
     pointer-events: none;
-    z-index: 9990; /* below nav and quiz */
+    z-index: 9990;
+    /* below nav and quiz */
     overflow: hidden;
 }
 
@@ -340,9 +341,9 @@ body {
     border: 1px solid var(--black);
     transform: rotate(var(--rotate));
     transition: transform 0.2s ease;
-    display: block;       
+    display: block;
     text-decoration: none;
-    color: inherit; 
+    color: inherit;
 }
 
 .floating-card:hover {
@@ -399,30 +400,28 @@ body {
 
 /* view toggle */
 .view-toggle {
-    display: flex;
-    gap: 0;
-    position: relative;
     z-index: 10000;
-    margin-bottom: 0.5rem;
+    position: fixed;
+    right: 0;
+    display: flex; 
+    right: 1rem; 
 }
 
 .view-btn {
     background: var(--white);
     color: var(--black);
     font-family: inherit;
-    padding: 0.45rem 1rem;
+    padding: 1rem 1rem;
     font-size: 12px;
     cursor: pointer;
-    border: 1.5px solid var(--black);
     letter-spacing: 0.08em;
     text-transform: uppercase;
     transition: background 0.2s ease, color 0.2s ease;
     display: flex;
-    align-items: center;
     gap: 0.4rem;
 }
 
-.view-btn + .view-btn {
+.view-btn+.view-btn {
     border-left: none;
 }
 
@@ -444,7 +443,7 @@ body {
     inset: 0;
     overflow-y: auto;
     z-index: 9990;
-    padding: 140px 40px 60px;
+    padding: 100px 40px 60px;
     box-sizing: border-box;
 }
 
@@ -455,8 +454,8 @@ body {
 .grid-inner {
     display: flex;
     flex-wrap: wrap;
-    gap: 1.25rem;
-    max-width: 1200px;
+    gap: 0.5rem;
+    max-width: 3000px;
     margin: 0 auto;
     justify-content: center;
 }
@@ -465,7 +464,7 @@ body {
     width: var(--card-w);
     padding: 0.75rem;
     background-color: var(--white);
-    border: 1px solid var(--black);
+    /* border: 1px solid var(--black); */
     text-decoration: none;
     color: inherit;
     display: block;
@@ -508,8 +507,15 @@ body {
 }
 
 @keyframes grid-in {
-    from { opacity: 0; transform: translateY(10px); }
-    to   { opacity: 1; transform: translateY(0); }
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 
 #no-match {
@@ -562,7 +568,7 @@ body {
     letter-spacing: 0.05em;
     text-transform: uppercase;
     padding-bottom: 16px;
-    font-weight:bold;
+    font-weight: bold;
 }
 
 .quiz-img {
@@ -593,6 +599,7 @@ body {
         padding: 30px 20px;
         gap: 30px;
     }
+
     .quiz-left {
         position: static;
     }
@@ -608,7 +615,7 @@ body {
     color: var(--text);
     border: 1px solid transparent;
     transition: background 0.2s ease, border 0.2s ease;
-    margin-bottom:10px;
+    margin-bottom: 10px;
 }
 
 .quiz-option input {
@@ -838,13 +845,13 @@ body {
     margin: 0 auto;
     padding: 60px 40px 120px;
 }
- 
+
 .about-intro {
     margin-bottom: 50px;
     border-bottom: 1px solid var(--border-soft);
     padding-bottom: 50px;
 }
- 
+
 .about-intro-label {
     font-size: 11px;
     letter-spacing: 0.22em;
@@ -852,7 +859,7 @@ body {
     color: var(--gray);
     margin-bottom: 20px;
 }
- 
+
 .about-intro-hook {
     font-size: clamp(1.4rem, 2vw, 1.25rem);
     line-height: 1.55;
@@ -860,29 +867,29 @@ body {
     font-weight: 400;
     margin: 0;
 }
- 
+
 .about-intro-hook em {
     font-style: italic;
     color: var(--text-sub);
 }
- 
+
 .about-section {
     margin-bottom: 56px;
 }
- 
+
 .about-section-header {
     display: flex;
     align-items: baseline;
     gap: 14px;
     margin-bottom: 20px;
 }
- 
+
 .about-section-num {
     font-size: 14px;
     letter-spacing: 0.18em;
     color: var(--black);
 }
- 
+
 .about-section-title {
     font-size: 14px;
     letter-spacing: 0.22em;
@@ -892,18 +899,18 @@ body {
     border-bottom: 1px solid var(--text);
     padding-bottom: 2px;
 }
- 
+
 .about-body {
     font-size: 0.92rem;
     line-height: 1.85;
     color: var(--text-sub);
     margin: 0 0 16px;
 }
- 
+
 .about-body:last-child {
     margin-bottom: 0;
 }
- 
+
 .about-pull {
     border-left: 2px solid var(--border);
     padding: 4px 0 4px 20px;
@@ -913,30 +920,30 @@ body {
     line-height: 1.7;
     color: var(--text-sub);
 }
- 
+
 .about-note {
     margin-top: 64px;
     padding-top: 40px;
     border-top: 1px solid var(--border-soft);
 }
- 
+
 .about-note-label {
     font-size: 10px;
     letter-spacing: 0.22em;
     text-transform: uppercase;
     margin-bottom: 14px;
 }
- 
+
 .about-note p {
     font-size: 0.82rem;
     line-height: 1.8;
     margin: 0 0 10px;
 }
- 
+
 .about-note p:last-child {
     margin-bottom: 0;
 }
- 
+
 .about-deco {
     display: flex;
     justify-content: center;
@@ -944,7 +951,7 @@ body {
     margin: 40px 0;
     transition: opacity 0.3s ease;
 }
- 
+
 .about-deco img {
     height: 52px;
     width: auto;
