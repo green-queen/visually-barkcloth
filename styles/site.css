@@ -379,6 +379,121 @@ body {
     }
 }
 
+/* view toggle */
+.view-toggle {
+    display: flex;
+    gap: 0;
+    position: relative;
+    z-index: 10000;
+    margin-bottom: 0.5rem;
+}
+
+.view-btn {
+    background: var(--white);
+    color: var(--black);
+    font-family: inherit;
+    padding: 0.45rem 1rem;
+    font-size: 12px;
+    cursor: pointer;
+    border: 1.5px solid var(--black);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    transition: background 0.2s ease, color 0.2s ease;
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+}
+
+.view-btn + .view-btn {
+    border-left: none;
+}
+
+.view-btn.active {
+    background: var(--black);
+    color: var(--white);
+}
+
+.view-btn svg {
+    width: 13px;
+    height: 13px;
+    flex-shrink: 0;
+}
+
+/* grid view layer */
+#grid-layer {
+    display: none;
+    position: fixed;
+    inset: 0;
+    overflow-y: auto;
+    z-index: 9990;
+    padding: 140px 40px 60px;
+    box-sizing: border-box;
+}
+
+#grid-layer.visible {
+    display: block;
+}
+
+.grid-inner {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.25rem;
+    max-width: 1200px;
+    margin: 0 auto;
+    justify-content: center;
+}
+
+.grid-card {
+    width: var(--card-w);
+    padding: 0.75rem;
+    background-color: var(--white);
+    border: 1px solid var(--black);
+    text-decoration: none;
+    color: inherit;
+    display: block;
+    transition: transform 0.2s ease;
+    animation: grid-in 0.35s var(--ease-out) both;
+}
+
+.grid-card:hover {
+    transform: translateY(-5px) scale(1.03);
+    z-index: 1;
+    position: relative;
+}
+
+.grid-card img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    display: block;
+    margin-bottom: 0.5rem;
+}
+
+.grid-card .card-id {
+    font-weight: 700;
+    font-size: 0.7rem;
+    letter-spacing: 0.05em;
+    color: var(--text);
+}
+
+.grid-card .card-origin {
+    font-size: 0.66rem;
+    margin-top: 2px;
+    color: var(--text-sub);
+}
+
+.grid-card .card-shapes {
+    font-size: 0.6rem;
+    margin-top: 5px;
+    line-height: 1.5;
+    color: var(--text-sub);
+}
+
+@keyframes grid-in {
+    from { opacity: 0; transform: translateY(10px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+
 #no-match {
     display: none;
     position: fixed;

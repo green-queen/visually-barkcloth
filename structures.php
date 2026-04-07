@@ -40,6 +40,15 @@
             </svg>
         </div>
 
+        <div class="view-toggle">
+            <button class="view-btn active" id="btn-float" title="Float view">
+                Float
+            </button>
+            <button class="view-btn" id="btn-grid" title="Grid view">
+                Grid
+            </button>
+        </div>
+
         <div class="filter-bar" id="filter-bar">
             <button class="filter-btn" data-structure="square-structure">Square Structure</button>
             <button class="filter-btn" data-structure="square-cross-structure">Square Cross Structure</button>
@@ -62,9 +71,31 @@
     </main>
 
     <div id="floating-layer"></div>
+        <div id="grid-layer"><div class="grid-inner" id="grid-inner"></div></div>
     <div id="no-match">No barkcloths match the selected filters.</div>
 
     <script>
+                let currentView = 'float'; // 'float' or 'grid'
+
+        document.getElementById('btn-float').addEventListener('click', function () {
+            if (currentView === 'float') return;
+            currentView = 'float';
+            this.classList.add('active');
+            document.getElementById('btn-grid').classList.remove('active');
+            document.getElementById('grid-layer').classList.remove('visible');
+            renderBarkcloths();
+        });
+
+        document.getElementById('btn-grid').addEventListener('click', function () {
+            if (currentView === 'grid') return;
+            currentView = 'grid';
+            this.classList.add('active');
+            document.getElementById('btn-float').classList.remove('active');
+            document.getElementById('floating-layer').innerHTML = '';
+            document.getElementById('grid-layer').classList.add('visible');
+            renderBarkcloths();
+        });
+
         const barkcloths = [
             { id: "RV-4706-120", origin: "Fiji", structures: ["square-structure", "square-cross-structure", "equilateral-structure", "circle-structure"], link: "https://hdl.handle.net/20.500.11840/795173" },
             { id: "RV-265-1b", origin: "Futuna", structures: ["rectangle-structure", "two-dir-sym", "four-dir-sym", "concentric-circle-sym"], link: "https://hdl.handle.net/20.500.11840/598299" },
@@ -138,9 +169,11 @@
 
         function renderBarkcloths() {
             let floatingLayer = document.getElementById('floating-layer');
+            let gridInner = document.getElementById('grid-inner');
             let noMatch = document.getElementById('no-match');
 
             floatingLayer.innerHTML = '';
+            gridInner.innerHTML = '';
             noMatch.style.display = 'none';
 
             if (selectedStructures.length === 0) return;
@@ -166,6 +199,25 @@
                 return;
             }
 
+            if (currentView === 'grid') {
+                for (let i = 0; i < filtered.length; i++) {
+                    let bc = filtered[i];
+                    let structureList = bc.structures.length > 0 ? bc.structures.join(', ') : 'No structures';
+
+                    let cardLink = document.createElement('a');
+                    cardLink.href = bc.link || '#';
+                    cardLink.target = '_blank';
+                    cardLink.className = 'grid-card';
+                    cardLink.style.animationDelay = (i * 0.04) + 's';
+                    cardLink.innerHTML =
+                        '<img src="img/' + bc.id + '.png" alt="' + bc.id + '" onerror="this.style.display=\'none\'">' +
+                        '<div class="card-id">' + bc.id + '</div>' +
+                        '<div class="card-origin">' + bc.origin + '</div>' +
+                        '<div class="card-shapes">' + structureList + '</div>';
+
+                    gridInner.appendChild(cardLink);
+                }
+            } else {
             for (let i = 0; i < filtered.length; i++) {
                 let bc = filtered[i];
 
@@ -213,6 +265,7 @@
             }
         }
 
+    }
         renderBarkcloths();
     </script>
 </body>

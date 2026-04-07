@@ -40,6 +40,15 @@
         </div>
         </div>
 
+        <div class="view-toggle">
+            <button class="view-btn active" id="btn-float" title="Float view">
+                Float
+            </button>
+            <button class="view-btn" id="btn-grid" title="Grid view">
+                Grid
+            </button>
+        </div>
+
         <div class="filter-bar" id="filter-bar">
             <button class="filter-btn" data-shape="square">Square</button>
             <button class="filter-btn" data-shape="rhombus">Rhombus</button>
@@ -62,9 +71,31 @@
     </main>
 
     <div id="floating-layer"></div>
+    <div id="grid-layer"><div class="grid-inner" id="grid-inner"></div></div>
     <div id="no-match">No barkcloths match the selected filters.</div>
 
     <script>
+        let currentView = 'float'; // 'float' or 'grid'
+
+        document.getElementById('btn-float').addEventListener('click', function () {
+            if (currentView === 'float') return;
+            currentView = 'float';
+            this.classList.add('active');
+            document.getElementById('btn-grid').classList.remove('active');
+            document.getElementById('grid-layer').classList.remove('visible');
+            renderBarkcloths();
+        });
+
+        document.getElementById('btn-grid').addEventListener('click', function () {
+            if (currentView === 'grid') return;
+            currentView = 'grid';
+            this.classList.add('active');
+            document.getElementById('btn-float').classList.remove('active');
+            document.getElementById('floating-layer').innerHTML = '';
+            document.getElementById('grid-layer').classList.add('visible');
+            renderBarkcloths();
+        });
+
         const barkcloths = [
             { id: "RV-4706-120", origin: "Fiji", shapes: ["square", "right", "circle", "line", "cross", "flower"], link: "https://hdl.handle.net/20.500.11840/795173" },
             { id: "RV-265-1b", origin: "Futuna", shapes: ["square", "line", "cross", "sun"], link: "https://hdl.handle.net/20.500.11840/598299" },
@@ -138,14 +169,16 @@
 
         function renderBarkcloths() {
             let floatingLayer = document.getElementById('floating-layer');
+            let gridInner = document.getElementById('grid-inner');
             let noMatch = document.getElementById('no-match');
 
             floatingLayer.innerHTML = '';
+            gridInner.innerHTML = '';
             noMatch.style.display = 'none';
 
             if (selectedShapes.length === 0) return;
 
-            // find barkcloths w all selected shapes
+            // find barkcloths with all selected shapes
             let filtered = [];
             for (let i = 0; i < barkcloths.length; i++) {
                 let bc = barkcloths[i];
@@ -166,50 +199,70 @@
                 return;
             }
 
-            for (let i = 0; i < filtered.length; i++) {
-                let bc = filtered[i];
+            if (currentView === 'grid') {
+                for (let i = 0; i < filtered.length; i++) {
+                    let bc = filtered[i];
+                    let shapeList = bc.shapes.length > 0 ? bc.shapes.join(', ') : 'No shapes';
 
-                // random speeds and positions for animations
-                let xSpeed = Math.random() * 9 + 9;   // 9 to 18
-                let ySpeed = Math.random() * 5 + 5;   // 5 to 10
-                let xDelay = Math.random() * -xSpeed;
-                let yDelay = Math.random() * -ySpeed;
-                let xEnd = 'calc(' + (Math.random() * 40 + 60) + 'vw - 180px)';
-                let yEnd = 'calc(' + (Math.random() * 40 + 60) + 'vh - 180px)';
-                let rotate = Math.random() * 12 - 6;  // -6 to 6
-                let goRight = i % 2 === 0;
+                    let cardLink = document.createElement('a');
+                    cardLink.href = bc.link || '#';
+                    cardLink.target = '_blank';
+                    cardLink.className = 'grid-card';
+                    cardLink.style.animationDelay = (i * 0.04) + 's';
+                    cardLink.innerHTML =
+                        '<img src="img/' + bc.id + '.png" alt="' + bc.id + '" onerror="this.style.display=\'none\'">' +
+                        '<div class="card-id">' + bc.id + '</div>' +
+                        '<div class="card-origin">' + bc.origin + '</div>' +
+                        '<div class="card-shapes">' + shapeList + '</div>';
 
-                let xWrap = document.createElement('div');
-                xWrap.className = 'card-x ' + (goRight ? 'go-right' : 'go-left');
-                xWrap.style.cssText =
-                    '--x-speed: ' + xSpeed + 's;' +
-                    '--x-delay: ' + xDelay + 's;' +
-                    '--x-end: ' + xEnd + ';' +
-                    'top: 0; left: 0;';
+                    gridInner.appendChild(cardLink);
+                }
+            } else {
+                for (let i = 0; i < filtered.length; i++) {
+                    let bc = filtered[i];
 
-                let yWrap = document.createElement('div');
-                yWrap.className = 'card-y';
-                yWrap.style.cssText =
-                    '--y-speed: ' + ySpeed + 's;' +
-                    '--y-delay: ' + yDelay + 's;' +
-                    '--y-end: ' + yEnd + ';';
+                    // random speeds and positions for animations
+                    let xSpeed = Math.random() * 9 + 9;   // 9 to 18
+                    let ySpeed = Math.random() * 5 + 5;   // 5 to 10
+                    let xDelay = Math.random() * -xSpeed;
+                    let yDelay = Math.random() * -ySpeed;
+                    let xEnd = 'calc(' + (Math.random() * 40 + 60) + 'vw - 180px)';
+                    let yEnd = 'calc(' + (Math.random() * 40 + 60) + 'vh - 180px)';
+                    let rotate = Math.random() * 12 - 6;  // -6 to 6
+                    let goRight = i % 2 === 0;
 
-                let cardLink = document.createElement('a');
-                cardLink.href = bc.link || '#'; 
-                cardLink.target = '_blank';     
-                cardLink.className = 'floating-card';
-                cardLink.style.setProperty('--rotate', rotate + 'deg');
+                    let xWrap = document.createElement('div');
+                    xWrap.className = 'card-x ' + (goRight ? 'go-right' : 'go-left');
+                    xWrap.style.cssText =
+                        '--x-speed: ' + xSpeed + 's;' +
+                        '--x-delay: ' + xDelay + 's;' +
+                        '--x-end: ' + xEnd + ';' +
+                        'top: 0; left: 0;';
 
-                let shapeList = bc.shapes.length > 0 ? bc.shapes.join(', ') : 'No shapes';
-                cardLink.innerHTML =
-                    '<img src="img/' + bc.id + '.png" alt="' + bc.id + '" onerror="this.style.display=\'none\'">' +
-                    '<div class="card-id">' + bc.id + '</div>' +
-                    '<div class="card-origin">' + bc.origin + '</div>' +
-                    '<div class="card-shapes">' + shapeList + '</div>';
+                    let yWrap = document.createElement('div');
+                    yWrap.className = 'card-y';
+                    yWrap.style.cssText =
+                        '--y-speed: ' + ySpeed + 's;' +
+                        '--y-delay: ' + yDelay + 's;' +
+                        '--y-end: ' + yEnd + ';';
 
-                yWrap.appendChild(cardLink);
-                xWrap.appendChild(yWrap);
-                floatingLayer.appendChild(xWrap);
+                    let cardLink = document.createElement('a');
+                    cardLink.href = bc.link || '#';
+                    cardLink.target = '_blank';
+                    cardLink.className = 'floating-card';
+                    cardLink.style.setProperty('--rotate', rotate + 'deg');
+
+                    let shapeList = bc.shapes.length > 0 ? bc.shapes.join(', ') : 'No shapes';
+                    cardLink.innerHTML =
+                        '<img src="img/' + bc.id + '.png" alt="' + bc.id + '" onerror="this.style.display=\'none\'">' +
+                        '<div class="card-id">' + bc.id + '</div>' +
+                        '<div class="card-origin">' + bc.origin + '</div>' +
+                        '<div class="card-shapes">' + shapeList + '</div>';
+
+                    yWrap.appendChild(cardLink);
+                    xWrap.appendChild(yWrap);
+                    floatingLayer.appendChild(xWrap);
+                }
             }
         }
 
