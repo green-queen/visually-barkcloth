@@ -31,7 +31,7 @@ body {
     padding: 0;
     margin: 25px 0px 0px 0px;
     position: relative; 
-    z-index: 10000;  
+    z-index: 9999;  
 }
 
 .nav li a {
@@ -278,6 +278,24 @@ body {
 .filter-btn.selected {
     background: var(--black);
     color: var(--white);
+}
+
+.clear-btn {
+    background: #e74c3c;
+    color: white;
+    border: 1.5px solid #e74c3c;
+    font-family: inherit;
+    padding: 0.45rem 1.1rem;
+    font-size: 13px;
+    cursor: pointer;
+    letter-spacing: 0.04em;
+    transition: background 0.2s ease, border-color 0.2s ease, color 0.2s ease, transform 0.15s ease;
+}
+
+.clear-btn:hover {
+    background: #c0392b;
+    border-color: #c0392b;
+    transform: translateY(-1px);
 }
 
 /* animated floating cards */
@@ -531,7 +549,7 @@ body {
 #quiz-form {
     width: 100%;
     background: var(--white);
-    border: 1px solid var(--border-soft);
+    border: 1px solid var(--black);
     padding: 32px;
     box-sizing: border-box;
     transition: opacity 0.3s ease;
@@ -543,7 +561,6 @@ body {
     font-size: 15px;
     letter-spacing: 0.05em;
     text-transform: uppercase;
-    border-bottom: 1px solid var(--border-soft);
     padding-bottom: 16px;
     font-weight:bold;
 }
@@ -652,7 +669,7 @@ body {
     width: 100%;
     background: transparent;
     color: var(--text-sub);
-    border: 1px solid var(--border);
+    border: 1px solid var(--black);
     cursor: pointer;
     font-size: 0.85rem;
     font-family: 'Courier New', Courier, monospace;
@@ -663,7 +680,7 @@ body {
 
 .quiz-skip:hover {
     color: var(--text);
-    border-color: var(--black-sub);
+    border-color: var(--gray);
 }
 
 .dropdown {
@@ -861,15 +878,13 @@ body {
 }
  
 .about-section-num {
-    font-size: 10px;
+    font-size: 14px;
     letter-spacing: 0.18em;
-    color: var(--gray);
-    text-transform: uppercase;
-    flex-shrink: 0;
+    color: var(--black);
 }
  
 .about-section-title {
-    font-size: 11px;
+    font-size: 14px;
     letter-spacing: 0.22em;
     text-transform: uppercase;
     color: var(--text);
@@ -909,14 +924,12 @@ body {
     font-size: 10px;
     letter-spacing: 0.22em;
     text-transform: uppercase;
-    color: var(--gray);
     margin-bottom: 14px;
 }
  
 .about-note p {
     font-size: 0.82rem;
     line-height: 1.8;
-    color: var(--gray);
     margin: 0 0 10px;
 }
  

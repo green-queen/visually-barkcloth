@@ -50,6 +50,7 @@
         </div>
 
         <div class="filter-bar" id="filter-bar">
+            <button id="clear-filters" class="clear-btn">Clear All</button>
             <button class="filter-btn" data-shape="square">Square</button>
             <button class="filter-btn" data-shape="rhombus">Rhombus</button>
             <button class="filter-btn" data-shape="rectangle">Rectangle</button>
@@ -166,6 +167,19 @@
                 renderBarkcloths();
             });
         }
+
+        document.getElementById('clear-filters').addEventListener('click', function () {
+            selectedShapes = [];
+
+            // remove "selected" class from all buttons
+            let buttons = document.querySelectorAll('.filter-btn');
+            buttons.forEach(btn => btn.classList.remove('selected'));
+
+            // clear rendered results
+            document.getElementById('floating-layer').innerHTML = '';
+            document.getElementById('grid-inner').innerHTML = '';
+            document.getElementById('no-match').style.display = 'none';
+        });
 
         function renderBarkcloths() {
             let floatingLayer = document.getElementById('floating-layer');

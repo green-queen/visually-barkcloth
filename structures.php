@@ -50,6 +50,7 @@
         </div>
 
         <div class="filter-bar" id="filter-bar">
+            <button id="clear-filters" class="clear-btn">Clear All</button>
             <button class="filter-btn" data-structure="square-structure">Square Structure</button>
             <button class="filter-btn" data-structure="square-cross-structure">Square Cross Structure</button>
             <button class="filter-btn" data-structure="square-concentric-circle-structure">Square Concentric Circle
@@ -167,6 +168,19 @@
             });
         }
 
+                document.getElementById('clear-filters').addEventListener('click', function () {
+            selectedShapes = [];
+
+            // remove "selected" class from all buttons
+            let buttons = document.querySelectorAll('.filter-btn');
+            buttons.forEach(btn => btn.classList.remove('selected'));
+
+            // clear rendered results
+            document.getElementById('floating-layer').innerHTML = '';
+            document.getElementById('grid-inner').innerHTML = '';
+            document.getElementById('no-match').style.display = 'none';
+        });
+        
         function renderBarkcloths() {
             let floatingLayer = document.getElementById('floating-layer');
             let gridInner = document.getElementById('grid-inner');
