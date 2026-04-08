@@ -25,6 +25,9 @@
         <a class="white-nav <?= ($currentPage == 'annotations.php') ? 'active' : '' ?>" href="annotations.php">Annotations</a>
       </li>
       <li>
+        <a class="white-nav <?= ($currentPage == 'gallery.php') ? 'active' : '' ?>" href="gallery.php">Gallery</a>
+      </li>
+      <li>
         <a class="white-nav <?= ($currentPage == 'about.php') ? 'active' : '' ?>" href="about.php">About</a>
       </li>
     </ul>
