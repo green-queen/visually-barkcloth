@@ -958,3 +958,79 @@ body {
     object-fit: contain;
     mix-blend-mode: multiply;
 }
+
+/* gallery */
+#gallery-container {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  padding: 3rem;
+  position: relative;
+}
+
+.gallery-wrapper {
+  width: min(70vw, 700px);
+  text-align: center;
+  position: relative;
+}
+
+.gallery {
+  width: 100%;
+  height: min(70vh, 500px);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
+  overflow: hidden;
+  position: relative;
+}
+
+.gallery::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.gallery-citation {
+  margin-top: 0.75rem;
+  font-size: 0.9rem;
+  line-height: 1.4;
+  color: var(--text-sub);
+  max-width: 700px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.arrow {
+  position: fixed;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 58px;
+  height: 58px;
+  border: none;
+  background: var(--white);
+  color: var(--black);
+  font-size: 1.9rem;
+  cursor: pointer;
+  z-index: 9999;
+  display: grid;
+  place-items: center;
+  transition: transform 0.2s ease, background 0.2s ease;
+}
+
+.arrow:hover {
+  transform: translateY(-50%) scale(1.05);
+}
+
+.arrow:active {
+  transform: translateY(-50%) scale(0.96);
+}
+
+.arrow.left {
+  left: 24px;
+}
+
+.arrow.right {
+  right: 24px;
+}
+

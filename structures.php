@@ -164,7 +164,7 @@
         }
 
                 document.getElementById('clear-filters').addEventListener('click', function () {
-            selectedShapes = [];
+            selectedStructures = [];
 
             // remove "selected" class from all buttons
             let buttons = document.querySelectorAll('.filter-btn');
