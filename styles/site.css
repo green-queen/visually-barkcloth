@@ -260,13 +260,10 @@ body {
 .filter-btn {
     background: transparent;
     color: var(--black);
-    font-family: inherit;
-    padding: 0.45rem 1.1rem;
-    font-size: 13px;
+    padding-top: 0.3rem;
     cursor: pointer;
     transition: background 0.2s ease, border-color 0.2s ease, color 0.2s ease, transform 0.15s ease;
     border: 1.5px solid var(--black);
-    letter-spacing: 0.04em;
     background-color: var(--white);
 }
 

@@ -103,20 +103,18 @@
         </svg>
     </button>
 
-    <button class="filter-btn" data-structure="sym">
+   <button class="filter-btn" data-structure="sym">
     <svg width="32" height="32" viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
         <rect x="4" y="8" width="24" height="16"/>
-        <line x1="16" y1="8" x2="16" y2="24" stroke-dasharray="2 2"/>
+        <line x1="16" y1="2" x2="16" y2="30" stroke-dasharray="2 2"/>
     </svg>
-    </button>
+</button>
 
-    <button class="filter-btn" data-structure="a-sym">
+<button class="filter-btn" data-structure="a-sym">
     <svg width="32" height="32" viewBox="0 0 32 32" fill="none"
         stroke="currentColor" stroke-width="1.5"
         stroke-linecap="round" stroke-linejoin="round">
-
         <path d="M4,8 L16,8 M16,24 L4,24 L4,8"/>
-
         <path d="
         M16,8
         Q22,6 24,10
@@ -125,10 +123,9 @@
         Q28,22 24,24
         L16,24
         "/>
-
-        <line x1="16" y1="8" x2="16" y2="24" stroke-dasharray="2 2"/>
+        <line x1="16" y1="2" x2="16" y2="30" stroke-dasharray="2 2"/>
     </svg>
-    </button>
+</button>
 
     </div>
         <section class="barkcloth-list" id="barkcloth-list">
