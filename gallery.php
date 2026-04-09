@@ -4,9 +4,6 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <link rel="stylesheet" type="text/css" href="styles/site.css">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Audiowide&family=Barriecito&family=Rubik+Dirt&display=swap" rel="stylesheet">
   <title>Visually Barkcloth</title>
   <script src="https://cdn.jsdelivr.net/npm/papaparse@5.4.1/papaparse.min.js"></script>
 </head>
@@ -33,30 +30,27 @@
   </div>
 </main>
 
+<?php
+    $files = glob('hero/*.png');
+    $images = json_encode(array_values($files));
+?>
+
 <script>
   document.addEventListener('DOMContentLoaded', () => {
     const gallery = document.querySelector('.gallery');
-    const citationEl = document.getElementById('gallery-citation');
-    let rows = [];
     let current = 0;
 
-    if (!gallery || !citationEl) return;
+    if (!gallery) return;
 
-    function showRow(index) {
-      if (!rows.length) return;
+    const images = <?= $images ?>;
 
-      current = (index + rows.length) % rows.length;
-      const row = rows[current];
-
-      gallery.style.backgroundImage = `url('img/${row.id}.png')`;
-
-      const cite = row['reference citation'] || row.referenceCitation || row.link || 'No citation available';
-      if (row.link && !row['reference citation'] && !row.referenceCitation) {
-        citationEl.innerHTML = `<a href="${row.link}" target="_blank" rel="noopener noreferrer">${cite}</a>`;
-      } else {
-        citationEl.textContent = cite;
-      }
+    function showImage(index) {
+      if (!images.length) return;
+      current = (index + images.length) % images.length;
+      gallery.style.backgroundImage = `url('${images[current]}')`;
     }
+
+    showImage(0);
 
     const prevBtn = document.createElement('button');
     prevBtn.className = 'arrow left';
@@ -68,25 +62,16 @@
     nextBtn.innerHTML = '&#10095;';
     nextBtn.setAttribute('aria-label', 'Next image');
 
-    prevBtn.addEventListener('click', () => showRow(current - 1));
-    nextBtn.addEventListener('click', () => showRow(current + 1));
+    prevBtn.addEventListener('click', () => showImage(current - 1));
+    nextBtn.addEventListener('click', () => showImage(current + 1));
 
     document.body.appendChild(prevBtn);
     document.body.appendChild(nextBtn);
-
-    fetch('data/data.csv')
-      .then(res => res.text())
-      .then(csvText => {
-        const result = Papa.parse(csvText, {
-          header: true,
-          skipEmptyLines: true
-        });
-
-        rows = result.data;
-        if (rows.length > 0) showRow(0);
-      })
-      .catch(err => console.error(err));
   });
 </script>
 </body>
+</html>
+
+</body>
+
 </html>

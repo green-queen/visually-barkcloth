@@ -42,21 +42,11 @@
         </div>
 
     <main class="page">
-        <div class="choice-icon">
-            <svg viewBox="0 0 56 56" fill="none" stroke="var(--black)" stroke-width="1.5">
-                <rect x="8" y="8" width="40" height="40" />
-                <rect x="16" y="16" width="24" height="24" stroke-dasharray="2,2" />
-                <rect x="24" y="24" width="8" height="8" />
-                <line x1="28" y1="8" x2="28" y2="48" />
-                <line x1="8" y1="28" x2="48" y2="28" />
-            </svg>
-                    
-        </div>
+
+    <h2 class="choice-title">Structures</h2>
 
     <div class="filter-bar" id="filter-bar">
-    <button id="clear-filters" class="clear-btn">Clear All</button>
-
-    <button class="filter-btn" data-structure="square-concentric-structure">
+    <button class="filter-btn" data-structure="square-concentric-structure" title="Square Concentric Structure">
         <svg width="32" height="32" viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round">
         <rect x="4" y="4" width="24" height="24"/>
         <rect x="9" y="9" width="14" height="14"/>
@@ -64,7 +54,7 @@
         </svg>
     </button>
 
-    <button class="filter-btn" data-structure="square-cross-structure">
+    <button class="filter-btn" data-structure="square-cross-structure" title="Square Cross Structure">
         <svg width="32" height="32" viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round" stroke-linecap="round">
         <rect x="4" y="4" width="24" height="24"/>
         <line x1="4" y1="4" x2="28" y2="28"/>
@@ -72,7 +62,7 @@
         </svg>
     </button>
 
-    <button class="filter-btn" data-structure="grid-structure">
+    <button class="filter-btn" data-structure="grid-structure" title="Grid Structure">
         <svg width="32" height="32" viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round">
         <line x1="4" y1="4" x2="4" y2="28"/>
         <line x1="12" y1="4" x2="12" y2="28"/>
@@ -85,7 +75,7 @@
         </svg>
     </button>
 
-    <button class="filter-btn" data-structure="horizontal-line-structure">
+    <button class="filter-btn" data-structure="horizontal-line-structure" title="Horizontal Line Structure">
         <svg width="32" height="32" viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
         <rect x="4" y="6" width="24" height="20"/>
         <line x1="4" y1="11" x2="28" y2="11"/>
@@ -94,7 +84,7 @@
         </svg>
     </button>
 
-    <button class="filter-btn" data-structure="vertical-line-structure">
+    <button class="filter-btn" data-structure="vertical-line-structure" title="Vertical Line Structure">
         <svg width="32" height="32" viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
         <rect x="4" y="6" width="24" height="20"/>
         <line x1="10" y1="6" x2="10" y2="26"/>
@@ -103,14 +93,14 @@
         </svg>
     </button>
 
-   <button class="filter-btn" data-structure="sym">
+   <button class="filter-btn" data-structure="sym" title="Symmetrical Structure">
     <svg width="32" height="32" viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
         <rect x="4" y="8" width="24" height="16"/>
         <line x1="16" y1="2" x2="16" y2="30" stroke-dasharray="2 2"/>
     </svg>
 </button>
 
-<button class="filter-btn" data-structure="a-sym">
+<button class="filter-btn" data-structure="a-sym" title="Asymmetrical Structure">
     <svg width="32" height="32" viewBox="0 0 32 32" fill="none"
         stroke="currentColor" stroke-width="1.5"
         stroke-linecap="round" stroke-linejoin="round">
@@ -126,6 +116,12 @@
         <line x1="16" y1="2" x2="16" y2="30" stroke-dasharray="2 2"/>
     </svg>
 </button>
+
+</div>
+
+        <div class="filter-bar" id="filter-bar">
+    <button id="clear-filters" class="clear-btn">Clear All</button>
+</div>
 
     </div>
         <section class="barkcloth-list" id="barkcloth-list">

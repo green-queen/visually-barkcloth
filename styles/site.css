@@ -108,15 +108,15 @@ body {
 }
 
 .page-title {
-    margin-top: 65px;
-    font-size: clamp(7rem, 6vw, 6rem);
+    margin-top: 50px;
+    /* font-size: clamp(7.5rem, 6vw, 6rem); */
+    font-size: 125px;
     color: var(--white);
     text-shadow: var(--black-sub) 1px 1px 200px;
     letter-spacing: 0.05em;
     font-family: "Fraunces", serif;
-    font-optical-sizing: auto;
+    margin-bottom:38px;
     font-weight: 600;
-    font-style: italic
 }
 
 .hero {
