@@ -53,29 +53,67 @@
         </div>
 
         <div class="filter-bar" id="filter-bar">
-            <button class="filter-btn" data-shape="square">Square</button>
-            <button class="filter-btn" data-shape="rhombus">Rhombus</button>
-            <button class="filter-btn" data-shape="rectangle">Rectangle</button>
+        <button class="filter-btn" data-shape="square">
+            <svg width="32" height="32" viewBox="0 0 32 32"><rect x="4" y="4" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg>
+        </button>
+        <button class="filter-btn" data-shape="rhombus">
+            <svg width="32" height="32" viewBox="0 0 32 32"><polygon points="16,2 30,16 16,30 2,16" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg>
+        </button>
+        <button class="filter-btn" data-shape="rectangle">
+            <svg width="32" height="32" viewBox="0 0 32 32"><rect x="2" y="8" width="28" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg>
+        </button>
         </div>
 
         <div class="filter-bar" id="filter-bar">
-            <button class="filter-btn" data-shape="right">Right Triangle</button>
-            <button class="filter-btn" data-shape="equilateral">Equilateral Triangle</button>
-            <button class="filter-btn" data-shape="isoceles">Isoceles Triangle</button>
+        <button class="filter-btn" data-shape="right">
+            <svg width="32" height="32" viewBox="0 0 32 32"><polygon points="4,28 4,4 28,28" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg>
+        </button>
+        <button class="filter-btn" data-shape="equilateral">
+            <svg width="32" height="32" viewBox="0 0 32 32"><polygon points="16,3 30,28 2,28" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg>
+        </button>
+        <button class="filter-btn" data-shape="isoceles">
+            <svg width="32" height="32" viewBox="0 0 32 32"><polygon points="16,3 26,28 6,28" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg>
+        </button>
         </div>
 
         <div class="filter-bar" id="filter-bar">
-            <button class="filter-btn" data-shape="circle">Circle</button>
-            <button class="filter-btn" data-shape="line">Line</button>
-            <button class="filter-btn" data-shape="curve">Curve</button>
-            <button class="filter-btn" data-shape="cross">Cross</button>
+        <button class="filter-btn" data-shape="circle">
+            <svg width="32" height="32" viewBox="0 0 32 32"><circle cx="16" cy="16" r="12" fill="none" stroke="currentColor" stroke-width="2"/></svg>
+        </button>
+        <button class="filter-btn" data-shape="line">
+            <svg width="32" height="32" viewBox="0 0 32 32"><line x1="4" y1="16" x2="28" y2="16" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+        </button>
+        <button class="filter-btn" data-shape="curve">
+            <svg width="32" height="32" viewBox="0 0 32 32"><path d="M4,26 Q16,2 28,26" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+        </button>
+        <button class="filter-btn" data-shape="cross">
+            <svg width="32" height="32" viewBox="0 0 32 32"><line x1="16" y1="4" x2="16" y2="28" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><line x1="4" y1="16" x2="28" y2="16" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+        </button>
         </div>
 
         <div class="filter-bar" id="filter-bar">
-            <button class="filter-btn" data-shape="sun">Sun</button>
-            <button class="filter-btn" data-shape="moon">Moon</button>
-            <button class="filter-btn" data-shape="star">Star</button>
-            <button class="filter-btn" data-shape="flower">Flower</button>
+        <button class="filter-btn" data-shape="sun">
+            <svg width="32" height="32" viewBox="0 0 32 32"><circle cx="16" cy="16" r="5" fill="none" stroke="currentColor" stroke-width="2"/><line x1="16" y1="2" x2="16" y2="6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><line x1="16" y1="26" x2="16" y2="30" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><line x1="2" y1="16" x2="6" y2="16" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><line x1="26" y1="16" x2="30" y2="16" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><line x1="5.9" y1="5.9" x2="8.8" y2="8.8" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><line x1="23.2" y1="23.2" x2="26.1" y2="26.1" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><line x1="23.2" y1="8.8" x2="26.1" y2="5.9" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><line x1="5.9" y1="26.1" x2="8.8" y2="23.2" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+        </button>
+        <button class="filter-btn" data-shape="moon">
+        <svg viewBox="0 0 24 24" width="32" height="32" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+        </svg>
+        </button>
+        <button class="filter-btn" data-shape="star">
+            <svg width="32" height="32" viewBox="0 0 32 32"><polygon points="16,2 19.5,12 30,12 21.5,18.5 24.7,29 16,22.5 7.3,29 10.5,18.5 2,12 12.5,12" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg>
+        </button>
+        <button class="filter-btn" data-shape="flower">
+        <svg width="32" height="32" viewBox="0 0 32 32">
+            <ellipse cx="16" cy="8" rx="3" ry="5" fill="none" stroke="currentColor" stroke-width="1.5"/>
+            <ellipse cx="16" cy="8" rx="3" ry="5" fill="none" stroke="currentColor" stroke-width="1.5" transform="rotate(60 16 16)"/>
+            <ellipse cx="16" cy="8" rx="3" ry="5" fill="none" stroke="currentColor" stroke-width="1.5" transform="rotate(120 16 16)"/>
+            <ellipse cx="16" cy="8" rx="3" ry="5" fill="none" stroke="currentColor" stroke-width="1.5" transform="rotate(180 16 16)"/>
+            <ellipse cx="16" cy="8" rx="3" ry="5" fill="none" stroke="currentColor" stroke-width="1.5" transform="rotate(240 16 16)"/>
+            <ellipse cx="16" cy="8" rx="3" ry="5" fill="none" stroke="currentColor" stroke-width="1.5" transform="rotate(300 16 16)"/>
+            <circle cx="16" cy="16" r="3" fill="none" stroke="currentColor" stroke-width="1.5"/>
+        </svg>
+        </button>
         </div>
 
         <div class="filter-bar" id="filter-bar">

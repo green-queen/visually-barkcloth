@@ -133,7 +133,7 @@
         const dropdowns = [
           {
             id: "square-dropdown",
-            label: "Select Square",
+            label: "Square Shapes",
             options: [
               { value: "square",    text: "Square" },
               { value: "rectangle", text: "Rectangle" },
@@ -142,7 +142,7 @@
           },
           {
             id: "circle-dropdown",
-            label: "Select Circle",
+            label: "Circular Shapes",
             options: [
               { value: "circle", text: "Circle" },
               { value: "oval",   text: "Oval" },
@@ -151,7 +151,7 @@
           },
           {
             id: "triangle-dropdown",
-            label: "Select Triangle",
+            label: "Triangular Shapes",
             options: [
               { value: "equilateral", text: "Equilateral" },
               { value: "right",       text: "Right" },
@@ -161,7 +161,7 @@
           },
           {
             id: "lines-dropdown",
-            label: "Select Line",
+            label: "Line Shapes",
             options: [
               { value: "regular", text: "Regular" },
               { value: "dotted",  text: "Dotted" },
