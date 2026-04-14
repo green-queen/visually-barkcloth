@@ -33,23 +33,6 @@
 
 <main class="about-page">
 
-  <div class="about-intro">
-    <p class="about-intro-label">About Visually Barkcloth</p>
-    <p class="about-intro-hook">
-      What do you see when you look at a piece of barkcloth?
-      Maybe a stripe. Maybe something that curves like a crescent — or almost like one, but not quite.
-      Maybe a shape that repeats, shifts, and repeats again, slightly differently each time.
-      <em>Maybe something you do not have a word for yet.</em>
-    </p>
-    <p class="about-intro-hook" style="margin-top: 1rem;">
-      The feeling of almost recognizing something but not quite is where this project begins.
-    </p>
-  </div>
-
-  <div class="about-deco" aria-hidden="true">
-    <img src="deco/IMG_3453.jpg" alt="">
-  </div>
-
   <section class="about-section" aria-labelledby="section-textile">
     <div class="about-section-header">
       <span class="about-section-num">01</span>
