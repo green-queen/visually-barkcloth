@@ -40,18 +40,18 @@
 
     <div class="home-right">
 
-      <p class="about-hook" style="margin-bottom: 40px;">
+      <p class="about-hook" style="margin-bottom: 20px;">
         What do you see when you look at a piece of barkcloth?
       </p>
-      <p class="about-hook" style="margin-bottom: 40px;">
+      <p class="about-hook" style="margin-bottom: 20px;">
         Maybe a stripe. Maybe something that curves like a crescent — or almost like one, but not quite.
       </p>
-      <p class="about-hook" style="margin-bottom: 40px;">
+      <p class="about-hook" style="margin-bottom: 20px;">
         Maybe a shape that repeats, shifts, and repeats again, slightly differently each time.
         <em>Maybe something you do not have a word for yet.</em>
       </p>
 
-      <p class="about-hook" style="margin-bottom: 40px;">
+      <p class="about-hook" style="margin-bottom: 20px;">
         The feeling of almost recognizing something but not quite is where this project begins.
       </p>
 

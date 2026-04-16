@@ -527,7 +527,7 @@ body.hero {
 #no-match {
     display: none;
     position: fixed;
-    top: 65%;
+    top: 95%;
     left: 50%;
     transform: translate(-50%, -50%);
     z-index: 10001;
@@ -1098,8 +1098,8 @@ body.hero {
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 40px;
-    height: 40px;
+    width: 50px;
+    height: 50px;
     border: 1px solid var(--black);
     font-size: 11px;
     font-weight: 400;

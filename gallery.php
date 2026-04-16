@@ -1,14 +1,17 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <link rel="stylesheet" type="text/css" href="styles/site.css">
   <title>Visually Barkcloth</title>
+
   <script src="https://cdn.jsdelivr.net/npm/papaparse@5.4.1/papaparse.min.js"></script>
 </head>
 
 <body>
+
 <?php $currentPage = basename($_SERVER['PHP_SELF']); ?>
 
 <nav class="nav">
@@ -31,136 +34,97 @@
 </main>
 
 <?php
-    $files = glob('hero/*.png');
-    $images = json_encode(array_values($files));
+  $files = glob('hero/*.png');
+  $images = json_encode(array_values($files));
 ?>
 
 <script>
-document.addEventListener('DOMContentLoaded', () => {
+const images = <?= $images ?>;
+
+let currentIndex = 0;
+let rows = [];
+
+function extractSMVK(str) {
+  if (!str) return null;
+  const match = str.match(/SMVK[-_]?(\d+[a-zA-Z]?)/i);
+  return match ? match[1].toLowerCase() : null;
+}
+
+function findRowByImage(imagePath) {
+  const filename = imagePath.split('/').pop();
+  const key = extractSMVK(filename);
+
+  if (!key) return null;
+
+  return rows.find(r => extractSMVK(r.id) === key);
+}
+
+function showImage(index) {
   const gallery = document.querySelector('.gallery');
   const citationEl = document.getElementById('gallery-citation');
-  let current = 0;
-  let citationsByImage = {};
 
-  if (!gallery) return;
+  currentIndex = (index + images.length) % images.length;
 
-  const images = <?= $images ?>;
+  const imgPath = images[currentIndex];
+  gallery.style.backgroundImage = `url('${imgPath}')`;
 
-  function normalizeText(str) {
-    return decodeURIComponent(str).normalize('NFC');
+  const row = findRowByImage(imgPath);
+
+  if (!row) {
+    citationEl.innerHTML = `<p style="opacity:0.6;">No citation found</p>`;
+    return;
   }
 
-  function stemFromPath(path) {
-    const filename = path.replace(/^.*\//, '').replace(/\.[^.]+$/, '');
-    return normalizeText(filename);
+  let html = '';
+
+  if (row.citation) {
+    html += `<p class="gallery-citation-text">${row.citation}</p>`;
   }
 
-  function entriesForImage(path) {
-    const stem = stemFromPath(path);
-
-    if (citationsByImage[stem]) return citationsByImage[stem];
-
-    // fallback: normalized comparison
-    for (const id of Object.keys(citationsByImage)) {
-      const normId = normalizeText(id);
-
-      if (stem === normId) return citationsByImage[id];
-      if (stem.includes(normId)) return citationsByImage[id];
-    }
-
-    return null;
+  if (row.link) {
+    html += `
+      <p class="gallery-citation-link">
+        <a href="${row.link}" target="_blank" rel="noopener">
+          ${row.link}
+        </a>
+      </p>
+    `;
   }
 
-  function renderCitation(index) {
-    if (!images.length) return;
+  citationEl.innerHTML = html;
+}
 
-    const entries = entriesForImage(images[index]);
+fetch('data/annotated-data.csv')
+  .then(res => res.text())
+  .then(csvText => {
 
-    console.log("IMAGE:", images[index]);
-    console.log("STEM:", stemFromPath(images[index]));
-    console.log("MATCH:", entries);
+    const result = Papa.parse(csvText, {
+      header: true,
+      skipEmptyLines: true
+    });
 
-    if (!entries || !entries.length) {
-      citationEl.innerHTML = '<p style="opacity:0.6;">No citation found</p>';
-      return;
-    }
+    rows = result.data;
 
-    const citation = entries[0].citation;
-    const link = entries[0].link;
+    console.log("CSV LOADED:", rows);
 
-    let html = '';
-    if (citation) {
-      html += `<p class="gallery-citation-text">${citation}</p>`;
-    }
-    if (link) {
-      html += `<p class="gallery-citation-link">
-        <a href="${link}" target="_blank" rel="noopener">${link}</a>
-      </p>`;
-    }
+    showImage(0);
+  })
+  .catch(err => console.error(err));
 
-    citationEl.innerHTML = html;
-  }
+const prevBtn = document.createElement('button');
+prevBtn.className = 'arrow left';
+prevBtn.innerHTML = '&#10094;';
 
-  function showImage(index) {
-    if (!images.length) return;
+const nextBtn = document.createElement('button');
+nextBtn.className = 'arrow right';
+nextBtn.innerHTML = '&#10095;';
 
-    current = (index + images.length) % images.length;
-    gallery.style.backgroundImage = `url('${images[current]}')`;
-    renderCitation(current);
-  }
+prevBtn.onclick = () => showImage(currentIndex - 1);
+nextBtn.onclick = () => showImage(currentIndex + 1);
 
-  // Load CSV
-  Papa.parse('data/annotated-data.csv', {
-    download: true,
-    header: true,
-    skipEmptyLines: true,
-    transformHeader: h => h.replace(/^\uFEFF/, '').trim(),
-    complete(results) {
-      console.log("CSV LOADED:", results.data);
-
-      results.data.forEach(row => {
-        const id = (row.id || '').trim();
-        if (!id) return;
-
-        const normalizedId = normalizeText(id);
-
-        if (!citationsByImage[normalizedId]) {
-          citationsByImage[normalizedId] = [];
-        }
-
-        citationsByImage[normalizedId].push({
-          citation: (row.citation || '').trim(),
-          link: (row.link || '').trim(),
-        });
-      });
-
-      console.log("CITATION MAP:", citationsByImage);
-
-      showImage(0);
-    },
-    error(err) {
-      console.error("CSV LOAD ERROR:", err);
-      showImage(0);
-    }
-  });
-
-  // navigation arrows
-  const prevBtn = document.createElement('button');
-  prevBtn.className = 'arrow left';
-  prevBtn.innerHTML = '&#10094;';
-  prevBtn.setAttribute('aria-label', 'Previous image');
-
-  const nextBtn = document.createElement('button');
-  nextBtn.className = 'arrow right';
-  nextBtn.innerHTML = '&#10095;';
-  nextBtn.setAttribute('aria-label', 'Next image');
-
-  prevBtn.addEventListener('click', () => showImage(current - 1));
-  nextBtn.addEventListener('click', () => showImage(current + 1));
-
-  document.body.appendChild(prevBtn);
-  document.body.appendChild(nextBtn);
-});
+document.body.appendChild(prevBtn);
+document.body.appendChild(nextBtn);
 </script>
+
 </body>
 </html>
