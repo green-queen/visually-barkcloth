@@ -8,7 +8,7 @@
   <title>About — Visually Barkcloth</title>
 </head>
 
-<body>
+<body class="hero">
 <?php $currentPage = basename($_SERVER['PHP_SELF']); ?>
 
 <nav class="nav">
@@ -31,7 +31,8 @@
   </ul>
 </nav>
 
-<main class="about-page">
+<main class="about-hero-wrap">
+  <div class="about-page">
 
   <section class="about-section" aria-labelledby="section-textile">
     <div class="about-section-header">
@@ -39,21 +40,13 @@
       <span class="about-section-title" id="section-textile">The Textile</span>
     </div>
     <p class="about-body">
-      Barkcloth is made from the inner bark of trees. It is soaked, fermented, and beaten until it becomes
-      soft and flat, ready to be worn, used, or decorated. People across the Austronesian world have been
-      making it for at least five thousand years — from the forests of Central Sulawesi in Eastern
-      Indonesia, where it is called <em>fuya</em>, to the islands of Polynesia, where it is known as
-      <em>tapa</em>. As Austronesian voyagers sailed across the Pacific, they brought the knowledge of
-      barkcloth with them.
-    </p>
-    <p class="about-body">
       The patterns on these textiles — dots, stripes, crescents, zigzags, forms that repeat and transform —
       carry quiet traces of those journeys and the connections between distant places.
     </p>
-    <blockquote class="about-pull">
+    <p class="about-body">
       Sometimes, when you look closely at a piece of <em>fuya</em> from Sulawesi and a piece of
       <em>tapa</em> from Samoa, something quietly rhymes.
-    </blockquote>
+    </p>
     <p class="about-body">
       These connections are not always easy to see. Museum collections have their own geographies:
       Indonesian barkcloth here, Polynesian tapa there, organized by the categories of their time.
@@ -106,7 +99,7 @@
       Wereldmuseum Leiden in the 1960s and 1970s who spent years studying these exact objects. He was
       brilliant and careful. He was also, sometimes, guessing — just like you might be.
     </p>
-    <blockquote class="about-pull">
+    <p class="about-body">
       Reading his descriptions closely, you can find the moments where he was not quite sure either:
       where he wrote "buffalo horn-like, but not clearly a buffalo horn," or proposed a connection he
       could not fully prove. That is not a failure. That is what interpretation looks like without enough
@@ -125,16 +118,17 @@
 
   <footer class="about-note" role="contentinfo">
     <p class="about-note-label">A Note</p>
-    <p>
+    <p class="about-body">
       This project is part of an ongoing doctoral research on digital archives, material culture, and how
       we organize knowledge. It is built on the belief that the categories we inherit are worth questioning,
       and that the best way to question them is to play, look carefully, and stay curious.
     </p>
-    <p>
+    <p class="about-body">
       <em>Visually the Barkcloth</em> is imperfect and a work in progress. Welcome — and have fun.
     </p>
   </footer>
 
+  </div>
 </main>
 
 </body>

@@ -29,7 +29,11 @@ body {
 body.hero {
     display: flex;
     flex-direction: column;
-    background-color: var(--white);
+    background-image: url('../New.png');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
 }
 
 
@@ -37,26 +41,18 @@ body.hero {
 .nav ul {
     list-style: none;
     display: flex;
-    gap: 2.5rem;
+    gap: 3rem;
     justify-content: center;
-    padding: 0;
     margin: 25px 0px 0px 0px;
-    position: relative;
     z-index: 9999;
     margin: 0;
-    padding: 18px 0;
-    border-bottom: 1px solid var(--text);
-}
-
-#special {
-    border-bottom: 1px solid var(--white);
+    margin-top: 20px;
 }
 
 .nav li a {
     text-decoration: none;
     color: var(--text);
-    font-size: 13px;
-    font-weight: 575;
+    font-size: 14px;
     letter-spacing: 0.10em;
     text-transform: uppercase;
     transition: color 0.25s var(--ease-out);
@@ -127,14 +123,12 @@ body.hero {
 
 .page-title {
     margin-top: 50px;
-    /* font-size: clamp(7.5rem, 6vw, 6rem); */
     font-size: 125px;
     color: var(--white);
     text-shadow: var(--black-sub) 1px 1px 200px;
     letter-spacing: 0.05em;
     font-family: "Fraunces", serif;
     margin-bottom: 38px;
-    font-weight: 600;
 }
 
 .hero {
@@ -350,8 +344,6 @@ body.hero {
     padding: 0.75rem;
     pointer-events: auto;
     cursor: pointer;
-    /* backdrop-filter: blur(8px);
-    -webkit-backdrop-filter: blur(8px); */
     background-color: var(--white);
     border: 1px solid var(--black);
     transform: rotate(var(--rotate));
@@ -479,7 +471,6 @@ body.hero {
     width: var(--card-w);
     padding: 0.75rem;
     background-color: var(--white);
-    /* border: 1px solid var(--black); */
     text-decoration: none;
     color: inherit;
     display: block;
@@ -903,6 +894,7 @@ body.hero {
     font-size: 14px;
     letter-spacing: 0.18em;
     color: var(--black);
+    font-weight: 600;
 }
 
 .about-section-title {
@@ -924,16 +916,6 @@ body.hero {
 
 .about-body:last-child {
     margin-bottom: 0;
-}
-
-.about-pull {
-    border-left: 2px solid var(--border);
-    padding: 4px 0 4px 20px;
-    margin: 24px 0;
-    font-style: italic;
-    font-size: 0.9rem;
-    line-height: 1.7;
-    color: var(--text-sub);
 }
 
 .about-note {
@@ -968,10 +950,27 @@ body.hero {
 }
 
 .about-deco img {
-    height: 52px;
+    height: 60px;
     width: auto;
     object-fit: contain;
     mix-blend-mode: multiply;
+}
+
+.about-hero-wrap {
+    min-height: calc(100vh - 57px);
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    padding: 3rem 1.5rem 5rem;
+    box-sizing: border-box;
+}
+ 
+.about-hero-wrap .about-page {
+    background-color: var(--white);
+    padding: 60px 56px 80px;
+    max-width: 720px;
+    width: 100%;
+    margin: 0;
 }
 
 /* gallery */
@@ -1065,53 +1064,44 @@ body.hero {
     text-align: center;
     padding: 3rem;
     position: relative;
-    border-right: 1px solid var(--border-soft);
-    background-color: var(--white);
     min-width: 0;
     overflow-y: auto;
     box-sizing: border-box;
+    /* backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px); */
 }
  
 .home-title {
-    font-family: 'Faculty Glyphic', serif;
-    font-size: clamp(3.8rem, 5.5vw, 6rem);
-    font-weight: 400;
-    line-height: 1.0;
-    letter-spacing: 0.06em;
+    font-family: "Fraunces", serif;
+    font-size: clamp(2rem, 5.5vw, 6rem);
     color: var(--text);
-    margin: 0 0 2.2rem 0;
     text-transform: uppercase;
+    margin-top: -6rem;
 }
  
+.home-credits{
+    margin: 2rem 0rem;
+}
+
 .home-rule {
-    width: 100%;
+    width: 85%;
     height: 1px;
-    background: var(--border);
-    margin-bottom: 2.2rem;
+    background: var(--black);
+    margin-top: -2rem;
 }
 
 .enter-link {
-    display: inline-flex;
-    align-items: center;
-    gap: 1.1rem;
     text-decoration: none;
-    color: var(--text);
-    font-size: 11px;
-    letter-spacing: 0.3em;
-    text-transform: uppercase;
-    font-weight: 700;
-    width: fit-content;
-    transition: color 0.2s ease;
 }
 
 .enter-arrow {
-    display: inline-flex;
+    display: flex;
     align-items: center;
     justify-content: center;
     width: 40px;
     height: 40px;
-    border: 1.5px solid var(--black);
-    font-size: 1rem;
+    border: 1px solid var(--black);
+    font-size: 11px;
     font-weight: 400;
     transition: background 0.22s ease, color 0.22s ease, transform 0.3s cubic-bezier(0.22, 1, 0.36, 1);
 }
@@ -1122,61 +1112,19 @@ body.hero {
     transform: translateX(5px);
 }
 
-/* deco bottom-left corner */
-.home-deco {
-    position: absolute;
-    bottom: 2.5rem;
-    left: 7rem;
-    opacity: 0.28;
-}
-
-.home-deco img {
-    height: 32px;
-    width: auto;
-    object-fit: contain;
-    mix-blend-mode: multiply;
-}
-
 .home-right {
     flex: 1 1 0;
     display: flex;
     flex-direction: column;
     justify-content: center;
     padding: 3rem 3rem 3rem 3rem;
-    background-color: var(--white);
+    /* backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px); */
     overflow-y: auto;
     min-width: 0;
     box-sizing: border-box;
     word-wrap: break-word;
     overflow-wrap: break-word;
-}
-
-.about-label {
-    font-size: 10px;
-    letter-spacing: 0.28em;
-    text-transform: uppercase;
-    color: var(--gray);
-    margin-bottom: 2rem;
-}
-
-.about-hook {
-    font-size: clamp(1rem, 1.35vw, 1.18rem);
-    line-height: 1.72;
-    color: var(--text);
-    margin: 0;
-    font-family: 'Courier New', Courier, monospace;
-}
-
-.about-hook em {
-    font-style: italic;
-    color: var(--text-sub);
-}
-
-.about-credit {
-    font-size: 10px;
-    letter-spacing: 0.18em;
-    text-transform: uppercase;
-    color: var(--gray);
 }
 
 @keyframes fade-up {
@@ -1215,18 +1163,12 @@ body.hero {
     animation: fade-up 0.75s cubic-bezier(0.22, 1, 0.36, 1) both;
 }
 
-.about-label {
-    animation-delay: 0.2s;
+.hero-img {
+    background-image: url("New.png");
+    background-color: #cccccc;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-position: center center;
 }
 
-.about-hook {
-    animation-delay: 0.3s;
-}
-
-.about-rule {
-    animation-delay: 0.42s;
-}
-
-.about-credit {
-    animation-delay: 0.48s;
-}

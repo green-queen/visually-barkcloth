@@ -5,15 +5,15 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <link rel="stylesheet" type="text/css" href="styles/site.css">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Faculty+Glyphic&display=swap" rel="stylesheet">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Faculty+Glyphic&display=swap" rel="stylesheet">
   <title>Visually Barkcloth</title>
 </head>
 
 <body class="hero">
     <?php $currentPage = basename($_SERVER['PHP_SELF']); ?>
-  <nav class="nav" id="special">
+  <nav class="nav">
     <ul>
       <li>
         <a class="white-nav <?= ($currentPage == 'index.php') ? 'active' : '' ?>" href="index.php">Home</a>

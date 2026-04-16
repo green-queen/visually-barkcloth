@@ -36,42 +36,131 @@
 ?>
 
 <script>
-  document.addEventListener('DOMContentLoaded', () => {
-    const gallery = document.querySelector('.gallery');
-    let current = 0;
+document.addEventListener('DOMContentLoaded', () => {
+  const gallery = document.querySelector('.gallery');
+  const citationEl = document.getElementById('gallery-citation');
+  let current = 0;
+  let citationsByImage = {};
 
-    if (!gallery) return;
+  if (!gallery) return;
 
-    const images = <?= $images ?>;
+  const images = <?= $images ?>;
 
-    function showImage(index) {
-      if (!images.length) return;
-      current = (index + images.length) % images.length;
-      gallery.style.backgroundImage = `url('${images[current]}')`;
+  function normalizeText(str) {
+    return decodeURIComponent(str).normalize('NFC');
+  }
+
+  function stemFromPath(path) {
+    const filename = path.replace(/^.*\//, '').replace(/\.[^.]+$/, '');
+    return normalizeText(filename);
+  }
+
+  function entriesForImage(path) {
+    const stem = stemFromPath(path);
+
+    if (citationsByImage[stem]) return citationsByImage[stem];
+
+    // fallback: normalized comparison
+    for (const id of Object.keys(citationsByImage)) {
+      const normId = normalizeText(id);
+
+      if (stem === normId) return citationsByImage[id];
+      if (stem.includes(normId)) return citationsByImage[id];
     }
 
-    showImage(0);
+    return null;
+  }
 
-    const prevBtn = document.createElement('button');
-    prevBtn.className = 'arrow left';
-    prevBtn.innerHTML = '&#10094;';
-    prevBtn.setAttribute('aria-label', 'Previous image');
+  function renderCitation(index) {
+    if (!images.length) return;
 
-    const nextBtn = document.createElement('button');
-    nextBtn.className = 'arrow right';
-    nextBtn.innerHTML = '&#10095;';
-    nextBtn.setAttribute('aria-label', 'Next image');
+    const entries = entriesForImage(images[index]);
 
-    prevBtn.addEventListener('click', () => showImage(current - 1));
-    nextBtn.addEventListener('click', () => showImage(current + 1));
+    console.log("IMAGE:", images[index]);
+    console.log("STEM:", stemFromPath(images[index]));
+    console.log("MATCH:", entries);
 
-    document.body.appendChild(prevBtn);
-    document.body.appendChild(nextBtn);
+    if (!entries || !entries.length) {
+      citationEl.innerHTML = '<p style="opacity:0.6;">No citation found</p>';
+      return;
+    }
+
+    const citation = entries[0].citation;
+    const link = entries[0].link;
+
+    let html = '';
+    if (citation) {
+      html += `<p class="gallery-citation-text">${citation}</p>`;
+    }
+    if (link) {
+      html += `<p class="gallery-citation-link">
+        <a href="${link}" target="_blank" rel="noopener">${link}</a>
+      </p>`;
+    }
+
+    citationEl.innerHTML = html;
+  }
+
+  function showImage(index) {
+    if (!images.length) return;
+
+    current = (index + images.length) % images.length;
+    gallery.style.backgroundImage = `url('${images[current]}')`;
+    renderCitation(current);
+  }
+
+  // Load CSV
+  Papa.parse('data/annotated-data.csv', {
+    download: true,
+    header: true,
+    skipEmptyLines: true,
+    transformHeader: h => h.replace(/^\uFEFF/, '').trim(),
+    complete(results) {
+      console.log("CSV LOADED:", results.data);
+
+      results.data.forEach(row => {
+        const id = (row.id || '').trim();
+        if (!id) return;
+
+        const normalizedId = normalizeText(id);
+
+        if (!citationsByImage[normalizedId]) {
+          citationsByImage[normalizedId] = [];
+        }
+
+        citationsByImage[normalizedId].push({
+          citation: (row.citation || '').trim(),
+          link: (row.link || '').trim(),
+        });
+      });
+
+      console.log("CITATION MAP:", citationsByImage);
+
+      showImage(0);
+    },
+    error(err) {
+      console.error("CSV LOAD ERROR:", err);
+      showImage(0);
+    }
   });
+
+  // navigation arrows
+  const prevBtn = document.createElement('button');
+  prevBtn.className = 'arrow left';
+  prevBtn.innerHTML = '&#10094;';
+  prevBtn.setAttribute('aria-label', 'Previous image');
+
+  const nextBtn = document.createElement('button');
+  nextBtn.className = 'arrow right';
+  nextBtn.innerHTML = '&#10095;';
+  nextBtn.setAttribute('aria-label', 'Next image');
+
+  prevBtn.addEventListener('click', () => showImage(current - 1));
+  nextBtn.addEventListener('click', () => showImage(current + 1));
+
+  document.body.appendChild(prevBtn);
+  document.body.appendChild(nextBtn);
+});
 </script>
 </body>
-</html>
-
-</body>
-
 </html>

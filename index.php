@@ -24,44 +24,47 @@
       <li><a class="<?= ($currentPage == 'about.php') ? 'active' : '' ?>" href="about.php">About</a></li>
     </ul>
   </nav>
-
   <div class="home-split">
-
-    <!-- LEFT -->
     <div class="home-left">
       <h1 class="home-title">Visually<br>Barkcloth</h1>
-      <p class="home-credits">
-        Curated and Edited by<br>
-        Iris Luo, Kiran Mohammadi-Williams,<br>
-        Shihan Gao
-      </p>
       <div class="home-rule"></div>
+      <p class="home-credits">
+        Created by<br>
+        Iris Luo, Kiran Mohammadi-Williams,<br>
+        & Shihan Gao
+      </p>
       <a class="enter-link" href="filters.php">
-        Enter
         <span class="enter-arrow">→</span>
       </a>
-      <div class="home-deco" aria-hidden="true">
-        <img src="deco/IMG_3453.jpg" alt="">
-      </div>
     </div>
 
-    <!-- RIGHT -->
     <div class="home-right">
-      <p class="about-label">About this project</p>
 
-      <p class="about-hook">
+      <p class="about-hook" style="margin-bottom: 40px;">
         What do you see when you look at a piece of barkcloth?
+      </p>
+      <p class="about-hook" style="margin-bottom: 40px;">
         Maybe a stripe. Maybe something that curves like a crescent — or almost like one, but not quite.
+      </p>
+      <p class="about-hook" style="margin-bottom: 40px;">
         Maybe a shape that repeats, shifts, and repeats again, slightly differently each time.
         <em>Maybe something you do not have a word for yet.</em>
       </p>
 
-      <p class="about-hook">
+      <p class="about-hook" style="margin-bottom: 40px;">
         The feeling of almost recognizing something but not quite is where this project begins.
       </p>
 
-    </div>
+      <p class="about-hook">
+      Barkcloth is made from the inner bark of trees. It is soaked, fermented, and beaten until it becomes
+      soft and flat, ready to be worn, used, or decorated. People across the Austronesian world have been
+      making it for at least five thousand years — from the forests of Central Sulawesi in Eastern
+      Indonesia, where it is called <em>fuya</em>, to the islands of Polynesia, where it is known as
+      <em>tapa</em>. As Austronesian voyagers sailed across the Pacific, they brought the knowledge of
+      barkcloth with them.
+    </p>
 
+    </div>
   </div>
 </body>
 
