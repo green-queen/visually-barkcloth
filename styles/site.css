@@ -29,6 +29,7 @@ body {
 body.hero {
     display: flex;
     flex-direction: column;
+    min-height: 100vh;
     background-image: url('../New.png');
     background-size: cover;
     background-position: center;
@@ -44,7 +45,8 @@ body.hero {
     gap: 3rem;
     justify-content: center;
     margin: 25px 0px 0px 0px;
-    z-index: 9999;
+    position: relative; 
+    z-index: 99999;
     margin: 0;
     margin-top: 20px;
 }
@@ -137,28 +139,6 @@ body.hero {
     background-repeat: no-repeat;
 }
 
-/* @keyframes rise {
-    from {
-        opacity: 0;
-        transform: translateY(20px);
-    }
-
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-} */
-
-@keyframes fade-in {
-    from {
-        opacity: 0;
-    }
-
-    to {
-        opacity: 1;
-    }
-}
-
 /* choice cards */
 .choices {
     display: grid;
@@ -219,13 +199,6 @@ body.hero {
     width: 48px;
     height: 48px;
     margin-bottom: 1.1rem;
-    opacity: 0.85;
-    transition: opacity 0.2s;
-    z-index: 100000;
-}
-
-.choice-card:hover .choice-icon {
-    opacity: 1;
 }
 
 .choice-label {
@@ -239,8 +212,8 @@ body.hero {
 .choice-title {
     font-size: 1.6rem;
     font-weight: 400;
-    line-height: 1.2;
     color: var(--text);
+    z-index: 100000;
 }
 
 .choice-arrow {
@@ -449,7 +422,7 @@ body.hero {
     position: fixed;
     inset: 0;
     overflow-y: auto;
-    z-index: 9990;
+    z-index: 9000;
     padding: 100px 40px 60px;
     box-sizing: border-box;
 }
@@ -1072,11 +1045,16 @@ body.hero {
 }
  
 .home-title {
+    color: var(--text);
+    margin-top: -1rem; 
+    font-size: 100px;
+    letter-spacing: 0.05em;
     font-family: "Fraunces", serif;
+    /* font-family: "Fraunces", serif;
     font-size: clamp(2rem, 5.5vw, 6rem);
     color: var(--text);
     text-transform: uppercase;
-    margin-top: -6rem;
+    margin-top: -6rem; */
 }
  
 .home-credits{
@@ -1087,7 +1065,7 @@ body.hero {
     width: 85%;
     height: 1px;
     background: var(--black);
-    margin-top: -2rem;
+    margin-top: -3rem;
 }
 
 .enter-link {
@@ -1127,48 +1105,26 @@ body.hero {
     overflow-wrap: break-word;
 }
 
-@keyframes fade-up {
-    from {
-        opacity: 0;
-        transform: translateY(16px);
-    }
-
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
+.home-wrap {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-sizing: border-box;
 }
 
-.home-left>* {
-    animation: fade-up 0.75s cubic-bezier(0.22, 1, 0.36, 1) both;
-}
-
-.home-title {
-    animation-delay: 0.05s;
-}
-
-.home-rule {
-    animation-delay: 0.15s;
-}
-
-.home-subtitle {
-    animation-delay: 0.2s;
-}
-
-.enter-link {
-    animation-delay: 0.28s;
-}
-
-.home-right>* {
-    animation: fade-up 0.75s cubic-bezier(0.22, 1, 0.36, 1) both;
+.home-wrap .home-split {
+    background-color: var(--white);
+    width: 100%;
+    max-width: 1300px;
+    min-height: 0;
+    flex: unset;
 }
 
 .hero-img {
     background-image: url("New.png");
-    background-color: #cccccc;
     background-size: cover;
     background-repeat: no-repeat;
     background-attachment: fixed;
     background-position: center center;
 }
-

@@ -34,7 +34,7 @@
 <main class="about-hero-wrap">
   <div class="about-page">
 
-  <section class="about-section" aria-labelledby="section-textile">
+  <section class="about-section">
     <div class="about-section-header">
       <span class="about-section-num">01</span>
       <span class="about-section-title" id="section-textile">The Textile</span>
@@ -56,11 +56,11 @@
     </p>
   </section>
 
-  <div class="about-deco" aria-hidden="true">
+  <div class="about-deco">
     <img src="deco/IMG_3707.jpg" alt="">
   </div>
 
-  <section class="about-section" aria-labelledby="section-game">
+  <section class="about-section">
     <div class="about-section-header">
       <span class="about-section-num">02</span>
       <span class="about-section-title" id="section-game">The Game</span>
@@ -79,11 +79,11 @@
     </p>
   </section>
 
-  <div class="about-deco" aria-hidden="true">
+  <div class="about-deco">
     <img src="deco/IMG_3708.jpg" alt="">
   </div>
 
-  <section class="about-section" aria-labelledby="section-turn">
+  <section class="about-section">
     <div class="about-section-header">
       <span class="about-section-num">03</span>
       <span class="about-section-title" id="section-turn">Your Turn</span>
@@ -112,11 +112,11 @@
     </p>
   </section>
 
-  <div class="about-deco" aria-hidden="true">
+  <div class="about-deco">
     <img src="deco/IMG_3712.jpg" alt="">
   </div>
 
-  <footer class="about-note" role="contentinfo">
+  <footer class="about-note">
     <p class="about-note-label">A Note</p>
     <p class="about-body">
       This project is part of an ongoing doctoral research on digital archives, material culture, and how

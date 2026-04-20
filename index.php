@@ -24,6 +24,7 @@
       <li><a class="<?= ($currentPage == 'about.php') ? 'active' : '' ?>" href="about.php">About</a></li>
     </ul>
   </nav>
+  <div class="home-wrap">
   <div class="home-split">
     <div class="home-left">
       <h1 class="home-title">Visually<br>Barkcloth</h1>
@@ -65,6 +66,7 @@
     </p>
 
     </div>
+  </div>
   </div>
 </body>
 
