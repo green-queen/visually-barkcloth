@@ -45,22 +45,12 @@ let currentIndex = 0;
 let rows = [];
 
 function extractSMVK(str) {
-  if (!str) return null;
-  const match = str.match(/SMVK[-_]?(\d+[a-zA-Z]?)/i);
-  return match ? match[1].toLowerCase() : null;
-}
-
-function findRowByImage(imagePath) {
-  const filename = imagePath.split('/').pop();
-  const key = extractSMVK(filename);
-
-  if (!key) return null;
-
-  return rows.find(r => extractSMVK(r.id) === key);
+  const m = str.match(/SMVK_-_([\w]+)/i);
+  return m ? m[1] : null;
 }
 
 function showImage(index) {
-  const gallery = document.querySelector('.gallery');
+  const gallery    = document.querySelector('.gallery');
   const citationEl = document.getElementById('gallery-citation');
 
   currentIndex = (index + images.length) % images.length;
@@ -68,7 +58,8 @@ function showImage(index) {
   const imgPath = images[currentIndex];
   gallery.style.backgroundImage = `url('${imgPath}')`;
 
-  const row = findRowByImage(imgPath);
+  const fileKey = extractSMVK(imgPath);
+  const row     = rows.find(r => extractSMVK(r.id) === fileKey);
 
   if (!row) {
     citationEl.innerHTML = `<p style="opacity:0.6;">No citation found</p>`;
@@ -81,32 +72,28 @@ function showImage(index) {
     html += `<p class="gallery-citation-text">${row.citation}</p>`;
   }
 
-  if (row.link) {
-    html += `
-      <p class="gallery-citation-link">
-        <a href="${row.link}" target="_blank" rel="noopener">
-          ${row.link}
-        </a>
-      </p>
-    `;
-  }
+  // if (row.link) {
+  //   html += `
+  //     <p class="gallery-citation-link">
+  //       <a href="${row.link}" target="_blank" rel="noopener">
+  //         ${row.link}
+  //       </a>
+  //     </p>
+  //   `;
+  // }
 
-  citationEl.innerHTML = html;
+  citationEl.innerHTML = html || `<p style="opacity:0.6;">No citation found</p>`;
 }
 
-fetch('data/annotated-data.csv')
+fetch('data/hero-data.csv')
   .then(res => res.text())
   .then(csvText => {
-
     const result = Papa.parse(csvText, {
       header: true,
       skipEmptyLines: true
     });
 
     rows = result.data;
-
-    console.log("CSV LOADED:", rows);
-
     showImage(0);
   })
   .catch(err => console.error(err));
