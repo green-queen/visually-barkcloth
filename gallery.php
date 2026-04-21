@@ -72,15 +72,15 @@ function showImage(index) {
     html += `<p class="gallery-citation-text">${row.citation}</p>`;
   }
 
-  // if (row.link) {
-  //   html += `
-  //     <p class="gallery-citation-link">
-  //       <a href="${row.link}" target="_blank" rel="noopener">
-  //         ${row.link}
-  //       </a>
-  //     </p>
-  //   `;
-  // }
+  if (row.link) {
+    html += `
+      <p class="gallery-citation-text">
+        <a href="${row.link}" target="_blank" rel="noopener">
+          ${row.link}
+        </a>
+      </p>
+    `;
+  }
 
   citationEl.innerHTML = html || `<p style="opacity:0.6;">No citation found</p>`;
 }

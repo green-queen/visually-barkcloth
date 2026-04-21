@@ -32,14 +32,14 @@
   </ul>
 </nav>
 
-        <div class="view-toggle">
-            <button class="view-btn active" id="btn-float" title="Float view">
-                Float
-            </button>
-            <button class="view-btn" id="btn-grid" title="Grid view">
-                Grid
-            </button>
-        </div>
+    <div class="view-toggle">
+        <button class="view-btn active" id="btn-float" title="Float view">
+            Float
+        </button>
+        <button class="view-btn" id="btn-grid" title="Grid view">
+            Grid
+        </button>
+    </div>
 
     <main class="page">
 
