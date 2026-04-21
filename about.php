@@ -11,7 +11,7 @@
 <body class="hero">
 <?php $currentPage = basename($_SERVER['PHP_SELF']); ?>
 
-<nav class="nav">
+<nav class="nav stripe">
   <ul>
     <li>
       <a class="<?= ($currentPage == 'index.php') ? 'active' : '' ?>" href="index.php">Home</a>

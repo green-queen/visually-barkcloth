@@ -116,12 +116,11 @@
         <line x1="16" y1="2" x2="16" y2="30" stroke-dasharray="2 2"/>
     </svg>
 </button>
-
 </div>
 
-        <div class="filter-bar" id="filter-bar">
-    <button id="clear-filters" class="clear-btn">Clear All</button>
-</div>
+    <div class="filter-bar" id="filter-bar">
+        <button id="clear-filters" class="clear-btn">Clear All</button>
+    </div>
 
     </div>
         <section class="barkcloth-list" id="barkcloth-list">
@@ -129,11 +128,51 @@
     </main>
 
     <div id="floating-layer"></div>
-        <div id="grid-layer"><div class="grid-inner" id="grid-inner"></div></div>
+    <div id="grid-layer"><div class="grid-inner" id="grid-inner"></div></div>
     <div id="no-match">No barkcloths match the selected filters.</div>
 
+     <div id="card-modal" style="display:none; position:fixed; top:0; left:0; width:100vw; height:100vh; background:rgba(0,0,0,0.6); justify-content:center; align-items:center; z-index:100000; cursor:pointer;">
+      <div id="card-modal-inner" style="background:#fff; padding:2rem; max-width:480px; width:90%; cursor:default; display:flex; flex-direction:column; align-items:center; gap:1rem;">
+        <img id="card-modal-img" src="" alt="" style="max-width:100%; max-height:50vh; object-fit:contain;">
+        <div id="card-modal-id" style="font-weight:bold; font-size:1.1rem;"></div>
+        <div id="card-modal-origin" style="opacity:0.7;"></div>
+        <div id="card-modal-shapes" style="font-size:0.9rem;"></div>
+        <a id="card-modal-link" href="#" target="_blank" rel="noopener noreferrer" style="margin-top:0.5rem; color: rgba(165, 17, 17, 0.8);word-spacing: 0.2em;">View Source</a>
+      </div>
+    </div>
+    
     <script>
-                let currentView = 'float'; // 'float' or 'grid'
+        let currentView = 'float'; // 'float' or 'grid'
+
+        // modal logic
+        const cardModal      = document.getElementById('card-modal');
+        const cardModalInner = document.getElementById('card-modal-inner');
+
+        function openModal(bc) {
+          document.getElementById('card-modal-img').src    = 'img/' + bc.id + '.png';
+          document.getElementById('card-modal-img').alt    = bc.id;
+          document.getElementById('card-modal-id').textContent     = bc.id;
+          document.getElementById('card-modal-origin').textContent = bc.origin;
+          document.getElementById('card-modal-shapes').textContent = bc.structures.length > 0 ? 'Structures: ' + bc.structures.join(', ') : '';
+
+          const link = document.getElementById('card-modal-link');
+          if (bc.link) {
+            link.href = bc.link;
+            link.style.display = 'inline';
+          } else {
+            link.style.display = 'none';
+          }
+
+          cardModal.style.display = 'flex';
+        }
+
+        // clicking the backdrop closes the modal; clicking inside does not
+        cardModal.addEventListener('click', function () {
+          cardModal.style.display = 'none';
+        });
+        cardModalInner.addEventListener('click', function (e) {
+          e.stopPropagation();
+        });
 
         document.getElementById('btn-float').addEventListener('click', function () {
             if (currentView === 'float') return;
@@ -225,18 +264,22 @@
             });
         }
 
-                document.getElementById('clear-filters').addEventListener('click', function () {
+            document.getElementById('clear-filters').addEventListener('click', function () {
             selectedStructures = [];
-
-            // remove "selected" class from all buttons
             let buttons = document.querySelectorAll('.filter-btn');
             buttons.forEach(btn => btn.classList.remove('selected'));
-
-            // clear rendered results
             document.getElementById('floating-layer').innerHTML = '';
             document.getElementById('grid-inner').innerHTML = '';
             document.getElementById('no-match').style.display = 'none';
         });
+
+          function makeCardHTML(bc) {
+            let structureList = bc.structures.length > 0 ? bc.structures.join(', ') : 'No structures';
+            return '<img src="img/' + bc.id + '.png" alt="' + bc.id + '" onerror="this.style.display=\'none\'">' +
+                   '<div class="card-id">' + bc.id + '</div>' +
+                   '<div class="card-origin">' + bc.origin + '</div>' +
+                   '<div class="card-shapes">' + structureList + '</div>';
+        }
 
         function renderBarkcloths() {
             let floatingLayer = document.getElementById('floating-layer');
@@ -273,70 +316,62 @@
             if (currentView === 'grid') {
                 for (let i = 0; i < filtered.length; i++) {
                     let bc = filtered[i];
-                    let structureList = bc.structures.length > 0 ? bc.structures.join(', ') : 'No structures';
 
-                    let cardLink = document.createElement('a');
-                    cardLink.href = bc.link || '#';
-                    cardLink.target = '_blank';
-                    cardLink.className = 'grid-card';
-                    cardLink.style.animationDelay = (i * 0.04) + 's';
-                    cardLink.innerHTML =
-                        '<img src="img/' + bc.id + '.png" alt="' + bc.id + '" onerror="this.style.display=\'none\'">' +
-                        '<div class="card-id">' + bc.id + '</div>' +
-                        '<div class="card-origin">' + bc.origin + '</div>' +
-                        '<div class="card-shapes">' + structureList + '</div>';
+                    let card = document.createElement('div');
+                    card.className = 'grid-card';
+                    card.style.animationDelay = (i * 0.04) + 's';
+                    card.style.cursor = 'pointer';
+                    card.innerHTML = makeCardHTML(bc);
+                    card.addEventListener('click', (function(b) {
+                        return function() { openModal(b); };
+                    })(bc));
 
-                    gridInner.appendChild(cardLink);
+                    gridInner.appendChild(card);
                 }
             } else {
-            for (let i = 0; i < filtered.length; i++) {
-                let bc = filtered[i];
+                for (let i = 0; i < filtered.length; i++) {
+                    let bc = filtered[i];
 
-                // random speeds and positions for animations
-                let xSpeed = Math.random() * 9 + 9;   // 9 to 18
-                let ySpeed = Math.random() * 5 + 5;   // 5 to 10
-                let xDelay = Math.random() * -xSpeed;
-                let yDelay = Math.random() * -ySpeed;
-                let xEnd = 'calc(' + (Math.random() * 40 + 60) + 'vw - 180px)';
-                let yEnd = 'calc(' + (Math.random() * 40 + 60) + 'vh - 180px)';
-                let rotate = Math.random() * 12 - 6;  // -6 to 6
-                let goRight = i % 2 === 0;
+                    let xSpeed = Math.random() * 9 + 9;
+                    let ySpeed = Math.random() * 5 + 5;
+                    let xDelay = Math.random() * -xSpeed;
+                    let yDelay = Math.random() * -ySpeed;
+                    let xEnd   = 'calc(' + (Math.random() * 40 + 60) + 'vw - 180px)';
+                    let yEnd   = 'calc(' + (Math.random() * 40 + 60) + 'vh - 180px)';
+                    let rotate = Math.random() * 12 - 6;
+                    let goRight = i % 2 === 0;
 
-                let xWrap = document.createElement('div');
-                xWrap.className = 'card-x ' + (goRight ? 'go-right' : 'go-left');
-                xWrap.style.cssText =
-                    '--x-speed: ' + xSpeed + 's;' +
-                    '--x-delay: ' + xDelay + 's;' +
-                    '--x-end: ' + xEnd + ';' +
-                    'top: 0; left: 0;';
+                    let xWrap = document.createElement('div');
+                    xWrap.className = 'card-x ' + (goRight ? 'go-right' : 'go-left');
+                    xWrap.style.cssText =
+                        '--x-speed: ' + xSpeed + 's;' +
+                        '--x-delay: ' + xDelay + 's;' +
+                        '--x-end: ' + xEnd + ';' +
+                        'top: 0; left: 0;';
 
-                let yWrap = document.createElement('div');
-                yWrap.className = 'card-y';
-                yWrap.style.cssText =
-                    '--y-speed: ' + ySpeed + 's;' +
-                    '--y-delay: ' + yDelay + 's;' +
-                    '--y-end: ' + yEnd + ';';
+                    let yWrap = document.createElement('div');
+                    yWrap.className = 'card-y';
+                    yWrap.style.cssText =
+                        '--y-speed: ' + ySpeed + 's;' +
+                        '--y-delay: ' + yDelay + 's;' +
+                        '--y-end: ' + yEnd + ';';
 
-                let cardLink = document.createElement('a');
-                cardLink.href = bc.link || '#'; 
-                cardLink.target = '_blank';     
-                cardLink.className = 'floating-card';
-                cardLink.style.setProperty('--rotate', rotate + 'deg');
+                    let card = document.createElement('div');
+                    card.className = 'floating-card';
+                    card.style.setProperty('--rotate', rotate + 'deg');
+                    card.style.cursor = 'pointer';
+                    card.innerHTML = makeCardHTML(bc);
+                    card.addEventListener('click', (function(b) {
+                        return function() { openModal(b); };
+                    })(bc));
 
-                let structureList = bc.structures.length > 0 ? bc.structures.join(', ') : 'No structures';
-                cardLink.innerHTML =
-                    '<img src="img/' + bc.id + '.png" alt="' + bc.id + '" onerror="this.style.display=\'none\'">' +
-                    '<div class="card-id">' + bc.id + '</div>' +
-                    '<div class="card-origin">' + bc.origin + '</div>' +
-                    '<div class="card-shapes">' + structureList + '</div>';
-
-                yWrap.appendChild(cardLink);
-                xWrap.appendChild(yWrap);
-                floatingLayer.appendChild(xWrap);
+                    yWrap.appendChild(card);
+                    xWrap.appendChild(yWrap);
+                    floatingLayer.appendChild(xWrap);
+                }
             }
         }
 
-    }
         renderBarkcloths();
     </script>
 </body>

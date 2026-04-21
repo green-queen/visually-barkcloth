@@ -37,9 +37,8 @@
   </main>
 
   <script>
-    function pickRandom(arr) {
-      return arr[Math.floor(Math.random() * arr.length)];
-    }
+    let currentIndex = 0;
+    let rows = [];
 
     function buildDot(label) {
       const dot = document.createElement('div');
@@ -49,17 +48,17 @@
 
       const tooltip = document.createElement('div');
       tooltip.className = 'annotation-tooltip';
-
       tooltip.innerHTML = label || "No annotation available";
 
       dot.appendChild(tooltip);
       return dot;
     }
 
-    function showAnnotation(rows) {
+    function showAnnotation(index) {
       const container = document.getElementById('annotation-container');
 
-      const row = pickRandom(rows);
+      currentIndex = (index + rows.length) % rows.length;
+      const row = rows[currentIndex];
 
       const imgSrc = `annotated-img/${row.id}.png`;
 
@@ -96,8 +95,6 @@
       container.appendChild(citeEl);
     }
 
-    const container = document.getElementById('annotation-container');
-
     fetch('data/annotated-data.csv')
       .then(res => res.text())
       .then(csvText => {
@@ -106,12 +103,26 @@
           skipEmptyLines: true
         });
 
-        const rows = result.data;
-        showAnnotation(rows);
+        rows = result.data;
+        showAnnotation(0);
       })
       .catch(err => {
         console.error(err);
       });
+
+    const prevBtn = document.createElement('button');
+    prevBtn.className = 'arrow left';
+    prevBtn.innerHTML = '&#10094;';
+
+    const nextBtn = document.createElement('button');
+    nextBtn.className = 'arrow right';
+    nextBtn.innerHTML = '&#10095;';
+
+    prevBtn.onclick = () => showAnnotation(currentIndex - 1);
+    nextBtn.onclick = () => showAnnotation(currentIndex + 1);
+
+    document.body.appendChild(prevBtn);
+    document.body.appendChild(nextBtn);
   </script>
 </body>
 

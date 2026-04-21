@@ -33,6 +33,7 @@
 </nav>
 
   <main class="page">
+    <div id="submission-count" style="margin-bottom: 1rem;">Submissions: 0</div>
     <div id="quiz-container"></div>
     <div id="img-modal"
       style="display:none; position:fixed; top:0; left:0; width:100vw; height:100vh; background:rgba(0,0,0,0.6); justify-content:center; align-items:center; z-index:9999; cursor:pointer;">
@@ -70,7 +71,7 @@
       'lines-dropdown':    ['regular', 'dotted', 'curved'],
     };
 
-    // escapes string for safe insertion into HTML 
+    // escapes string for safe insertion into HTML
     function escapeHTML(str) {
       const div = document.createElement('div');
       div.textContent = str ?? '';
@@ -203,7 +204,7 @@
     }
 
     // quiz logic
-    let barkcloth, question;
+    let barkcloth, question, submitCount = 0;
 
     function showQuiz(data) {
       const container = document.getElementById('quiz-container');
@@ -281,9 +282,9 @@
 
       // form skip
       document.getElementById('quiz-skip')
-      .addEventListener('click', () => showQuiz(data));
+        .addEventListener('click', () => showQuiz(data));
 
-       // form submission
+      // form submission
       document.getElementById('quiz-form')
         .addEventListener('submit', async (e) => {
           e.preventDefault();
@@ -298,11 +299,11 @@
             .filter(v => ['Cross'].includes(v))
             .join(', ');
 
-          const textareas      = form.querySelectorAll('textarea[name="answer"]');
+          const textareas       = form.querySelectorAll('textarea[name="answer"]');
           const structuresOther = textareas.length > 1 ? textareas[0].value.trim() : '';
           const generalTextarea = textareas[textareas.length - 1].value.trim();
 
-          // all fields trimmed and cast to strings 
+          // all fields trimmed and cast to strings
           const payload = {
             barkcloth_id:     sanitizeField(barkcloth.id,              100),
             question:         sanitizeField(question.text,             200),
@@ -333,6 +334,9 @@
           } catch (err) {
             console.error('Network error:', err);
           }
+
+          submitCount++;
+          document.getElementById('submission-count').textContent = `Submissions: ${submitCount}`;
 
           showQuiz(data);
         });
