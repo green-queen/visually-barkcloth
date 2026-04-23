@@ -31,7 +31,7 @@
       <div class="home-adjust">
       <p class="home-credits">
         Curated by<br>
-        Iris Luo, Kiran Mohammadi-Williams,<br>
+        Iris Yiqun Luo, Kiran Mohammadi-Williams,<br>
         & Shihan Gao
       </p>
       <div class="home-rule"></div>
