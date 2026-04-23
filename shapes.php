@@ -32,6 +32,8 @@
   </ul>
 </nav>
 
+    <a class="view-btn-filter" href="filters.php" title="Back to Filters" style="position:fixed; top:57px; left:1rem; z-index:10000;">&#8592; Back to Filters</a>
+
     <div class="view-toggle">
         <button class="view-btn active" id="btn-float" title="Float view">
             Float

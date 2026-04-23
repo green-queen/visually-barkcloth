@@ -33,7 +33,7 @@
 </nav>
 
   <main class="page">
-    <div id="submission-count" style="margin-bottom: 1rem;">Submissions: 0</div>
+    <div id="submission-count">Submissions: 0</div>
     <div id="quiz-container"></div>
     <div id="img-modal"
       style="display:none; position:fixed; top:0; left:0; width:100vw; height:100vh; background:rgba(0,0,0,0.6); justify-content:center; align-items:center; z-index:9999; cursor:pointer;">
