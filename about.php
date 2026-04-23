@@ -39,6 +39,19 @@
       <span class="about-section-num">01</span>
       <span class="about-section-title" id="section-textile">The Textile</span>
     </div>
+      <p class="about-body">
+      Barkcloth is made from the inner bark of trees. It is soaked, fermented, and beaten until it becomes
+      soft and flat, ready to be worn, used, or decorated. 
+      </p>
+      
+      <p class="about-body">
+      People across the Austronesian world have been
+      making it for at least five thousand years — from the forests of Central Sulawesi in Eastern
+      Indonesia, where it is called <em>fuya</em>, to the islands of Polynesia, where it is known as
+      <em>tapa</em>. As Austronesian voyagers sailed across the Pacific, they brought the knowledge of
+      barkcloth with them.
+    </p>
+
     <p class="about-body">
       The patterns on these textiles — dots, stripes, crescents, zigzags, forms that repeat and transform —
       carry quiet traces of those journeys and the connections between distant places.

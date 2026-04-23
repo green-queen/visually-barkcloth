@@ -75,26 +75,15 @@
 
 <body>
 <?php $currentPage = basename($_SERVER['PHP_SELF']); ?>
-
-<nav class="nav">
-  <ul>
-    <li>
-      <a class="<?= ($currentPage == 'index.php') ? 'active' : '' ?>" href="index.php">Home</a>
-    </li>
-    <li>
-      <a class="<?= ($currentPage == 'quiz.php') ? 'active' : '' ?>" href="quiz.php">Quiz</a>
-    </li>
-    <li>
-      <a class="<?= ($currentPage == 'annotations.php') ? 'active' : '' ?>" href="annotations.php">Annotations</a>
-    </li>
-    <li>
-      <a class="<?= ($currentPage == 'gallery.php') ? 'active' : '' ?>" href="gallery.php">Gallery</a>
-    </li>
-    <li>
-      <a class="<?= ($currentPage == 'about.php') ? 'active' : '' ?>" href="about.php">About</a>
-    </li>
-  </ul>
-</nav>
+  <nav class="nav black-stripe">
+    <ul>
+      <li><a class="<?= ($currentPage == 'index.php') ? 'active' : '' ?>" href="index.php">Home</a></li>
+      <li><a class="<?= ($currentPage == 'quiz.php') ? 'active' : '' ?>" href="quiz.php">Quiz</a></li>
+      <li><a class="<?= ($currentPage == 'annotations.php') ? 'active' : '' ?>" href="annotations.php">Annotations</a></li>
+      <li><a class="<?= ($currentPage == 'gallery.php') ? 'active' : '' ?>" href="gallery.php">Gallery</a></li>
+      <li><a class="<?= ($currentPage == 'about.php') ? 'active' : '' ?>" href="about.php">About</a></li>
+    </ul>
+  </nav>
 
   <div class="view-toggle">
     <button class="view-btn active" id="btn-single" title="Single view">Single</button>

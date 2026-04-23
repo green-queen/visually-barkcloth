@@ -42,7 +42,7 @@ body.hero {
     gap: 7rem;
     justify-content: center;
     position: relative;
-    z-index: 99999;
+    z-index: 999999;
     margin: 1rem;
 }
 
@@ -107,6 +107,10 @@ body.hero {
     background-color: rgba(255, 255, 255, 0.85);
 }
 
+
+.black-stripe nav ul a {
+    color: var(--white);
+}
 /* page */
 .page {
     display: flex;
@@ -138,8 +142,9 @@ body.hero {
 .choices {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 2rem;
+    gap: 3rem;
     max-width: 680px;
+    max-height:390px;
     width: 100%;
 }
 
@@ -193,8 +198,8 @@ body.hero {
 }
 
 .choice-icon {
-    width: 48px;
-    height: 48px;
+    width: 100px;
+    height: 100px;
     margin-bottom: 1.1rem;
 }
 
@@ -215,7 +220,7 @@ body.hero {
     position: absolute;
     bottom: 1.4rem;
     right: 1.4rem;
-    font-size: 1.2rem;
+    font-size: 3rem;
     color: var(--text-sub);
     transition: color 0.25s ease, transform 0.25s var(--ease-out);
 }
@@ -405,16 +410,22 @@ body.hero {
 }
 
 .view-btn-filter {
-    color: var(--black);
+    background: #e74c3c;
+    color: white;
+    border: 1.5px solid #e74c3c;
     font-family: inherit;
-    padding: 1rem 1rem;
-    font-size: 12px;
+    padding: 0.45rem 1.1rem;
+    font-size: 13px;
     cursor: pointer;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    transition: background 0.2s ease, color 0.2s ease;
-    display: flex;
-    gap: 0.4rem;
+    letter-spacing: 0.04em;
+    transition: background 0.2s ease, border-color 0.2s ease, color 0.2s ease, transform 0.15s ease;
+    text-decoration:none;
+}
+
+.view-btn-filter:hover {
+    background: #c0392b;
+    border-color: #c0392b;
+    transform: translateY(-1px);
 }
 
 .view-btn+.view-btn {
@@ -441,6 +452,7 @@ body.hero {
     z-index: 9000;
     padding: 100px 40px 60px;
     box-sizing: border-box;
+    margin-top:1rem;
 }
 
 #grid-layer.visible {
@@ -465,6 +477,7 @@ body.hero {
     display: block;
     transition: transform 0.2s ease;
     animation: grid-in 0.35s var(--ease-out) both;
+    border: 1px solid var(--black);
 }
 
 .grid-card:hover {
@@ -830,6 +843,7 @@ body.hero {
     padding: 100px 40px 60px;
     box-sizing: border-box;
     background: var(--white);
+    margin-top:1rem;
 }
 
 .annotation-grid-inner {
@@ -1051,6 +1065,7 @@ body.hero {
     padding: 100px 40px 60px;
     box-sizing: border-box;
     background: var(--white);
+    margin-top:1rem;
 }
 
 .gallery-grid-inner {
@@ -1075,33 +1090,6 @@ body.hero {
     max-width: 600px;
     margin-left: auto;
     margin-right: auto;
-}
-
-#gallery-grid-layer {
-    position: fixed;
-    inset: 0;
-    overflow-y: auto;
-    z-index: 9000;
-    padding: 100px 40px 60px;
-    box-sizing: border-box;
-    background: var(--white);
-}
-
-.gallery-grid-inner {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.5rem;
-    max-width: 3000px;
-    margin: 0 auto;
-    justify-content: center;
-}
-
-.gallery-grid-inner .grid-card img {
-    width: 100%;
-    height: 200px;
-    object-fit: cover;
-    display: block;
-    transition: opacity 0.2s ease;
 }
 
 .gallery-grid-inner .grid-card:hover {

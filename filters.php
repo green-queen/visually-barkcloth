@@ -41,21 +41,21 @@
     <div class="choices">
       <a href="shapes.php" class="choice-card">
         <div class="choice-icon">
-          <svg viewBox="0 0 56 56" fill="none" stroke="var(--black)" stroke-width="1.5">
+          <svg viewBox="0 0 56 56" fill="none" stroke="var(--black)" stroke-width="1">
             <rect x="8" y="8" width="16" height="16" />
             <circle cx="42" cy="16" r="8" />
             <polygon points="8,48 24,32 8,32" />
             <path d="M32 40 L48 40 L40 32 Z" />
           </svg>
         </div>
-        <span class="choice-label">Filter by</span>
+        <!-- <span class="choice-label">Filter by</span> -->
         <h2 class="choice-title">Shapes</h2>
         <span class="choice-arrow">→</span>
       </a>
 
       <a href="structures.php" class="choice-card">
         <div class="choice-icon">
-          <svg viewBox="0 0 56 56" fill="none" stroke="var(--black)" stroke-width="1.5">
+          <svg viewBox="0 0 56 56" fill="none" stroke="var(--black)" stroke-width="1">
             <rect x="8" y="8" width="40" height="40" />
             <rect x="16" y="16" width="24" height="24" stroke-dasharray="2,2" />
             <rect x="24" y="24" width="8" height="8" />
@@ -63,7 +63,7 @@
             <line x1="8" y1="28" x2="48" y2="28" />
           </svg>
         </div>
-        <span class="choice-label">Filter by</span>
+        <!-- <span class="choice-label">Filter by</span> -->
         <h2 class="choice-title">Structures</h2>
         <span class="choice-arrow">→</span>
       </a>
