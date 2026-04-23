@@ -106,13 +106,8 @@ function buildGrid() {
     img.alt = row ? row.id : imgPath;
     img.onerror = () => img.style.display = 'none';
 
-    const cite = document.createElement('div');
-    cite.className = 'annotation-citation';
-    cite.style.marginTop = '6px';
-    cite.innerHTML = getCitationHTML(row);
 
     card.appendChild(img);
-    card.appendChild(cite);
     card.addEventListener('click', () => openGalleryModal(imgPath, row));
 
     gridInner.appendChild(card);

@@ -15,6 +15,8 @@
     --radius-sm: 4px;
     --radius-md: 8px;
     --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+    --blue: rgb(169, 233, 255);
+    --light-blue: rgba(209, 240, 251, 0.806);
 }
 
 html,
@@ -174,12 +176,12 @@ body.hero {
     transform: scaleX(0);
     transform-origin: left;
     transition: transform 0.35s var(--ease-out);
-    background-color: rgb(185, 233, 247);
+    background-color: var(--blue);
 }
 
 .choice-card:hover {
     transform: translateY(-5px);
-    background-color: rgb(185, 233, 247);
+    background-color: var(--light-blue);
 }
 
 .choice-card:hover::before {
@@ -224,11 +226,11 @@ body.hero {
 }
 
 .grid-card:hover {
-    background-color: rgb(185, 233, 247);
+    background-color: var(--light-blue);
 }
 
 .floating-card:hover {
-    background-color: rgb(185, 233, 247);
+    background-color: var(--light-blue);
 }
 
 /* filters */
@@ -331,7 +333,7 @@ body.hero {
     transform: rotate(0deg) scale(1.03);
     z-index: 10001;
     position: relative;
-    background-color: rgb(185, 233, 247);
+    background-color: var(--light-blue);
 }
 
 .floating-card img {
@@ -850,20 +852,16 @@ body.hero {
 .about-page {
     max-width: 680px;
     margin: 0 auto;
-    padding: 60px 40px 120px;
+        padding-bottom: 50px;
 }
 
 .about-intro {
     margin-bottom: 50px;
-    border-bottom: 1px solid var(--border-soft);
     padding-bottom: 50px;
 }
 
 .about-intro-label {
-    font-size: 11px;
-    letter-spacing: 0.22em;
     text-transform: uppercase;
-    color: var(--gray);
     margin-bottom: 20px;
 }
 
@@ -877,11 +875,7 @@ body.hero {
 
 .about-intro-hook em {
     font-style: italic;
-    color: var(--text-sub);
-}
-
-.about-section {
-    margin-bottom: 56px;
+    color: var(--text);
 }
 
 .about-section-header {
@@ -893,8 +887,7 @@ body.hero {
 
 .about-section-num {
     font-size: 14px;
-    letter-spacing: 0.18em;
-    color: var(--black);
+    color: var(--text);
     font-weight: 600;
 }
 
@@ -911,8 +904,7 @@ body.hero {
 .about-body {
     font-size: 0.92rem;
     line-height: 1.85;
-    color: var(--text-sub);
-    margin: 0 0 16px;
+    color: var(--text);
 }
 
 .about-body:last-child {
@@ -926,15 +918,11 @@ body.hero {
 }
 
 .about-note-label {
-    font-size: 10px;
-    letter-spacing: 0.22em;
     text-transform: uppercase;
     margin-bottom: 14px;
 }
 
 .about-note p {
-    font-size: 0.82rem;
-    line-height: 1.8;
     margin: 0 0 10px;
 }
 
@@ -968,6 +956,7 @@ body.hero {
 
 .about-hero-wrap .about-page {
     background-color: var(--white);
+    opacity: 0.85;
     padding: 60px 56px 80px;
     max-width: 720px;
     width: 100%;
@@ -1116,7 +1105,7 @@ body.hero {
 }
 
 .gallery-grid-inner .grid-card:hover {
-    background-color: rgb(185, 233, 247);
+    background-color: var(--light-blue);
 }
 
 .gallery-grid-inner .grid-card .annotation-citation {
@@ -1232,7 +1221,7 @@ body.hero {
     letter-spacing: 0.1em;
     color: var(--text);
     margin-top: 0.5rem;
-    background-color: rgb(185, 233, 247);
+    background-color: var(--blue);
     padding: 10px 10px;
     text-transform: uppercase;
 }
@@ -1286,8 +1275,6 @@ body.hero {
     justify-content: center;
     margin: 1rem 0rem;
     padding: 1rem 2rem 1rem 2rem;
-    /* backdrop-filter: blur(6px);
-    -webkit-backdrop-filter: blur(6px); */
     overflow-y: auto;
     min-width: 0;
     box-sizing: border-box;
@@ -1304,7 +1291,6 @@ body.hero {
 }
 
 .home-wrap .home-split {
-    /* background-color: var(--white); */
     width: 100%;
     max-width: 1300px;
     min-height: 0;

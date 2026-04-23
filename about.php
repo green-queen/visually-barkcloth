@@ -72,10 +72,7 @@
       that does not have a name yet.
     </p>
     <p class="about-body">
-      This project takes a collection of barkcloth objects from Wereldmuseum Leiden in the Netherlands
-      and reorganizes them by their visual patterns — their building blocks and structural forms — rather
-      than by where they came from. When you search this way, surprising things happen. Objects from
-      opposite ends of the Austronesian world start to find each other.
+    This project brings together digitized barkcloth from Wereldmuseum Leiden (Netherlands) and archival photographs from Världskulturmuseerna (Sweden), and reorganizes them by their visual patterns — their building blocks and structural forms — rather than by where they came from. When you search this way, surprising things may happen. Objects from opposite ends of the Austronesian world start to find each other.
     </p>
   </section>
 

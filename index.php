@@ -30,7 +30,7 @@
       <h1 class="home-title">Visually<br>Barkcloth</h1>
       <div class="home-adjust">
       <p class="home-credits">
-        Created by<br>
+        Curated by<br>
         Iris Luo, Kiran Mohammadi-Williams,<br>
         & Shihan Gao
       </p>

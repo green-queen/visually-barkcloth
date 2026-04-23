@@ -34,9 +34,9 @@
   </nav>
 
   <main class="page">
-    <h1 class="page-title">
+    <!-- <h1 class="page-title">
       Explore<br>Barkcloth
-    </h1>
+    </h1> -->
 
     <div class="choices">
       <a href="shapes.php" class="choice-card">

@@ -30,7 +30,7 @@
       display: block;
     }
     .annotation-grid-inner .grid-card:hover {
-      background-color: rgb(185, 233, 247);
+      background-color: var(--light-blue);
     }
     /* modal */
     #annotation-modal {
@@ -197,22 +197,8 @@
         img.alt = row.name || row.id;
         img.onerror = () => img.style.display = 'none';
 
-        const cite = document.createElement('div');
-        cite.className = 'annotation-citation';
-        cite.style.marginTop = '6px';
-        if (row.link) {
-          const a = document.createElement('a');
-          a.href = row.link;
-          a.target = '_blank';
-          a.rel = 'noopener noreferrer';
-          a.textContent = row.id || 'Source';
-          cite.appendChild(a);
-        } else {
-          cite.textContent = row.id || '';
-        }
 
         card.appendChild(img);
-        card.appendChild(cite);
         card.addEventListener('click', () => openAnnotationModal(row));
 
         gridInner.appendChild(card);
