@@ -14,14 +14,14 @@
   <nav class="nav black-stripe">
     <ul>
       <li><a class="<?= ($currentPage == 'index.php') ? 'active' : '' ?>" href="index.php">Home</a></li>
-      <li><a class="<?= ($currentPage == 'quiz.php') ? 'active' : '' ?>" href="quiz.php">Quiz</a></li>
+      <li><a class="<?= ($currentPage == 'quiz.php') ? 'active' : '' ?>" href="quiz.php">Ideas?</a></li>
       <li><a class="<?= ($currentPage == 'annotations.php') ? 'active' : '' ?>" href="annotations.php">Annotations</a></li>
       <li><a class="<?= ($currentPage == 'gallery.php') ? 'active' : '' ?>" href="gallery.php">Gallery</a></li>
       <li><a class="<?= ($currentPage == 'about.php') ? 'active' : '' ?>" href="about.php">About</a></li>
     </ul>
   </nav>
 
-    <a class="view-btn-filter" href="filters.php" title="Back to Filters" style="position:fixed; top:40px; z-index:10000;">&#8592; Back to Filters</a>
+    <a class="view-btn-filter" href="filters.php" title="Back to Filters" style="position:fixed; top:57px; left:1rem; z-index:10000;">&#8592; Back to Filters</a>
 
         <div class="view-toggle">
             <button class="view-btn active" id="btn-float" title="Float view">

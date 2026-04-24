@@ -19,7 +19,7 @@
         <a class="white-nav <?= ($currentPage == 'index.php') ? 'active' : '' ?>" href="index.php">Home</a>
       </li>
       <li>
-        <a class="white-nav <?= ($currentPage == 'quiz.php') ? 'active' : '' ?>" href="quiz.php">Quiz</a>
+        <a class="white-nav <?= ($currentPage == 'quiz.php') ? 'active' : '' ?>" href="quiz.php">Ideas?</a>
       </li>
       <li>
         <a class="white-nav <?= ($currentPage == 'annotations.php') ? 'active' : '' ?>" href="annotations.php">Annotations</a>

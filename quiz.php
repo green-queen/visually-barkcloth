@@ -18,7 +18,7 @@
       <a class="<?= ($currentPage == 'index.php') ? 'active' : '' ?>" href="index.php">Home</a>
     </li>
     <li>
-      <a class="<?= ($currentPage == 'quiz.php') ? 'active' : '' ?>" href="quiz.php">Quiz</a>
+      <a class="<?= ($currentPage == 'quiz.php') ? 'active' : '' ?>" href="quiz.php">Ideas?</a>
     </li>
     <li>
       <a class="<?= ($currentPage == 'annotations.php') ? 'active' : '' ?>" href="annotations.php">Annotations</a>
@@ -215,11 +215,12 @@
       const safeImgAlt     = escapeHTML(barkcloth.id);
       const safeCitation   = escapeHTML(barkcloth["reference citation"]);
       const safeQuestionTx = escapeHTML(question.text);
+      const link = escapeHTML(barkcloth.link);
 
       container.innerHTML = `
       <div class="quiz-left">
         <img class="quiz-img" src="${safeImgSrc}" alt="${safeImgAlt}">
-        <div class="quiz-citation">${safeCitation}</div>
+        <a href="${link}" target="_blank" class="quiz-citation">${safeCitation}</a>
       </div>
       <form id="quiz-form">
         <div class="quiz-question">${safeQuestionTx}</div>
