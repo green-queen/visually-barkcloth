@@ -336,7 +336,7 @@ body.hero {
 }
 
 .floating-card:hover {
-    transform: rotate(0deg) scale(1.03);
+    transform: rotate(0deg) scale(1.02);
     z-index: 10001;
     position: relative;
     background-color: var(--light-blue);
@@ -480,7 +480,7 @@ body.hero {
 }
 
 .grid-card:hover {
-    transform: translateY(-5px) scale(1.03);
+    transform: translateY(-5px) scale(1.02);
     z-index: 1;
     position: relative;
 }
@@ -594,7 +594,7 @@ body.hero {
 }
 
 .quiz-img:hover {
-    transform: scale(1.01);
+    transform: scale(1.02);
 }
 
 .quiz-citation {
@@ -1041,7 +1041,7 @@ body.hero {
 }
 
 .arrow:hover {
-    transform: translateY(-50%) scale(1.05);
+    transform: translateY(-50%) scale(1.02);
 }
 
 .arrow:active {
