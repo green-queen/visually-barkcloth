@@ -1,3 +1,7 @@
+<?php
+session_start();
+$currentPage = basename($_SERVER['PHP_SELF']);
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -10,7 +14,6 @@
 </head>
 
 <body>
-<?php $currentPage = basename($_SERVER['PHP_SELF']); ?>
 
 <nav class="nav">
   <ul>
@@ -32,8 +35,13 @@
   </ul>
 </nav>
 
-  <main class="page">
+  <main class="page" style="position: relative;">
     <div id="submission-count">Submissions: 0</div>
+
+    <?php if (!empty($_SESSION['submissions'])): ?>
+      <a href="results.php" class="results-link">View your last results →</a>
+    <?php endif; ?>
+
     <div id="quiz-container"></div>
     <div id="img-modal"
       style="display:none; position:fixed; top:0; left:0; width:100vw; height:100vh; background:rgba(0,0,0,0.6); justify-content:center; align-items:center; z-index:9999; cursor:pointer;">
@@ -338,6 +346,15 @@
 
           submitCount++;
           document.getElementById('submission-count').textContent = `Submissions: ${submitCount}`;
+
+          // show results link after first submission in this session
+          if (!document.querySelector('.results-link')) {
+            const link = document.createElement('a');
+            link.href = 'results.php';
+            link.className = 'results-link';
+            link.textContent = 'View your last results →';
+            document.querySelector('main.page').insertBefore(link, document.getElementById('quiz-container'));
+          }
 
           showQuiz(data);
         });
