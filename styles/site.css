@@ -30,7 +30,6 @@ body {
 body.hero {
     display: flex;
     flex-direction: column;
-    min-height: 100vh;
     background-image: url('../New.png');
     background-size: cover;
 }
@@ -146,6 +145,8 @@ body.hero {
     max-width: 680px;
     max-height:390px;
     width: 100%;
+    margin: 0 auto;
+    padding-top: 5rem;
 }
 
 .choice-card {
@@ -220,7 +221,7 @@ body.hero {
     position: absolute;
     bottom: 1.4rem;
     right: 1.4rem;
-    font-size: 3rem;
+    font-size: 2rem;
     color: var(--text-sub);
     transition: color 0.25s ease, transform 0.25s var(--ease-out);
 }
@@ -280,7 +281,7 @@ body.hero {
     cursor: pointer;
     letter-spacing: 0.04em;
     transition: background 0.2s ease, border-color 0.2s ease, color 0.2s ease, transform 0.15s ease;
-    margin:1rem;
+    margin:1.5rem;
 }
 
 .clear-btn:hover {
@@ -295,7 +296,6 @@ body.hero {
     inset: 0;
     pointer-events: none;
     z-index: 9990;
-    /* below nav and quiz */
     overflow: hidden;
 }
 
@@ -411,9 +411,9 @@ body.hero {
 }
 
 .view-btn-filter {
-    background: #e74c3c;
+    background: #000000;
     color: white;
-    border: 1.5px solid #e74c3c;
+    border: 1.5px solid #000000;
     font-family: inherit;
     padding: 0.45rem 1.1rem;
     font-size: 13px;
@@ -424,8 +424,6 @@ body.hero {
 }
 
 .view-btn-filter:hover {
-    background: #c0392b;
-    border-color: #c0392b;
     transform: translateY(-1px);
 }
 
