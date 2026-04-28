@@ -55,7 +55,7 @@ $currentPage = basename($_SERVER['PHP_SELF']);
       {
         type: 'multiple',
         text: 'What building blocks do you see?',
-        options: ['Cross']
+        options: ['cross']
       },
       {
         type: 'text',
@@ -305,7 +305,7 @@ $currentPage = basename($_SERVER['PHP_SELF']);
             form.querySelectorAll('input[name="answer"][type="checkbox"]:checked')
           )
             .map(cb => cb.value)
-            .filter(v => ['Cross'].includes(v))
+            .filter(v => ['cross'].includes(v))
             .join(', ');
 
           const textareas       = form.querySelectorAll('textarea[name="answer"]');
