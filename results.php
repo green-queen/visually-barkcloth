@@ -141,39 +141,8 @@ $submissions = array_reverse($_SESSION['submissions']); // most recent first
   </div>
 
 
-     <section class="test" id="test">
-    <div class="about-section-header">
-      <span class="about-section-num">01</span>
-      <span class="about-section-title" id="section-textile">The Textile</span>
-    </div>
-      <p class="about-body">
-      Barkcloth is made from the inner bark of trees. It is soaked, fermented, and beaten until it becomes
-      soft and flat, ready to be worn, used, or decorated. 
-      </p>
-      
-      <p class="about-body">
-      People across the Austronesian world have been
-      making it for at least five thousand years — from the forests of Central Sulawesi in Eastern
-      Indonesia, where it is called <em>fuya</em>, to the islands of Polynesia, where it is known as
-      <em>tapa</em>. As Austronesian voyagers sailed across the Pacific, they brought the knowledge of
-      barkcloth with them.
-    </p>
-
-    <p class="about-body">
-      The patterns on these textiles — dots, stripes, crescents, zigzags, forms that repeat and transform —
-      carry quiet traces of those journeys and the connections between distant places.
-    </p>
-    <p class="about-body">
-      Sometimes, when you look closely at a piece of <em>fuya</em> from Sulawesi and a piece of
-      <em>tapa</em> from Samoa, something quietly rhymes.
-    </p>
-    <p class="about-body">
-      These connections are not always easy to see. Museum collections have their own geographies:
-      Indonesian barkcloth here, Polynesian tapa there, organized by the categories of their time.
-      Many institutions are now rethinking how their collections are arranged and described. This project
-      is part of that conversation — starting not from inherited labels, but from what you can actually
-      see on the objects themselves.
-    </p>
+    <section class="test" id="test">
+    <img src="wordcloud.png" alt="Word Cloud of All Answers">
   </section>
 
   <div class="about-deco">
