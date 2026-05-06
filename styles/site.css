@@ -1318,6 +1318,7 @@ body.hero {
 }
 
 .results-actions-top {
+    margin-top:1px;
     margin-bottom: 2.5rem;
 }
 

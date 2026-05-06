@@ -21,6 +21,7 @@ $submissions = array_reverse($_SESSION['submissions']); // most recent first
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" type="text/css" href="styles/site.css">
   <title>Your Results – Visually Barkcloth</title>
+  <script src="https://cdn.jsdelivr.net/npm/wordcloud@1.2.2/src/wordcloud2.js"></script>
   <style>
     .results-scrollbox {
       max-height: 500px;
@@ -40,6 +41,18 @@ $submissions = array_reverse($_SESSION['submissions']); // most recent first
       border-bottom: none;
       margin-bottom: 0;
       padding-bottom: 0;
+    }
+    .wordcloud-section {
+      margin-top: 20px;
+      text-align: center;
+    }
+    #wordcloud-canvas {
+      border: 1px solid var(--black);
+      background: #ffffff;
+      max-width: 100%;
+      display: block;
+      margin: 0 auto;
+      margin-bottom: 24px;
     }
   </style>
 </head>
@@ -133,23 +146,69 @@ $submissions = array_reverse($_SESSION['submissions']); // most recent first
   </div>
 
   <div class="center">
-    <button class="down" onclick="document.getElementById('test').scrollIntoView({ behavior: 'smooth' })" title="Scroll to section">
-        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" >
+    <button class="down" onclick="document.getElementById('wordcloud-section').scrollIntoView({ behavior: 'smooth' })" title="Scroll to word cloud">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
         <path d="M12 5v14M19 12l-7 7-7-7"/>
-        </svg>
+      </svg>
     </button>
   </div>
 
-
-    <section class="test" id="test">
-    <img src="wordcloud.png" alt="Word Cloud of All Answers">
+  <section class="wordcloud-section" id="wordcloud-section">
+    <canvas id="wordcloud-canvas" width="860" height="480"></canvas>
   </section>
 
-  <div class="about-deco">
-    <img src="deco/IMG_3707.jpg" alt="">
-  </div>
-
 </main>
+
+<script>
+  (function () {
+    const canvas = document.getElementById('wordcloud-canvas');
+    const status = document.getElementById('wc-status');
+
+    // color palette inspired by the barkcloth images, but feel free to tweak!
+    const palette = [
+      '#8B5A2B', '#B47C3C', '#507850', '#A05040',
+      '#3C5A82', '#8C64A0', '#BE8C3C', '#507878',
+    ];
+
+    fetch('wordcloud_data.php')
+      .then(r => r.json())
+      .then(words => {
+        if (!words.length) {
+          status.textContent = 'No responses yet — be the first!';
+          return;
+        }
+
+        status.textContent = '';
+
+        // Scale weights so largest word isn't absurdly huge
+        const maxWeight = words[0][1];
+        const minWeight = words[words.length - 1][1];
+        const range     = maxWeight - minWeight || 1;
+
+        const scaled = words.map(([word, weight]) => {
+          const ratio = (weight - minWeight) / range;
+          return [word, Math.round(14 + ratio * 56)]; // 14px–70px
+        });
+
+        WordCloud(canvas, {
+          list:            scaled,
+          gridSize:        8,
+          weightFactor:    1,
+          fontFamily:      'Georgia, serif',
+          color:           () => palette[Math.floor(Math.random() * palette.length)],
+          rotateRatio:     0.3,
+          rotationSteps:   2,
+          backgroundColor: '#ffffff',
+          shuffle:         true,
+          drawOutOfBound:  false,
+          minSize:         10
+        });
+      })
+      .catch(() => {
+        status.textContent = 'Could not load word cloud data.';
+      });
+  })();
+</script>
 
 </body>
 </html>
