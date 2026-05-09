@@ -42,17 +42,34 @@ $submissions = array_reverse($_SESSION['submissions']); // most recent first
       margin-bottom: 0;
       padding-bottom: 0;
     }
+
+    /* ── word cloud ── */
     .wordcloud-section {
-      margin-top: 20px;
+      margin-top: 48px;
       text-align: center;
+    }
+    .wordcloud-section h2 {
+      font-size: 1.25rem;
+      margin-bottom: 6px;
+      letter-spacing: .04em;
+    }
+    .wordcloud-section p.wordcloud-sub {
+      font-size: 0.85rem;
+      color: #666;
+      margin-bottom: 20px;
     }
     #wordcloud-canvas {
       border: 1px solid var(--black);
-      background: #ffffff;
+      background: #faf6ee;
       max-width: 100%;
       display: block;
       margin: 0 auto;
-      margin-bottom: 24px;
+    }
+    .wordcloud-loading {
+      font-style: italic;
+      color: #999;
+      font-size: 0.9rem;
+      margin-top: 12px;
     }
   </style>
 </head>
@@ -145,6 +162,7 @@ $submissions = array_reverse($_SESSION['submissions']); // most recent first
     <?php endforeach; ?>
   </div>
 
+  <!-- scroll arrow -->
   <div class="center">
     <button class="down" onclick="document.getElementById('wordcloud-section').scrollIntoView({ behavior: 'smooth' })" title="Scroll to word cloud">
       <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -153,7 +171,11 @@ $submissions = array_reverse($_SESSION['submissions']); // most recent first
     </button>
   </div>
 
+  <!-- word cloud -->
   <section class="wordcloud-section" id="wordcloud-section">
+    <h2>What everyone sees</h2>
+    <p class="wordcloud-sub">Most frequent words from all visitor responses — common filler words removed.</p>
+    <p class="wordcloud-loading" id="wc-status">Loading…</p>
     <canvas id="wordcloud-canvas" width="860" height="480"></canvas>
   </section>
 
@@ -164,7 +186,7 @@ $submissions = array_reverse($_SESSION['submissions']); // most recent first
     const canvas = document.getElementById('wordcloud-canvas');
     const status = document.getElementById('wc-status');
 
-    // color palette inspired by the barkcloth images, but feel free to tweak!
+    // Earthy / textile palette
     const palette = [
       '#8B5A2B', '#B47C3C', '#507850', '#A05040',
       '#3C5A82', '#8C64A0', '#BE8C3C', '#507878',
@@ -198,10 +220,10 @@ $submissions = array_reverse($_SESSION['submissions']); // most recent first
           color:           () => palette[Math.floor(Math.random() * palette.length)],
           rotateRatio:     0.3,
           rotationSteps:   2,
-          backgroundColor: '#ffffff',
+          backgroundColor: '#faf6ee',
           shuffle:         true,
           drawOutOfBound:  false,
-          minSize:         10
+          minSize:         10,
         });
       })
       .catch(() => {
