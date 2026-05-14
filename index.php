@@ -29,6 +29,9 @@
     <div class="home-left">
       <h1 class="home-title">Visually<br>Barkcloth</h1>
       <div class="home-adjust">
+        <p class="home-subtitle">
+digitized barkcloth from Wereldmuseum Leiden (Netherlands) and archival photographs from Världskulturmuseerna (Sweden)
+        </p>
       <p class="home-credits">
         Curated by<br>
         Iris Yiqun Luo, Kiran Mohammadi-Williams,<br>

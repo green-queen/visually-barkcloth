@@ -15,7 +15,7 @@
     --radius-sm: 4px;
     --radius-md: 8px;
     --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
-    --blue: rgb(169, 233, 255);
+    --blue: #a9e9ff;
     --light-blue: rgba(209, 240, 251, 0.806);
 }
 

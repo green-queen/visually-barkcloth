@@ -59,11 +59,11 @@ $submissions = array_reverse($_SESSION['submissions']); // most recent first
       margin-bottom: 20px;
     }
     #wordcloud-canvas {
-      border: 1px solid var(--black);
       background: #faf6ee;
       max-width: 100%;
       display: block;
       margin: 0 auto;
+      margin-bottom:40px;
     }
     .wordcloud-loading {
       font-style: italic;
@@ -186,10 +186,9 @@ $submissions = array_reverse($_SESSION['submissions']); // most recent first
     const canvas = document.getElementById('wordcloud-canvas');
     const status = document.getElementById('wc-status');
 
-    // Earthy / textile palette
     const palette = [
-      '#8B5A2B', '#B47C3C', '#507850', '#A05040',
-      '#3C5A82', '#8C64A0', '#BE8C3C', '#507878',
+      '#67c6e6', '#34db9e', '#2C1320', '#E6236E',
+      '#B61D0F', '#9f7263', '#532F25', '#D6B51D', '#989190', '#1B396C'
     ];
 
     fetch('wordcloud_data.php')
