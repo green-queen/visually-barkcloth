@@ -22,56 +22,6 @@ $submissions = array_reverse($_SESSION['submissions']); // most recent first
   <link rel="stylesheet" type="text/css" href="styles/site.css">
   <title>Your Results – Visually Barkcloth</title>
   <script src="https://cdn.jsdelivr.net/npm/wordcloud@1.2.2/src/wordcloud2.js"></script>
-  <style>
-    .results-scrollbox {
-      max-height: 500px;
-      width: 100%;
-      overflow-y: auto;
-      padding: 16px;
-      margin-bottom: 24px;
-      border: 1px solid var(--black);
-      background: #fff;
-      box-sizing: border-box;
-    }
-    .results-entry {
-      margin-bottom: 24px;
-      padding-bottom: 16px;
-    }
-    .results-entry:last-child {
-      border-bottom: none;
-      margin-bottom: 0;
-      padding-bottom: 0;
-    }
-
-    /* ── word cloud ── */
-    .wordcloud-section {
-      margin-top: 48px;
-      text-align: center;
-    }
-    .wordcloud-section h2 {
-      font-size: 1.25rem;
-      margin-bottom: 6px;
-      letter-spacing: .04em;
-    }
-    .wordcloud-section p.wordcloud-sub {
-      font-size: 0.85rem;
-      color: #666;
-      margin-bottom: 20px;
-    }
-    #wordcloud-canvas {
-      background: #faf6ee;
-      max-width: 100%;
-      display: block;
-      margin: 0 auto;
-      margin-bottom:40px;
-    }
-    .wordcloud-loading {
-      font-style: italic;
-      color: #999;
-      font-size: 0.9rem;
-      margin-top: 12px;
-    }
-  </style>
 </head>
 
 <body>
@@ -162,21 +112,61 @@ $submissions = array_reverse($_SESSION['submissions']); // most recent first
     <?php endforeach; ?>
   </div>
 
-  <!-- scroll arrow -->
-  <div class="center">
-    <button class="down" onclick="document.getElementById('wordcloud-section').scrollIntoView({ behavior: 'smooth' })" title="Scroll to word cloud">
-      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-        <path d="M12 5v14M19 12l-7 7-7-7"/>
-      </svg>
-    </button>
-  </div>
-
-  <!-- word cloud -->
   <section class="wordcloud-section" id="wordcloud-section">
     <h2>What everyone sees</h2>
-    <p class="wordcloud-sub">Most frequent words from all visitor responses — common filler words removed.</p>
     <p class="wordcloud-loading" id="wc-status">Loading…</p>
     <canvas id="wordcloud-canvas" width="860" height="480"></canvas>
+  </section>
+
+  <section class="wordcloud-section" id="wordcloud-section">
+
+    <h2>Leave a thought</h2>
+
+    <form class="comment-form" id="comment-form" novalidate>
+
+      <div>
+        <label for="cf-name">Name <span aria-hidden="true">*</span></label>
+        <input
+          type="text" id="cf-name" name="name"
+          maxlength="20" autocomplete="nickname"
+          aria-required="true" aria-describedby="cf-name-count"
+          placeholder="Your name"
+        >
+        <p class="char-counter" id="cf-name-count" aria-live="polite">0 / 20</p>
+      </div>
+
+      <div>
+        <label for="cf-role">Role <span aria-hidden="true">*</span></label>
+        <input
+          type="text" id="cf-role" name="role"
+          maxlength="40" autocomplete="organization-title"
+          aria-required="true" aria-describedby="cf-role-count"
+          placeholder="e.g. Student, Researcher"
+        >
+        <p class="char-counter" id="cf-role-count" aria-live="polite">0 / 40</p>
+      </div>
+
+      <div class="field-full">
+        <label for="cf-comment">Comment <span aria-hidden="true">*</span></label>
+        <textarea
+          id="cf-comment" name="comment"
+          maxlength="200"
+          aria-required="true" aria-describedby="cf-comment-count"
+          placeholder="What do you see? What does this pattern remind you of?"
+        ></textarea>
+        <p class="char-counter" id="cf-comment-count" aria-live="polite">0 / 200</p>
+      </div>
+
+      <div class="comment-form-footer field-full">
+        <button type="submit" class="comment-submit-btn" id="cf-submit">Post comment</button>
+        <span class="comment-form-msg" id="cf-msg" role="alert" aria-live="assertive"></span>
+      </div>
+
+    </form>
+
+    <div class="comment-list" id="comment-list" aria-live="polite">
+      <p class="comments-loading" id="comments-loading">Loading comments…</p>
+    </div>
   </section>
 
 </main>
@@ -195,22 +185,17 @@ $submissions = array_reverse($_SESSION['submissions']); // most recent first
       .then(r => r.json())
       .then(words => {
         if (!words.length) {
-          status.textContent = 'No responses yet — be the first!';
+          status.textContent = '';
           return;
         }
-
         status.textContent = '';
-
-        // Scale weights so largest word isn't absurdly huge
         const maxWeight = words[0][1];
         const minWeight = words[words.length - 1][1];
         const range     = maxWeight - minWeight || 1;
-
-        const scaled = words.map(([word, weight]) => {
+        const scaled    = words.map(([word, weight]) => {
           const ratio = (weight - minWeight) / range;
-          return [word, Math.round(14 + ratio * 56)]; // 14px–70px
+          return [word, Math.round(14 + ratio * 56)];
         });
-
         WordCloud(canvas, {
           list:            scaled,
           gridSize:        8,
@@ -225,9 +210,145 @@ $submissions = array_reverse($_SESSION['submissions']); // most recent first
           minSize:         10,
         });
       })
-      .catch(() => {
-        status.textContent = 'Could not load word cloud data.';
-      });
+      .catch(() => { status.textContent = 'Could not load word cloud data.'; });
+  })();
+
+  (function () {
+    'use strict';
+
+    const form      = document.getElementById('comment-form');
+    const nameInput = document.getElementById('cf-name');
+    const roleInput = document.getElementById('cf-role');
+    const commentTA = document.getElementById('cf-comment');
+    const submitBtn = document.getElementById('cf-submit');
+    const msgEl     = document.getElementById('cf-msg');
+    const listEl    = document.getElementById('comment-list');
+    const loadingEl = document.getElementById('comments-loading');
+
+    function setupCounter(inputEl, counterId, max) {
+      const counter = document.getElementById(counterId);
+      function update() {
+        const len = inputEl.value.length;
+        counter.textContent = len + ' / ' + max;
+        counter.classList.toggle('near-limit', len >= max * 0.8 && len < max);
+        counter.classList.toggle('at-limit',   len >= max);
+      }
+      inputEl.addEventListener('input', update);
+      update();
+    }
+    setupCounter(nameInput,  'cf-name-count',    20);
+    setupCounter(roleInput,  'cf-role-count',    40);
+    setupCounter(commentTA,  'cf-comment-count', 200);
+
+    function validate() {
+      const name    = nameInput.value.trim();
+      const role    = roleInput.value.trim();
+      const comment = commentTA.value.trim();
+      if (!name || name.length < 2)       return 'Name must be at least 2 characters.';
+      if (name.length > 20)               return 'Name is too long.';
+      if (!role || role.length < 2)       return 'Role must be at least 2 characters.';
+      if (role.length > 40)               return 'Role is too long.';
+      if (!comment || comment.length < 5) return 'Comment must be at least 5 characters.';
+      if (comment.length > 200)           return 'Comment is too long.';
+      return null;
+    }
+
+    function esc(s) {
+      return String(s)
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;');
+    }
+
+    function renderCard(c, prepend) {
+      const card = document.createElement('div');
+      card.className = 'comment-card';
+      card.dataset.id = c.id;
+      card.innerHTML =
+        '<div class="comment-card-meta">' +
+          '<span class="comment-card-name">' + esc(c.name) + '</span>' +
+          '<span class="comment-card-role">'  + esc(c.role) + '</span>' +
+        '</div>' +
+        '<p class="comment-card-body">' + esc(c.comment) + '</p>';
+
+      if (prepend && listEl.firstChild) {
+        listEl.insertBefore(card, listEl.firstChild);
+      } else {
+        listEl.appendChild(card);
+      }
+    }
+
+    fetch('comments_get.php')
+      .then(r => { if (!r.ok) throw new Error(); return r.json(); })
+      .then(comments => {
+        loadingEl.remove();
+        if (!comments.length) {
+          const p = document.createElement('p');
+          p.className = 'comments-empty';
+          p.textContent = 'No comments yet — be the first!';
+          listEl.appendChild(p);
+          return;
+        }
+        comments.forEach(c => renderCard(c, false));
+      })
+      .catch(() => { loadingEl.textContent = 'Could not load comments.'; });
+
+    form.addEventListener('submit', function (e) {
+      e.preventDefault();
+      msgEl.className   = 'comment-form-msg';
+      msgEl.textContent = '';
+
+      const err = validate();
+      if (err) {
+        msgEl.className   = 'comment-form-msg error';
+        msgEl.textContent = err;
+        return;
+      }
+
+      submitBtn.disabled    = true;
+      submitBtn.textContent = 'Posting…';
+
+      fetch('comments_post.php', {
+        method:  'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body:    JSON.stringify({
+          name:    nameInput.value.trim(),
+          role:    roleInput.value.trim(),
+          comment: commentTA.value.trim(),
+        }),
+      })
+        .then(r => r.json().then(data => ({ ok: r.ok, data })))
+        .then(({ ok, data }) => {
+          if (!ok || !data.success) throw new Error(data.error || 'Submission failed.');
+
+          const emptyEl = listEl.querySelector('.comments-empty');
+          if (emptyEl) emptyEl.remove();
+
+          renderCard({
+            id:      data.id,
+            name:    nameInput.value.trim(),
+            role:    roleInput.value.trim(),
+            comment: commentTA.value.trim(),
+          }, true);
+
+          msgEl.className   = 'comment-form-msg success';
+          msgEl.textContent = 'Comment posted';
+          form.reset();
+
+          [['cf-name-count','0 / 20'],['cf-role-count','0 / 40'],['cf-comment-count','0 / 200']]
+            .forEach(([id, txt]) => { document.getElementById(id).textContent = txt; });
+        })
+        .catch(err => {
+          msgEl.className   = 'comment-form-msg error';
+          msgEl.textContent = err.message || 'Could not post comment. Please try again.';
+        })
+        .finally(() => {
+          submitBtn.disabled    = false;
+          submitBtn.textContent = 'Post comment';
+        });
+    });
+
   })();
 </script>
 

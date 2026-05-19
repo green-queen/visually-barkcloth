@@ -1,2 +1,4 @@
 submit_quiz.php
 wordcloud_data.php
+comments_get.php
+comments_post.php
