@@ -41,7 +41,7 @@ $submissions = array_reverse($_SESSION['submissions']); // most recent first
   <div class="results-actions-top">
     <a href="quiz.php" class="results-btn-primary">← Back to quiz</a>
   </div>
-
+    <h2 class="wordcloud-title">My Ideas</h2>
   <div class="results-scrollbox">
     <?php foreach ($submissions as $i => $s):
       $shape_groups = [
@@ -70,7 +70,6 @@ $submissions = array_reverse($_SESSION['submissions']); // most recent first
         </div>
 
         <div class="results-answers">
-
           <div class="results-question">
             <span class="results-q-label">Question</span>
             <p class="results-q-text"><?= h($s['question']) ?></p>
@@ -113,46 +112,46 @@ $submissions = array_reverse($_SESSION['submissions']); // most recent first
   </div>
 
   <section class="wordcloud-section" id="wordcloud-section">
-    <h2>What everyone sees</h2>
+    <h2 class="wordcloud-title">What everyone sees</h2>
     <p class="wordcloud-loading" id="wc-status">Loading…</p>
     <canvas id="wordcloud-canvas" width="860" height="480"></canvas>
   </section>
 
   <section class="wordcloud-section" id="wordcloud-section">
 
-    <h2>Leave a thought</h2>
+    <h2 class="wordcloud-title">Leave a thought</h2>
 
     <form class="comment-form" id="comment-form" novalidate>
 
       <div>
-        <label for="cf-name">Name <span aria-hidden="true">*</span></label>
+        <label for="cf-name">What do you want to be called? </label>
         <input
           type="text" id="cf-name" name="name"
           maxlength="20" autocomplete="nickname"
           aria-required="true" aria-describedby="cf-name-count"
-          placeholder="Your name"
+          placeholder="Your (nick)name"
         >
         <p class="char-counter" id="cf-name-count" aria-live="polite">0 / 20</p>
       </div>
 
       <div>
-        <label for="cf-role">Role <span aria-hidden="true">*</span></label>
+        <label for="cf-role">What do you do?</label>
         <input
           type="text" id="cf-role" name="role"
           maxlength="40" autocomplete="organization-title"
           aria-required="true" aria-describedby="cf-role-count"
-          placeholder="e.g. Student, Researcher"
+          placeholder="e.g. Student, Researcher, Textile lover"
         >
         <p class="char-counter" id="cf-role-count" aria-live="polite">0 / 40</p>
       </div>
 
       <div class="field-full">
-        <label for="cf-comment">Comment <span aria-hidden="true">*</span></label>
+        <label for="cf-comment">Comment</label>
         <textarea
           id="cf-comment" name="comment"
           maxlength="200"
           aria-required="true" aria-describedby="cf-comment-count"
-          placeholder="What do you see? What does this pattern remind you of?"
+          placeholder="Is there anything you want to share with us?"
         ></textarea>
         <p class="char-counter" id="cf-comment-count" aria-live="polite">0 / 200</p>
       </div>
@@ -164,9 +163,11 @@ $submissions = array_reverse($_SESSION['submissions']); // most recent first
 
     </form>
 
+  <div class="comment-list-scrollbox">
     <div class="comment-list" id="comment-list" aria-live="polite">
       <p class="comments-loading" id="comments-loading">Loading comments…</p>
     </div>
+  </div>
   </section>
 
 </main>
